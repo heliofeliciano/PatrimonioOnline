@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PatrimonioOnline</string>
+    <string name="str_entrar">Entrar</string>
+    <string name="str_solicitaracesso">Solicitar Acesso</string>
+    <string name="str_login_hint">Login</string>
+    <string name="str_senha_hint">Senha</string>
 </resources>
