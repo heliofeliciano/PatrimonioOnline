@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
+    
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
