@@ -6,6 +6,10 @@ package br.com.patrimonioonline.domain.login;
 
 public class SynchronousLoginInteractor implements ILoginInteractor {
 
+    public SynchronousLoginInteractor() {
+    }
 
-
+    public boolean validarLogin() {
+        return true;
+    }
 }
