@@ -46,6 +46,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @OnClick(R.id.btn_login_solicitaracesso)
     public void btnSolicitarAcesso(View view){
 
+        String usuario = _etLogin.getText().toString();
+        String senha = _etSenha.getText().toString();
+
+        presenter.tentativaLogin(usuario, senha);
+
     }
 
     @Override
