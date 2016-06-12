@@ -24,10 +24,9 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
-    
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+     @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
@@ -36,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
             _etLogin.setText("dbseller");
             _etSenha.setText("P@paiNoel");
         }
+
     }
 
     @OnClick(R.id.btn_login_solicitaracesso)
@@ -44,12 +44,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void navigateToCommit() {
-
-    }
-
-    @Override
-    public void network() {
+    public void navigateToListActivity() {
 
     }
 

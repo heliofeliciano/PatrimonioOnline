@@ -6,8 +6,7 @@ package br.com.patrimonioonline.domain.login;
 
 public interface ILoginView {
 
-    void navigateToCommit();
-    void network();
+    void navigateToListActivity();
     void loginFailed();
 
 }
