@@ -9,7 +9,7 @@ public class SynchronousLoginInteractor implements ILoginInteractor {
     public SynchronousLoginInteractor() {
     }
 
-    public boolean validarLogin() {
+    public boolean validarLogin(String usuario, String senha) {
         return true;
     }
 }
