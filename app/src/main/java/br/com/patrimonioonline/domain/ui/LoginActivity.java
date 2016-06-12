@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
@@ -49,11 +50,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void navigateToListActivity() {
-
+        Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void loginFailed() {
-
+    public void loginFalhou() {
+        Toast.makeText(this, "Login falhou. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
     }
 }
