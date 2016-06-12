@@ -5,4 +5,10 @@ package br.com.patrimonioonline.domain.login;
  */
 
 public class LoginPresenter {
+
+    private ILoginView view;
+
+    public LoginPresenter(ILoginView loginView) {
+        this.view = loginView;
+    }
 }

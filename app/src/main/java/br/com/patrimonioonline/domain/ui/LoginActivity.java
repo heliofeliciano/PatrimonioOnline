@@ -9,6 +9,7 @@ import android.widget.EditText;
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.login.ILoginView;
+import br.com.patrimonioonline.domain.login.LoginPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -25,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
 
+    LoginPresenter presenter;
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
             _etSenha.setText("P@paiNoel");
         }
 
+         presenter = new LoginPresenter(this);
     }
 
     @OnClick(R.id.btn_login_solicitaracesso)
