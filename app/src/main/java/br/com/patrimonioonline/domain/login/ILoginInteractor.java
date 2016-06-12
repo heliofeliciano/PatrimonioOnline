@@ -6,5 +6,5 @@ package br.com.patrimonioonline.domain.login;
 
 public interface ILoginInteractor {
 
-    boolean validarLogin();
+    boolean validarLogin(String usuario, String senha);
 }
