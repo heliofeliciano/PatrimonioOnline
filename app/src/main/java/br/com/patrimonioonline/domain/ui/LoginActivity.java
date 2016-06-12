@@ -1,5 +1,6 @@
 package br.com.patrimonioonline.domain.ui;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     EditText _etSenha;
 
     LoginPresenter presenter;
+    ProgressDialog progressDialog;
 
      @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @OnClick(R.id.btn_login_solicitaracesso)
     public void btnSolicitarAcesso(View view){
 
+        progressDialog = ProgressDialog.show(this, "Autenticando ...", null);
+
         String usuario = _etLogin.getText().toString();
         String senha = _etSenha.getText().toString();
 
@@ -55,11 +59,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void navigateToListActivity() {
+        progressDialog.dismiss();
         Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loginFalhou() {
+        progressDialog.dismiss();
         Toast.makeText(this, "Login falhou. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
     }
 }

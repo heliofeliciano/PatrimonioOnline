@@ -4,7 +4,8 @@ package br.com.patrimonioonline.domain.login;
  * Created by helio on 12/06/16.
  */
 
-public interface ILoginInteractor {
+public interface OnLoginFinishedListener {
 
-    boolean validarLogin(String usuario, String senha);
+    void onError();
+    void onSuccess();
 }
