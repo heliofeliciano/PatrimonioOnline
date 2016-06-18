@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:layout_marginTop="8dp">
+
+    <LinearLayout
+        android:layout_width="56dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <View
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_view"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="14sp"
+            android:gravity="bottom|center_horizontal"
+            android:paddingBottom="5dp"
+            android:text="@string/criacao_layout_bem_situacao"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="72dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_lista_bem_item_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:text="@string/criacao_layout_bem_descricao"
+                />
+
+            <TextView
+                android:id="@+id/tv_lista_bem_item_classificacao"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout_below="@+id/tv_lista_bem_item_descricao"
+                android:textSize="12sp"
+                android:text="@string/criacao_layout_bem_classificacao"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/tv_lista_bem_item_unidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/criacao_layout_bem_unidade"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:text="/"/>
+
+            <TextView
+                android:id="@+id/tv_lista_bem_item_setor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="@string/criacao_layout_bem_setor"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
