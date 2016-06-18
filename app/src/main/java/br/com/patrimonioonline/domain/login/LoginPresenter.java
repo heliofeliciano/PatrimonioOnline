@@ -1,32 +1,37 @@
 package br.com.patrimonioonline.domain.login;
 
-import br.com.patrimonioonline.domain.login.async.AsyncLoginInteractor;
+import android.content.Context;
+
+import br.com.patrimonioonline.domain.login.async.LoginAsyncInteractor;
+import br.com.patrimonioonline.domain.login.async.OnLoginAsync;
 
 /**
  * Created by helio on 12/06/16.
  */
 
-public class LoginPresenter implements ILoginPresenter, OnLoginFinishedListener {
+public class LoginPresenter implements ILoginPresenter {
 
     private ILoginView view;
-    private AsyncLoginInteractor interactor;
+    private LoginAsyncInteractor interactor;
+    private Context context;
 
-    public LoginPresenter(ILoginView loginView) {
+    public LoginPresenter(Context context, ILoginView loginView) {
         this.view = loginView;
-        this.interactor = new AsyncLoginInteractor();
+        this.interactor = new LoginAsyncInteractor();
+        this.context = context;
     }
 
-    public void tentativaLogin(String usuario, String senha){
-        interactor.validarLogin(this, usuario, senha);
-    }
-
-    @Override
-    public void onError() {
-        view.loginFalhou();
+    public void tentativaLogin(String usuario, String senha) {
+        interactor.validarLogin(context, this, usuario, senha);
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(String msg) {
         view.navigateToListActivity();
+    }
+
+    @Override
+    public void onFailure(String msg) {
+        view.loginFalhou();
     }
 }

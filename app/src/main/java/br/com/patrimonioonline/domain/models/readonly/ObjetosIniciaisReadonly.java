@@ -5,4 +5,10 @@ package br.com.patrimonioonline.domain.models.readonly;
  */
 
 public class ObjetosIniciaisReadonly {
+
+    public AquisicaoReadonly aquisicao;
+    public ClassificacaoReadonly classificacao;
+    public ConvenioReadonly convenio;
+    public SituacaoReadonly situacao;
+
 }

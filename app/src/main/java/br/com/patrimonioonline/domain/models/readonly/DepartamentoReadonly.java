@@ -6,7 +6,7 @@ import io.realm.RealmObject;
  * Created by helio on 15/06/16.
  */
 
-public class DepartamentoReadonly extends RealmObject {
+public class DepartamentoReadonly {
     public int _id;
     public String descricao;
 }

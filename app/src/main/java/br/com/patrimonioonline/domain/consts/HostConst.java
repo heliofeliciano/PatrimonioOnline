@@ -5,4 +5,7 @@ package br.com.patrimonioonline.domain.consts;
  */
 
 public class HostConst {
+
+    public static final String HOST_http = "http://";
+    public static final String HOST_https = "https://";
 }

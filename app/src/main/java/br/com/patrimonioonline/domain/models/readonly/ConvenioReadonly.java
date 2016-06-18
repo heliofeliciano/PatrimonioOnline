@@ -6,9 +6,9 @@ import io.realm.RealmObject;
  * Created by helio on 15/06/16.
  */
 
-public class ConvenioReadonly extends RealmObject {
+public class ConvenioReadonly {
 
     public int _id;
-    public String descricao;
+    public CgmReadonly cgm;
 
 }

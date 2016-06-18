@@ -5,4 +5,8 @@ package br.com.patrimonioonline.lib_ui;
  */
 
 public interface IActivityBase {
+
+    void showToast(String msg);
+    void showAlert(String msg);
+
 }

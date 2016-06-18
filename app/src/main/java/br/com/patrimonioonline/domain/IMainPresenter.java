@@ -5,4 +5,8 @@ package br.com.patrimonioonline.domain;
  */
 
 public interface IMainPresenter {
+
+    void onSuccess(String msg);
+    void onFailure(String msg);
+
 }

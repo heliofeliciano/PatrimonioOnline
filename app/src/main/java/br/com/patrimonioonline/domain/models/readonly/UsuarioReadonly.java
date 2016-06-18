@@ -8,7 +8,7 @@ public class UsuarioReadonly {
 
     public String nome;
     public String login;
-    public Boolean usuarioativo;
+    public int usuarioativo;
     public String email;
 
 }

@@ -37,7 +37,7 @@ public class StoredPreference {
         return new Gson().fromJson(_json, obj.getClass());
     }
 
-    public static void clearObjectPreference(Object obj){
+    public static void limparObjeto(Object obj){
         SharedPreferences.Editor _editor = preferencias.edit();
         _editor.remove(obj.getClass().getSimpleName());
         _editor.commit();

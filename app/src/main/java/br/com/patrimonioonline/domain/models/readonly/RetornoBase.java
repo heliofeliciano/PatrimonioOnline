@@ -5,4 +5,8 @@ package br.com.patrimonioonline.domain.models.readonly;
  */
 
 public class RetornoBase {
+
+    public String s;
+    public String m;
+
 }

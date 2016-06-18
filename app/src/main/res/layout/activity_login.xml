@@ -30,7 +30,7 @@
                 android:id="@+id/et_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:singleLine="true"
                 android:hint="@string/str_login_hint"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:text=""
+                android:maxLines="1"
                 android:hint="@string/str_senha_hint"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -61,12 +61,12 @@
             android:text="@string/str_entrar"/>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_login_solicitaracesso"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:padding="12dp"
-            android:text="@string/str_solicitaracesso"/>
+            android:text="@string/str_entrar"/>
 
         <!--<TextView
             android:id="@+id/tv_login_cadastrar"

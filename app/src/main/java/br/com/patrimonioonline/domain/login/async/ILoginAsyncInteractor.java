@@ -1,8 +1,15 @@
 package br.com.patrimonioonline.domain.login.async;
 
+import android.content.Context;
+
+import br.com.patrimonioonline.domain.login.ILoginPresenter;
+
 /**
  * Created by helio on 13/06/16.
  */
 
-public class ILoginAsyncInteractor {
+public interface ILoginAsyncInteractor {
+
+    void validarLogin(Context context, ILoginPresenter listener, String usuario, String senha);
+
 }

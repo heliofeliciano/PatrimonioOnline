@@ -5,4 +5,6 @@ package br.com.patrimonioonline.domain.consts;
  */
 
 public class UsuarioPreferenceConst {
+
+    public static final String USUARIO_PREF = "USUARIO_PREF";
 }

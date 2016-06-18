@@ -6,9 +6,9 @@ import io.realm.RealmObject;
  * Created by helio on 15/06/16.
  */
 
-public class AquisicaoReadonly extends RealmObject {
+public class AquisicaoReadonly {
 
-    public int _id;
+    public int id;
     public String descricao;
 
 }

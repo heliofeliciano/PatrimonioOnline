@@ -4,4 +4,9 @@
     <string name="str_solicitaracesso">Solicitar Acesso</string>
     <string name="str_login_hint">Login</string>
     <string name="str_senha_hint">Senha</string>
+    <string name="criacao_layout_bem_situacao">Bom</string>
+    <string name="criacao_layout_bem_descricao">Cadeira</string>
+    <string name="criacao_layout_bem_classificacao">Sem classificação</string>
+    <string name="criacao_layout_bem_unidade">Sempla</string>
+    <string name="criacao_layout_bem_setor">Informática</string>
 </resources>

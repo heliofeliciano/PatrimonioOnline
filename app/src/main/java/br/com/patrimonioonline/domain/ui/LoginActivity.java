@@ -2,7 +2,6 @@ package br.com.patrimonioonline.domain.ui;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -42,10 +41,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
             _etSenha.setText("P@paiNoel");
         }
 
-         presenter = new LoginPresenter(this);
+         presenter = new LoginPresenter(getApplicationContext(), this);
     }
 
-    @OnClick(R.id.btn_login_solicitaracesso)
+    @OnClick(R.id.btn_login)
     public void btnSolicitarAcesso(View view){
 
         progressDialog = ProgressDialog.show(this, "Autenticando ...", null);

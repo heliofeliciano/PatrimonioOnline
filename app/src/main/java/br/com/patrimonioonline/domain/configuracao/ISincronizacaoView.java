@@ -6,7 +6,7 @@ package br.com.patrimonioonline.domain.configuracao;
 
 public interface ISincronizacaoView {
 
-    void navegarTelaPrincipal();
+    void sincronizacaoOk();
     void sincronizacaoFalhou();
     void sincronizacaoOcorrendo();
 
