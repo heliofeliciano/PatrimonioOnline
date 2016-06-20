@@ -7,6 +7,15 @@ import io.realm.RealmObject;
  */
 
 public class DepartamentoReadonly {
-    public int _id;
+
+    public String id;
     public String descricao;
+    public String nomeresponsavel;
+    public String emailresponsavel;
+    public String limite;
+    public String telefone;
+    public String email;
+    public String fax;
+    public String ramal;
+    public String instituicao;
 }

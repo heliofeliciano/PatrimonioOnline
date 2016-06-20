@@ -14,6 +14,7 @@ import br.com.patrimonioonline.domain.consts.URLConst;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 import br.com.patrimonioonline.domain.models.readonly.AquisicaoReadonly;
 import br.com.patrimonioonline.domain.models.readonly.ObjetosIniciaisReadonly;
@@ -53,6 +54,7 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     String jsonClassificacao;
                     String jsonConvenio;
                     String jsonSituacao;
+                    String jsonDepartamento;
 
                     Object objO = _objetosini.o;
                     LinkedTreeMap objLinked = (LinkedTreeMap) objO;
@@ -61,24 +63,28 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     jsonClassificacao = GsonLib.converterObjetoParaJson(objLinked.get("classificacao"));
                     jsonConvenio = GsonLib.converterObjetoParaJson(objLinked.get("convenio"));
                     jsonSituacao = GsonLib.converterObjetoParaJson(objLinked.get("situacao"));
+                    jsonDepartamento = GsonLib.converterObjetoParaJson(objLinked.get("departamento"));
 
                     // Salvar as aquisições no Realm
                     Repository<AquisicaoEntity> repositoryAquisicao = new Repository<AquisicaoEntity>(AquisicaoEntity.class);
                     Repository<ClassificacaoEntity> repositoryClassificacao = new Repository<ClassificacaoEntity>(ClassificacaoEntity.class);
                     Repository<ConvenioEntity> repositoryConvenio = new Repository<ConvenioEntity>(ConvenioEntity.class);
                     Repository<SituacaoEntity> repositorySituacao = new Repository<SituacaoEntity>(SituacaoEntity.class);
+                    Repository<DepartamentoEntity> repositoryDepartamento = new Repository<DepartamentoEntity>(DepartamentoEntity.class);
 
                     // Exclui todos os cadastros
                     repositoryAquisicao.deleteAll();
                     repositoryClassificacao.deleteAll();
                     repositoryConvenio.deleteAll();
                     repositorySituacao.deleteAll();
+                    repositoryDepartamento.deleteAll();
 
                     // Inclui todos os cadastros
                     repositoryAquisicao.createAllFromJson(jsonAquisicao);
                     repositoryClassificacao.createAllFromJson(jsonClassificacao);
                     repositoryConvenio.createAllFromJson(jsonConvenio);
                     repositorySituacao.createAllFromJson(jsonSituacao);
+                    repositoryDepartamento.createAllFromJson(jsonDepartamento);
 
 
                     listener.onSuccess(responseString);

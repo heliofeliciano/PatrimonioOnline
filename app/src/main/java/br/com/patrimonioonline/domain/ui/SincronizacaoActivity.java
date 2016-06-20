@@ -33,6 +33,7 @@ public class SincronizacaoActivity extends ActivityBase implements ISincronizaca
     public void sincronizacaoOk() {
         progressDialog.dismiss();
         this.showToast("Configuração finalizada com sucesso.");
+
     }
 
     @Override
