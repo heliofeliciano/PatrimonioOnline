@@ -12,6 +12,33 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.0.1/345b89f45d02d8b09400b472fab7b7e38f4ede1f/butterknife-annotations-8.0.1.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="345b89f45d02d8b09400b472fab7b7e38f4ede1f">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-annotations-8.0.1_39da8b72a603c2ce2d01730fb1950d29fb95f544/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.1.1_2bc30c611a3048ea555a9e483b2c83306d90f254/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_35f8805f913c1997d5987c387a4ce00c94b4d842/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-alpha2/constraint-layout-solver-1.0.0-alpha2.jar"
         jumboMode="true"
         optimize="false"
@@ -39,66 +66,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.0.1/345b89f45d02d8b09400b472fab7b7e38f4ede1f/butterknife-annotations-8.0.1.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="345b89f45d02d8b09400b472fab7b7e38f4ede1f">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-annotations-8.0.1_39da8b72a603c2ce2d01730fb1950d29fb95f544/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
         sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_d3a9bbc5fbd40a519bda5b9399c73402e12104c9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="676796b9cd552db0e0bdbb4a5a0dbe2ba20d20e1">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_05e6c4eab53cae95f389f03c5c8b447bee4d7774/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="dc52bab07b229f3fb3aa706ed1d41ff8d9a682c4">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1acef8c89a950e60fecfe4862b83b718f7d16820/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.1.1_2bc30c611a3048ea555a9e483b2c83306d90f254/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.jakewharton/butterknife/8.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="74ca46e7da11e3d065eb64cdbe6568a7ed74c211">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.jakewharton-butterknife-8.0.1_9f3561445bfb616305a2ba1c19d109a4cea1d548/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.2_bc3e6412d565e5455be7c73b14fdd096c5af4ddd/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -111,39 +84,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_d508f716507759c3d9b8cc90251061607dc8aa3d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_35f8805f913c1997d5987c387a4ce00c94b4d842/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/helio/.gradle/caches/modules-2/files-2.1/io.realm/realm-annotations/1.0.0/a3f198fe36d4071e5832d7aad8ca19798e87a64c/realm-annotations-1.0.0.jar"
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
         sha1="a3f198fe36d4071e5832d7aad8ca19798e87a64c">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/realm-annotations-1.0.0_39a3d1de07ad213d3ebd1e35565a218ccd4c0d75/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/386a4339ffe52d5d63e80f9bed8d2b1d1a418249/android-async-http-1.4.9.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/android-async-http-1.4.9_e7da9279f0f35f8973ee4f8f3a13e151ec9bbb78/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -165,12 +111,66 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="4034408d3c91a631badfdd9bea945da8cb615877">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_05e6c4eab53cae95f389f03c5c8b447bee4d7774/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_d508f716507759c3d9b8cc90251061607dc8aa3d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
         sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_761a353aa0745a7e91aabdc6b11e9509d64d9691/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="9e472ee48c34d524a13b143e76c1dd089065a79a">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1acef8c89a950e60fecfe4862b83b718f7d16820/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.jakewharton/butterknife/8.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="74ca46e7da11e3d065eb64cdbe6568a7ed74c211">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.jakewharton-butterknife-8.0.1_9f3561445bfb616305a2ba1c19d109a4cea1d548/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.2_bc3e6412d565e5455be7c73b14fdd096c5af4ddd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.9/386a4339ffe52d5d63e80f9bed8d2b1d1a418249/android-async-http-1.4.9.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/android-async-http-1.4.9_e7da9279f0f35f8973ee4f8f3a13e151ec9bbb78/classes.dex" />
     </item>
     <item
         is-multidex="true"
