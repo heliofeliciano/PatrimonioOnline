@@ -9,4 +9,7 @@
     <string name="criacao_layout_bem_classificacao">Sem classificação</string>
     <string name="criacao_layout_bem_unidade">Sempla</string>
     <string name="criacao_layout_bem_setor">Informática</string>
+    <string name="str_descricao_bem_hint">Descrição do Bem</string>
+    <string name="str_dataaquisicao_bem_hint">Data de Aqusição</string>
+    <string name="str_aquisicao_bem_prompt">Aqusição</string>
 </resources>

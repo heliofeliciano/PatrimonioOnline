@@ -1,9 +1,9 @@
 package br.com.patrimonioonline.domain.repos;
 
-import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import java.util.List;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
-import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 /**
@@ -31,13 +31,13 @@ public class Repository<T extends RealmObject> {
         realm.commitTransaction();
     }
 
-    public RealmResults all(){
+    public List<T> all(){
         return realm.where(clazz).findAll();
     }
 
     public void deleteAll(){
 
-        final RealmResults results = all();
+        final RealmResults results = realm.where(clazz).findAll();
         realm.executeTransaction(new Realm.Transaction(){
             @Override
             public void execute(Realm realm) {

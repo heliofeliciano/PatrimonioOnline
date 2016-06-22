@@ -1,6 +1,7 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import br.com.patrimonioonline.R;
@@ -33,7 +34,7 @@ public class SincronizacaoActivity extends ActivityBase implements ISincronizaca
     public void sincronizacaoOk() {
         progressDialog.dismiss();
         this.showToast("Configuração finalizada com sucesso.");
-
+        startActivity(new Intent(this, BemCadastrarActivity.class));
     }
 
     @Override

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/et_dataaquisicao_bem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:hint="@string/str_dataaquisicao_bem_hint"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:id="@+id/et_descricao_bem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:hint="@string/str_descricao_bem_hint"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--<Spinner
+        android:id="@+id/sp_aquisicao_bem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/str_aquisicao_bem_prompt"
+        android:spinnerMode="dialog"
+        style="@style/Base.Widget.AppCompat.Spinner.Underlined" />-->
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/sp_aquisicao_bem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
