@@ -6,7 +6,7 @@ package br.com.patrimonioonline.domain.login;
 
 public interface ILoginView {
 
-    void navigateToListActivity();
+    void habilitarEscolhaDoDepartamento();
     void loginFalhou();
 
 }

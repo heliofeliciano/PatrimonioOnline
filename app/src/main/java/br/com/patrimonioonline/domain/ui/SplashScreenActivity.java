@@ -13,8 +13,9 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         Log.d("LOG", "Open SplashScreen");
 
+        Intent intent = new Intent(this, BemCadastrarActivity.class);
         //Intent intent = new Intent(this, LoginActivity.class);
-        Intent intent = new Intent(this, SincronizacaoActivity.class);
+        //Intent intent = new Intent(this, SincronizacaoActivity.class);
         startActivity(intent);
         finish();
     }

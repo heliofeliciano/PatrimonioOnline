@@ -1,11 +1,14 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
@@ -27,6 +30,9 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
 
+    @BindView(R.id.sp_login_departamentos)
+    MaterialSpinner _sp_login_departamentos;
+
     LoginPresenter presenter;
     ProgressDialog progressDialog;
 
@@ -45,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @OnClick(R.id.btn_login)
-    public void btnSolicitarAcesso(View view){
+    public void btnLogin(View view){
 
         progressDialog = ProgressDialog.show(this, "Autenticando ...", null);
 
@@ -57,8 +63,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void navigateToListActivity() {
+    public void habilitarEscolhaDoDepartamento() {
         progressDialog.dismiss();
+
+        //_sp_login_departamentos.setVisibility(View.VISIBLE);
+        startActivity(new Intent(this, SincronizacaoActivity.class));
         Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
     }
 

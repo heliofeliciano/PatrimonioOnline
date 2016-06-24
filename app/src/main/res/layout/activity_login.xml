@@ -60,6 +60,13 @@
             android:visibility="gone"
             android:text="@string/str_entrar"/>
 
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_login_departamentos"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="match_parent"

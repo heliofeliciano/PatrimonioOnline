@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -13,6 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.adapter.SpinnerAdapter.AquisicaoAdapter;
 import br.com.patrimonioonline.domain.bem.BemInteractor;
 import br.com.patrimonioonline.domain.bem.IBemPresenter;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
@@ -32,17 +34,21 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
 
     private BemInteractor interactor;
 
+    // Views
     @BindView(R.id.et_dataaquisicao_bem)
     EditText et_dataaquisicao;
 
     @BindView(R.id.sp_aquisicao_bem)
-    MaterialSpinner sp_aquisicao;
+    Spinner sp_aquisicao;
 
     @BindView(R.id.sp_bem_tipo)
     MaterialSpinner sp_bemtipo;
 
     @BindView(R.id.sp_situacao)
     MaterialSpinner sp_situacao;
+
+    // Adapaters
+    private AquisicaoAdapter adapterAquisicao;
 
     private int dia, mes, ano;
 
@@ -97,17 +103,9 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @Override
     public void PopularListaAquisicao(List<AquisicaoEntity> lista) {
         // ADAPTER
+        adapterAquisicao = new AquisicaoAdapter(this, R.layout.spinner_item, lista);
+        sp_aquisicao.setAdapter(adapterAquisicao);
 
-        sp_aquisicao.setItems(lista);
-
-        sp_aquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
-
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoEntity item) {
-                Snackbar.make(view, "Clicked " + item.toString(), Snackbar.LENGTH_LONG).show();
-            }
-
-        });
     }
 
     @Override

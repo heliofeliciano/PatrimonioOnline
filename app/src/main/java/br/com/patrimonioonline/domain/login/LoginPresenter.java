@@ -27,7 +27,7 @@ public class LoginPresenter implements ILoginPresenter {
 
     @Override
     public void onSuccess(String msg) {
-        view.navigateToListActivity();
+        view.habilitarEscolhaDoDepartamento();
     }
 
     @Override

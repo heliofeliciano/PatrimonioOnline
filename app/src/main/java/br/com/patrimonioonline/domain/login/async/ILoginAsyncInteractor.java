@@ -3,6 +3,7 @@ package br.com.patrimonioonline.domain.login.async;
 import android.content.Context;
 
 import br.com.patrimonioonline.domain.login.ILoginPresenter;
+import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 
 /**
  * Created by helio on 13/06/16.
@@ -11,5 +12,6 @@ import br.com.patrimonioonline.domain.login.ILoginPresenter;
 public interface ILoginAsyncInteractor {
 
     void validarLogin(Context context, ILoginPresenter listener, String usuario, String senha);
+    void buscarDepartamentosUsuario(ILoginPresenter listener, UsuarioReadonly usuarioReadonly);
 
 }

@@ -12,4 +12,6 @@
     <string name="str_descricao_bem_hint">Descrição do Bem</string>
     <string name="str_dataaquisicao_bem_hint">Data de Aqusição</string>
     <string name="str_aquisicao_bem_prompt">Aqusição</string>
+    <string name="str_valoraquisicao_bem_hint">Valor Aquisição</string>
+    <string name="str_valorresidual_bem_hint">Valor Residual</string>
 </resources>

@@ -58,6 +58,8 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
                     //_pref.salvarObjeto(_usuario);
 
                     listener.onSuccess(responseString);
+                    //buscarDepartamentosUsuario(listener, _usuario.o);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -66,5 +68,13 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
         });
 
+    }
+
+    @Override
+    public void buscarDepartamentosUsuario(ILoginPresenter listener, UsuarioReadonly usuarioReadonly) {
+
+
+
+        //listener.onSuccess(responseString);
     }
 }

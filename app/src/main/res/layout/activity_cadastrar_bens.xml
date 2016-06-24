@@ -3,7 +3,10 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:paddingLeft="16dp"
+              android:paddingRight="16dp"
+    >
 
     <EditText
         android:id="@+id/et_dataaquisicao_bem"
@@ -36,20 +39,126 @@
         android:spinnerMode="dialog"
         style="@style/Base.Widget.AppCompat.Spinner.Underlined" />-->
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/sp_aquisicao_bem"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="vertical">
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Aquisição"
+            android:textColor="#99000000"/>
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/sp_bem_tipo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <!--<View style="@style/Divider_8dp"/>-->
 
-    <com.jaredrummler.materialspinner.MaterialSpinner
-        android:id="@+id/sp_situacao"
+        <Spinner
+            android:id="@+id/sp_aquisicao_bem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            />
+
+        <!--<com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_aquisicao_bem"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"/>-->
+
+    </LinearLayout>
+
+    <View style="@style/Divider_8dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="72dp"
+        android:paddingTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tipo do Bem"
+            android:textColor="#99000000"/>
+
+        <!--<View style="@style/Divider_8dp"/>-->
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_bem_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <View style="@style/Divider_8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:paddingTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Situação"
+            android:textColor="#99000000"/>
+
+        <!--<View style="@style/Divider_8dp"/>-->
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_situacao"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/et_valoraquisicao_bem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:hint="@string/str_valoraquisicao_bem_hint"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/et_valorresidual_bem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:hint="@string/str_valorresidual_bem_hint"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>
