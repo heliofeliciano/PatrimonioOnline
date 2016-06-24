@@ -9,4 +9,9 @@ import io.realm.RealmObject;
 public class SituacaoEntity extends RealmObject {
     public int _id;
     public String descricao;
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

@@ -41,5 +41,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/sp_bem_tipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <com.jaredrummler.materialspinner.MaterialSpinner
+        android:id="@+id/sp_situacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

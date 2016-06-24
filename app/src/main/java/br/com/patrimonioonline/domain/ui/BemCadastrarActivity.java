@@ -4,10 +4,8 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -40,6 +38,12 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @BindView(R.id.sp_aquisicao_bem)
     MaterialSpinner sp_aquisicao;
 
+    @BindView(R.id.sp_bem_tipo)
+    MaterialSpinner sp_bemtipo;
+
+    @BindView(R.id.sp_situacao)
+    MaterialSpinner sp_situacao;
+
     private int dia, mes, ano;
 
     @Override
@@ -56,7 +60,7 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     private void init() {
         interactor.PopularListaAquisicao(getApplicationContext(), this);
         interactor.PopularListaBemtipos(getApplicationContext(), this);
-
+        interactor.PopularListaSituacao(getApplicationContext(), this);
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
@@ -87,27 +91,31 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
 
     @Override
     public void PopularListaSituacao(List<SituacaoEntity> lista) {
-
+        sp_situacao.setItems(lista);
     }
 
     @Override
     public void PopularListaAquisicao(List<AquisicaoEntity> lista) {
         // ADAPTER
 
-        String listaAquisicao[] = {"COMPRAS", "INVENTARIO" };
+        sp_aquisicao.setItems(lista);
 
-        ArrayAdapter<String> arrayAdapter;
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, listaAquisicao);
-        sp_aquisicao.setAdapter(arrayAdapter);
-        //Toast.makeText(getApplicationContext(), "Aquisicao retornada com sucesso " + lista.size(), Toast.LENGTH_SHORT).show();
+        sp_aquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
+
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoEntity item) {
+                Snackbar.make(view, "Clicked " + item.toString(), Snackbar.LENGTH_LONG).show();
+            }
+
+        });
     }
 
     @Override
     public void PopularListaBemtipos(List<BemTipoEntity> lista) {
 
-        sp_aquisicao.setItems(lista);
+        sp_bemtipo.setItems(lista);
 
-        sp_aquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
+        sp_bemtipo.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
 
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoEntity item) {

@@ -24,6 +24,8 @@ public class BemInteractor implements IBemInteractor {
 
     @Override
     public void PopularListaSituacao(Context context, IBemPresenter listener) {
+        Repository<SituacaoEntity> situacaoEntityRepository = new Repository<>(SituacaoEntity.class);
+        listener.PopularListaSituacao(situacaoEntityRepository.all());
     }
 
     @Override
