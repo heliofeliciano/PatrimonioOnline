@@ -14,4 +14,5 @@
     <string name="str_aquisicao_bem_prompt">Aqusição</string>
     <string name="str_valoraquisicao_bem_hint">Valor Aquisição</string>
     <string name="str_valorresidual_bem_hint">Valor Residual</string>
+    <string name="str_vidautil_bem_hint">Vida Útil</string>
 </resources>

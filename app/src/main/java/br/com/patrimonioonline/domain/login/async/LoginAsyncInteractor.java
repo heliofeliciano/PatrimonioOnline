@@ -8,15 +8,17 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.util.List;
+
 import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
-import br.com.patrimonioonline.domain.consts.UsuarioPreferenceConst;
 import br.com.patrimonioonline.domain.login.ILoginPresenter;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
-import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
+import br.com.patrimonioonline.domain.repos.Repository;
 import br.com.patrimonioonline.lib.GsonLib;
-import br.com.patrimonioonline.lib.StoredPreference;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -26,7 +28,7 @@ import cz.msebera.android.httpclient.Header;
 public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     @Override
-    public void validarLogin(final Context context, final ILoginPresenter listener, String usuario, String senha) {
+    public void validarLogin(final Context context, final ILoginPresenter listener, final String usuario, String senha) {
 
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_Login);
 
@@ -49,16 +51,26 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
                 try {
 
-                    Object o = GsonLib.fromJsonObject(responseString, new RetornoObjeto<UsuarioReadonly>());
-                    RetornoObjeto<UsuarioReadonly> _usuario= (RetornoObjeto<UsuarioReadonly>) o;
+                    Object obj = GsonLib.fromJsonObject(responseString, new RetornoObjeto<UsuarioEntity>());
+                    RetornoObjeto<UsuarioEntity> _usuario = (RetornoObjeto<UsuarioEntity>) obj;
 
-                    StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-                    Object obj = _pref.buscarObjeto(new RetornoObjeto<UsuarioReadonly>());
-                    //_pref.limparObjeto(_usuario);
-                    //_pref.salvarObjeto(_usuario);
+                    String jsonUsuario;
+
+                    jsonUsuario = GsonLib.converterObjetoParaJson(_usuario.o);
+
+                    Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
+
+                    // Provisorio
+                    usuarioEntityRepository.deleteAll();
+
+                    usuarioEntityRepository.createObjectFromJson(jsonUsuario);
+
+                    /*StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+
+                    _pref.limparObjeto(_usuario);
+                    _pref.salvarObjeto(_usuario);*/
 
                     listener.onSuccess(responseString);
-                    //buscarDepartamentosUsuario(listener, _usuario.o);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -71,10 +83,15 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
     }
 
     @Override
-    public void buscarDepartamentosUsuario(ILoginPresenter listener, UsuarioReadonly usuarioReadonly) {
+    public void buscarDepartamentosDoUsuario(Context context, final ILoginPresenter listener) {
 
+        Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
+        //listener.PopularListaAquisicao(aquisicaoEntityRepository.all());
 
+        List<DepartamentoEntity> departamentoEntities = usuarioEntityRepository.getByLogin("dbseller").departamentos;
 
-        //listener.onSuccess(responseString);
+        listener.onDepartamentosPorUsuario(departamentoEntities);
+
     }
+
 }

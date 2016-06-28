@@ -11,6 +11,11 @@ public class AquisicaoEntity extends RealmObject {
     public int _id;
     public String descricao;
 
+    /*public AquisicaoEntity(int _id, String descricao) {
+        this._id = _id;
+        this.descricao = descricao;
+    }*/
+
     @Override
     public String toString() {
         return descricao;

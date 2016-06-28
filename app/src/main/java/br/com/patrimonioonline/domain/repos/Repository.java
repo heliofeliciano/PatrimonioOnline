@@ -31,8 +31,18 @@ public class Repository<T extends RealmObject> {
         realm.commitTransaction();
     }
 
+    public void createObjectFromJson(String json){
+        realm.beginTransaction();
+        realm.createObjectFromJson(clazz, json);
+        realm.commitTransaction();
+    }
+
     public List<T> all(){
         return realm.where(clazz).findAll();
+    }
+
+    public T getByLogin(String login){
+        return realm.where(clazz).equalTo("login", login).findFirst();
     }
 
     public void deleteAll(){

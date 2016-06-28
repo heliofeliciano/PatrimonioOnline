@@ -15,4 +15,8 @@ public class BemTipoDepreciacaoEntity extends RealmObject {
     public String observacao;
     public Boolean edepreciavel;
 
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

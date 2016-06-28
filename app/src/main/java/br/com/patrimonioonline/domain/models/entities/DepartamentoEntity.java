@@ -19,4 +19,8 @@ public class DepartamentoEntity extends RealmObject {
     public String ramal;
     public String instituicao;
 
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

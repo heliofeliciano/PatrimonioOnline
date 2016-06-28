@@ -2,8 +2,8 @@ package br.com.patrimonioonline.domain.bem;
 
 import java.util.List;
 
-import br.com.patrimonioonline.domain.IMainPresenter;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
@@ -13,18 +13,18 @@ import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
  * Created by helio on 20/06/16.
  */
 
-public interface IBemPresenter extends IMainPresenter {
+public interface IBemPresenter {
 
-    void CadastrarBem();
+    void Salvar();
+    void Cancelar();
     void PopularListaSituacao(List<SituacaoEntity> lista);
     void PopularListaAquisicao(List<AquisicaoEntity> lista);
     void PopularListaBemtipos(List<BemTipoEntity> lista);
+    void PopularListaBemTipoDepreciacao(List<BemTipoDepreciacaoEntity> lista);
     void PopularListaConvenio(List<ConvenioEntity> lista);
     void PopularListaClassificacao(List<ClassificacaoEntity> lista);
 
-    @Override
-    void onSuccess(String msg);
+    void SalvoComSucesso();
+    void ErroAoSalvar();
 
-    @Override
-    void onFailure(String msg);
 }

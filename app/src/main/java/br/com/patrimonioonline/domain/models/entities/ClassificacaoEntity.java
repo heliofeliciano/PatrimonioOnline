@@ -11,4 +11,8 @@ public class ClassificacaoEntity extends RealmObject {
     public int _id;
     public String descricao;
 
+    /*public ClassificacaoEntity(int _id, String descricao) {
+        this._id = _id;
+        this.descricao = descricao;
+    }*/
 }

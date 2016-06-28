@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -14,13 +14,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
-import br.com.patrimonioonline.domain.adapter.SpinnerAdapter.AquisicaoAdapter;
 import br.com.patrimonioonline.domain.bem.BemInteractor;
 import br.com.patrimonioonline.domain.bem.IBemPresenter;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,11 +36,14 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     private BemInteractor interactor;
 
     // Views
+    @BindView(R.id.etDescricaoBem)
+    EditText etDescricaoBem;
+
     @BindView(R.id.et_dataaquisicao_bem)
     EditText et_dataaquisicao;
 
     @BindView(R.id.sp_aquisicao_bem)
-    Spinner sp_aquisicao;
+    MaterialSpinner sp_aquisicao;
 
     @BindView(R.id.sp_bem_tipo)
     MaterialSpinner sp_bemtipo;
@@ -47,8 +51,34 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @BindView(R.id.sp_situacao)
     MaterialSpinner sp_situacao;
 
+    @BindView(R.id.sp_tipodepreciacao)
+    MaterialSpinner sp_tipodepreciacao;
+
     // Adapaters
-    private AquisicaoAdapter adapterAquisicao;
+    // private AquisicaoAdapter adapterAquisicao;
+
+    // Objetos
+    BemTipoEntity bemTipoEntity;
+    BemTipoDepreciacaoEntity bemTipoDepreciacaoEntity;
+    ClassificacaoEntity classificacaoEntity;
+    AquisicaoEntity aquisicaoEntity;
+    DepartamentoEntity departamentoEntity;
+    ConvenioEntity convenioEntity;
+    SituacaoEntity situacaoEntity;
+
+    /*
+        bemEntity._id = 1;
+        bemEntity.descricao = descricao;
+        bemEntity.classificacaoEntity = classificacaoEntity;
+        bemEntity.aquisicaoEntity = aquisicaoEntity;
+        bemEntity.departamentoEntity = departamentoEntity;
+        bemEntity.convenioEntity = convenioEntity;
+        bemEntity.situacaoEntity = situacaoEntity;
+        bemEntity.numeroPlaca = numeroPlaca;
+        bemEntity.valorAquisicao = valorAquisicao;
+        bemEntity.valorResidual = valorResidual;
+        bemEntity.dataAquisicao = dataAquisicao;
+     */
 
     private int dia, mes, ano;
 
@@ -66,6 +96,7 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     private void init() {
         interactor.PopularListaAquisicao(getApplicationContext(), this);
         interactor.PopularListaBemtipos(getApplicationContext(), this);
+        interactor.PopularListaBemTipoDepreciacao(getApplicationContext(), this);
         interactor.PopularListaSituacao(getApplicationContext(), this);
     }
 
@@ -91,21 +122,75 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     }
 
     @Override
-    public void CadastrarBem() {
+    @OnClick(R.id.btn_bem_salvar)
+    public void Salvar() {
 
+        /*
+
+        bemEntity._id = 1;
+        bemEntity.descricao = descricao;
+        bemEntity.classificacaoEntity = classificacaoEntity;
+        bemEntity.aquisicaoEntity = aquisicaoEntity;
+        bemEntity.departamentoEntity = departamentoEntity;
+        bemEntity.convenioEntity = convenioEntity;
+        bemEntity.situacaoEntity = situacaoEntity;
+        bemEntity.numeroPlaca = numeroPlaca;
+        bemEntity.valorAquisicao = valorAquisicao;
+        bemEntity.valorResidual = valorResidual;
+        bemEntity.dataAquisicao = dataAquisicao;
+
+        interactor.Salvar(
+                getApplicationContext(),
+                this,
+        );*/
+
+        String strSalvar = situacaoEntity.toString()
+                 + "\n" + aquisicaoEntity.toString()
+                 + "\n" + bemTipoEntity.toString()
+                 + "\n" + bemTipoDepreciacaoEntity.toString()
+                ;
+
+        Toast.makeText(this, strSalvar, Toast.LENGTH_LONG).show();
+    }
+
+   /* @OnItemSelected(R.id.sp_aquisicao_bem)
+    public void aquisicaoSelecionado() {
+        Toast.makeText(this, "Item selecionado: ", Toast.LENGTH_SHORT).show();
+    }*/
+
+    @Override
+    @OnClick(R.id.btn_bem_cancelar)
+    public void Cancelar() {
+        Toast.makeText(this, "Cancelar", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void PopularListaSituacao(List<SituacaoEntity> lista) {
         sp_situacao.setItems(lista);
+
+        situacaoEntity = lista.get(sp_situacao.getSelectedIndex());
+
+        sp_situacao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<SituacaoEntity>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, SituacaoEntity item) {
+                situacaoEntity = item;
+            }
+        });
     }
 
     @Override
     public void PopularListaAquisicao(List<AquisicaoEntity> lista) {
-        // ADAPTER
-        adapterAquisicao = new AquisicaoAdapter(this, R.layout.spinner_item, lista);
-        sp_aquisicao.setAdapter(adapterAquisicao);
 
+        sp_aquisicao.setItems(lista);
+
+        aquisicaoEntity = lista.get(sp_aquisicao.getSelectedIndex());
+
+        sp_aquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<AquisicaoEntity>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, AquisicaoEntity item) {
+                aquisicaoEntity = item;
+            }
+        });
     }
 
     @Override
@@ -113,35 +198,49 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
 
         sp_bemtipo.setItems(lista);
 
-        sp_bemtipo.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
+        bemTipoEntity = lista.get(sp_bemtipo.getSelectedIndex());
 
+        sp_bemtipo.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoEntity item) {
-                Snackbar.make(view, "Clicked " + item.toString(), Snackbar.LENGTH_LONG).show();
+                bemTipoEntity = item;
+                Snackbar.make(view, item.toString() + " foi selecionado.", Snackbar.LENGTH_LONG).show();
             }
-
         });
+    }
 
+    @Override
+    public void PopularListaBemTipoDepreciacao(List<BemTipoDepreciacaoEntity> lista) {
+        sp_tipodepreciacao.setItems(lista);
 
+        bemTipoDepreciacaoEntity = lista.get(sp_tipodepreciacao.getSelectedIndex());
+
+        sp_tipodepreciacao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoDepreciacaoEntity>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoDepreciacaoEntity item) {
+                bemTipoDepreciacaoEntity = item;
+            }
+        });
     }
 
     @Override
     public void PopularListaConvenio(List<ConvenioEntity> lista) {
-
+        convenioEntity = null;
     }
 
     @Override
     public void PopularListaClassificacao(List<ClassificacaoEntity> lista) {
+        classificacaoEntity = null;
+    }
+
+    @Override
+    public void SalvoComSucesso() {
 
     }
 
     @Override
-    public void onSuccess(String msg) {
+    public void ErroAoSalvar() {
 
     }
 
-    @Override
-    public void onFailure(String msg) {
-
-    }
 }

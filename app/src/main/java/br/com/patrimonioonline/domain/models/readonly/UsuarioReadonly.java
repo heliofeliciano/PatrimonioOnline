@@ -10,6 +10,6 @@ public class UsuarioReadonly {
     public String login;
     public int usuarioativo;
     public String email;
-    public DepartamentoReadonly departamentoReadonly;
+    public DepartamentoReadonly departamentos;
 
 }

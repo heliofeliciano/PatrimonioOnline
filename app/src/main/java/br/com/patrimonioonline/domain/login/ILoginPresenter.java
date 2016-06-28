@@ -1,20 +1,18 @@
 package br.com.patrimonioonline.domain.login;
 
-import android.content.Context;
+import java.util.List;
 
-import br.com.patrimonioonline.domain.IMainPresenter;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 
 /**
  * Created by helio on 12/06/16.
  */
 
-public interface ILoginPresenter extends IMainPresenter {
+public interface ILoginPresenter {
 
     void tentativaLogin(String usuario, String senha);
-
-    @Override
+    void onDepartamentosPorUsuario(List<DepartamentoEntity> lista);
+    void buscarDepartamentosPorUsuario();
     void onSuccess(String msg);
-
-    @Override
     void onFailure(String msg);
 }

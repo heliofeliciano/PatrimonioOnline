@@ -2,12 +2,10 @@ package br.com.patrimonioonline.domain.bem;
 
 import android.content.Context;
 
-import java.util.List;
-
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
+import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
-import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
-import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 import br.com.patrimonioonline.domain.repos.Repository;
 
@@ -18,8 +16,11 @@ import br.com.patrimonioonline.domain.repos.Repository;
 public class BemInteractor implements IBemInteractor {
 
     @Override
-    public void CadastrarBem(Context context, IBemPresenter listener) {
+    public void Salvar(Context context, IBemPresenter listener, BemEntity bemEntity) {
 
+        Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
+        bemEntityRepository.create(bemEntity);
+        listener.SalvoComSucesso();
     }
 
     @Override
@@ -32,6 +33,12 @@ public class BemInteractor implements IBemInteractor {
     public void PopularListaBemtipos(Context context, IBemPresenter listener) {
         Repository<BemTipoEntity> bemTipoEntityRepository = new Repository<>(BemTipoEntity.class);
         listener.PopularListaBemtipos(bemTipoEntityRepository.all());
+    }
+
+    @Override
+    public void PopularListaBemTipoDepreciacao(Context context, IBemPresenter listener) {
+        Repository<BemTipoDepreciacaoEntity> bemTipoDepreciacaoEntityRepository = new Repository<>(BemTipoDepreciacaoEntity.class);
+        listener.PopularListaBemTipoDepreciacao(bemTipoDepreciacaoEntityRepository.all());
     }
 
     @Override

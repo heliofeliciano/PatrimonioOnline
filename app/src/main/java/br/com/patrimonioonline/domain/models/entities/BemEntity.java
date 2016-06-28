@@ -12,6 +12,8 @@ public class BemEntity extends RealmObject {
 
     public int _id;
     public String descricao;
+    public BemTipoEntity bemTipoEntity;
+    public BemTipoDepreciacaoEntity bemTipoDepreciacaoEntity;
     public ClassificacaoEntity classificacaoEntity;
     public AquisicaoEntity aquisicaoEntity;
     public DepartamentoEntity departamentoEntity;

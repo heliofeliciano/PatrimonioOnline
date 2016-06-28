@@ -2,8 +2,6 @@ package br.com.patrimonioonline.domain.configuracao;
 
 import android.content.Context;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.google.gson.internal.LinkedTreeMap;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
@@ -12,15 +10,14 @@ import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
-import br.com.patrimonioonline.domain.models.readonly.AquisicaoReadonly;
 import br.com.patrimonioonline.domain.models.readonly.ObjetosIniciaisReadonly;
 import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
-import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 import br.com.patrimonioonline.domain.repos.Repository;
 import br.com.patrimonioonline.lib.GsonLib;
 import cz.msebera.android.httpclient.Header;
@@ -57,6 +54,7 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     String jsonSituacao;
                     String jsonDepartamento;
                     String jsonBemtipos;
+                    String jsonBemTiposDepreciacao;
 
                     Object objO = _objetosini.o;
                     LinkedTreeMap objLinked = (LinkedTreeMap) objO;
@@ -67,14 +65,17 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     jsonSituacao = GsonLib.converterObjetoParaJson(objLinked.get("situacao"));
                     jsonDepartamento = GsonLib.converterObjetoParaJson(objLinked.get("departamento"));
                     jsonBemtipos = GsonLib.converterObjetoParaJson(objLinked.get("bemtipos"));
+                    jsonBemTiposDepreciacao = GsonLib.converterObjetoParaJson(objLinked.get("bemtipodepreciacao"));
 
                     // Salvar as aquisições no Realm
-                    Repository<AquisicaoEntity> repositoryAquisicao = new Repository<AquisicaoEntity>(AquisicaoEntity.class);
-                    Repository<ClassificacaoEntity> repositoryClassificacao = new Repository<ClassificacaoEntity>(ClassificacaoEntity.class);
-                    Repository<ConvenioEntity> repositoryConvenio = new Repository<ConvenioEntity>(ConvenioEntity.class);
-                    Repository<SituacaoEntity> repositorySituacao = new Repository<SituacaoEntity>(SituacaoEntity.class);
-                    Repository<DepartamentoEntity> repositoryDepartamento = new Repository<DepartamentoEntity>(DepartamentoEntity.class);
-                    Repository<BemTipoEntity> repositoryBemtipo = new Repository<BemTipoEntity>(BemTipoEntity.class);
+                    Repository<AquisicaoEntity> repositoryAquisicao = new Repository<>(AquisicaoEntity.class);
+                    Repository<ClassificacaoEntity> repositoryClassificacao = new Repository<>(ClassificacaoEntity.class);
+                    Repository<ConvenioEntity> repositoryConvenio = new Repository<>(ConvenioEntity.class);
+                    Repository<SituacaoEntity> repositorySituacao = new Repository<>(SituacaoEntity.class);
+                    Repository<DepartamentoEntity> repositoryDepartamento = new Repository<>(DepartamentoEntity.class);
+                    Repository<BemTipoEntity> repositoryBemtipo = new Repository<>(BemTipoEntity.class);
+                    Repository<BemTipoDepreciacaoEntity> repositoryBemTiposDepreciacao = new Repository<>
+                            (BemTipoDepreciacaoEntity.class);
 
                     // Exclui todos os cadastros
                     repositoryAquisicao.deleteAll();
@@ -83,6 +84,7 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     repositorySituacao.deleteAll();
                     repositoryDepartamento.deleteAll();
                     repositoryBemtipo.deleteAll();
+                    repositoryBemTiposDepreciacao.deleteAll();
 
                     // Inclui todos os cadastros
                     repositoryAquisicao.createAllFromJson(jsonAquisicao);
@@ -91,6 +93,7 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     repositorySituacao.createAllFromJson(jsonSituacao);
                     repositoryDepartamento.createAllFromJson(jsonDepartamento);
                     repositoryBemtipo.createAllFromJson(jsonBemtipos);
+                    repositoryBemTiposDepreciacao.createAllFromJson(jsonBemTiposDepreciacao);
 
 
                     listener.onSuccess(responseString);

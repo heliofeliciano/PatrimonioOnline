@@ -1,7 +1,6 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,10 +9,13 @@ import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.List;
+
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.login.ILoginView;
 import br.com.patrimonioonline.domain.login.LoginPresenter;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -63,12 +65,21 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void habilitarEscolhaDoDepartamento() {
+    public void habilitarEscolhaDoDepartamento(List<DepartamentoEntity> departamentoEntities) {
         progressDialog.dismiss();
 
-        //_sp_login_departamentos.setVisibility(View.VISIBLE);
-        startActivity(new Intent(this, SincronizacaoActivity.class));
-        Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
+        _sp_login_departamentos.setVisibility(View.VISIBLE);
+        _sp_login_departamentos.setItems(departamentoEntities);
+
+        //startActivity(new Intent(this, SincronizacaoActivity.class));
+        //Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginSucesso() {
+        Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
+
+        presenter.buscarDepartamentosPorUsuario();
     }
 
     @Override
