@@ -1,7 +1,9 @@
 package br.com.patrimonioonline.domain.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -64,7 +66,7 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
     @Override
     public void onExibirListaDepartamentos(final List<DepartamentoEntity> departamentoEntities) {
         new MaterialDialog.Builder(this)
-                .title("Escolher departamento")
+                .title(R.string.str_escolher_departamento)
                 .items(departamentoEntities)
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice(){
                     @Override
@@ -80,4 +82,17 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
                 .positiveText(R.string.str_escolher)
                 .show();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_adicionar_bem:
+                startActivity(new Intent(this, BemCadastrarActivity.class));
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

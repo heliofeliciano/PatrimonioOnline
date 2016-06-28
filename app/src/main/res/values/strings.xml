@@ -21,6 +21,9 @@
     <string name="criacaoLayoutEscolherSetorBoasVindas">Olá, fulano. Seja bem vindo.</string>
     <string name="criacaoLayoutEscolherSetor">Escolha o setor para iniciar.</string>
     <string name="str_escolher">Escolher</string>
+    <string name="action_adicionar_bem">Adicionar Bem</string>
+    <string name="action_configuracoes">Configurações</string>
+    <string name="str_escolher_departamento">Escolha um departamento</string>
 
 
 </resources>

@@ -22,5 +22,4 @@ public interface IBemListaPresenter {
     void buscarDepartamentosPorUsuario();
     void salvarEscolhaDepartamento(Context context, DepartamentoEntity departamentoEntity);
 
-
 }
