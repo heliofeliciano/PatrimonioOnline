@@ -1,21 +1,17 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jaredrummler.materialspinner.MaterialSpinner;
-
-import java.util.List;
-
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.login.ILoginView;
 import br.com.patrimonioonline.domain.login.LoginPresenter;
-import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,8 +28,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
 
-    @BindView(R.id.sp_login_departamentos)
-    MaterialSpinner _sp_login_departamentos;
+    /*@BindView(R.id.sp_login_departamentos)
+    MaterialSpinner _sp_login_departamentos;*/
 
     LoginPresenter presenter;
     ProgressDialog progressDialog;
@@ -64,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     }
 
-    @Override
+    /*@Override
     public void habilitarEscolhaDoDepartamento(List<DepartamentoEntity> departamentoEntities) {
         progressDialog.dismiss();
 
@@ -73,18 +69,25 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
         //startActivity(new Intent(this, SincronizacaoActivity.class));
         //Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
     @Override
     public void loginSucesso() {
+        progressDialog.dismiss();
         Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
 
-        presenter.buscarDepartamentosPorUsuario();
+        this.navegarParaProximaTela();
+        //presenter.buscarDepartamentosPorUsuario();
     }
 
     @Override
     public void loginFalhou() {
         progressDialog.dismiss();
         Toast.makeText(this, "Login falhou. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void navegarParaProximaTela() {
+        startActivity(new Intent(this, BensListaActivity.class));
     }
 }

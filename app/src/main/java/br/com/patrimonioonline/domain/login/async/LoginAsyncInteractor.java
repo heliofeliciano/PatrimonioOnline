@@ -8,13 +8,10 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import java.util.List;
-
 import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
 import br.com.patrimonioonline.domain.login.ILoginPresenter;
-import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
 import br.com.patrimonioonline.domain.repos.Repository;
@@ -67,8 +64,8 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
                     /*StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
 
-                    _pref.limparObjeto(_usuario);
-                    _pref.salvarObjeto(_usuario);*/
+                    _pref.limparObjeto(_usuario.o);
+                    _pref.salvarObjeto(_usuario.o);*/
 
                     listener.onSuccess(responseString);
 
@@ -82,7 +79,7 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     }
 
-    @Override
+    /*@Override
     public void buscarDepartamentosDoUsuario(Context context, final ILoginPresenter listener) {
 
         Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
@@ -92,6 +89,6 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
         listener.onDepartamentosPorUsuario(departamentoEntities);
 
-    }
+    }*/
 
 }

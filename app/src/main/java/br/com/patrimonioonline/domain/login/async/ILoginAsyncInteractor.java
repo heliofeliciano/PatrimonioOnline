@@ -11,6 +11,6 @@ import br.com.patrimonioonline.domain.login.ILoginPresenter;
 public interface ILoginAsyncInteractor {
 
     void validarLogin(Context context, ILoginPresenter listener, String usuario, String senha);
-    void buscarDepartamentosDoUsuario(Context context, ILoginPresenter listener);
+    //void buscarDepartamentosDoUsuario(Context context, ILoginPresenter listener);
 
 }

@@ -23,12 +23,20 @@ public class StoredPreference {
     }
 
     public static void salvarObjeto(Object obj){
-        Gson _gson = new Gson();
-        String _json = _gson.toJson(obj);
-        editor.putString(obj.getClass().getSimpleName(), _json);
-        editor.commit();
+        try {
 
-        Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+            Gson _gson = new Gson();
+            String _json = _gson.toJson(obj);
+            editor.putString(obj.getClass().getSimpleName(), _json);
+            editor.commit();
+
+            Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
     }
 
     public Object buscarObjeto(Object obj){

@@ -1,18 +1,26 @@
 <resources>
     <string name="app_name">PatrimonioOnline</string>
+
     <string name="str_entrar">Entrar</string>
     <string name="str_solicitaracesso">Solicitar Acesso</string>
     <string name="str_login_hint">Login</string>
     <string name="str_senha_hint">Senha</string>
-    <string name="criacao_layout_bem_situacao">Bom</string>
-    <string name="criacao_layout_bem_descricao">Cadeira</string>
-    <string name="criacao_layout_bem_classificacao">Sem classificação</string>
-    <string name="criacao_layout_bem_unidade">Sempla</string>
-    <string name="criacao_layout_bem_setor">Informática</string>
     <string name="str_descricao_bem_hint">Descrição do Bem</string>
     <string name="str_dataaquisicao_bem_hint">Data de Aqusição</string>
     <string name="str_aquisicao_bem_prompt">Aqusição</string>
     <string name="str_valoraquisicao_bem_hint">Valor Aquisição</string>
     <string name="str_valorresidual_bem_hint">Valor Residual</string>
     <string name="str_vidautil_bem_hint">Vida Útil</string>
+
+    <string name="criacao_layout_bem_situacao">Bom</string>
+    <string name="criacao_layout_bem_descricao">Cadeira</string>
+    <string name="criacao_layout_bem_classificacao">Sem classificação</string>
+    <string name="criacao_layout_bem_unidade">Sempla</string>
+    <string name="criacao_layout_bem_setor">Informática</string>
+
+    <string name="criacaoLayoutEscolherSetorBoasVindas">Olá, fulano. Seja bem vindo.</string>
+    <string name="criacaoLayoutEscolherSetor">Escolha o setor para iniciar.</string>
+    <string name="str_escolher">Escolher</string>
+
+
 </resources>
