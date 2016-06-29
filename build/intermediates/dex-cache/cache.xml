@@ -43,7 +43,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
-        sha1="41f48c5a04286149268ec820faa5596132e9ca64">
+        sha1="8648ad000ac4a9416de2395b0291e03b13af7c2e">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_05e6c4eab53cae95f389f03c5c8b447bee4d7774/classes.dex" />
     </item>
     <item
@@ -115,7 +115,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
-        sha1="cfb76a4b67118dec96e42112c4d55ef3db090f9d">
+        sha1="0c76bc5e6e075dc3dbafd4569bc2ac97c2383cfb">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1acef8c89a950e60fecfe4862b83b718f7d16820/classes.dex" />
     </item>
     <item

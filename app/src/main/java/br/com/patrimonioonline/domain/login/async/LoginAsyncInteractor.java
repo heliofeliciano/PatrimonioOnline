@@ -4,18 +4,25 @@ import android.content.Context;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.internal.LinkedTreeMap;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.util.ArrayList;
+
 import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
+import br.com.patrimonioonline.domain.consts.UsuarioPreferenceConst;
 import br.com.patrimonioonline.domain.login.ILoginPresenter;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
+import br.com.patrimonioonline.domain.models.readonly.DepartamentoReadonly;
 import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
+import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 import br.com.patrimonioonline.domain.repos.Repository;
 import br.com.patrimonioonline.lib.GsonLib;
+import br.com.patrimonioonline.lib.StoredPreference;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -59,13 +66,26 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
                     // Provisorio
                     usuarioEntityRepository.deleteAll();
-
                     usuarioEntityRepository.createObjectFromJson(jsonUsuario);
 
-                    /*StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+                    Object objO = _usuario.o;
+                    LinkedTreeMap objLinked = (LinkedTreeMap) objO;
+                    //objLinked.get("aquisicao")
+                    ArrayList<DepartamentoReadonly> departamentoReadonlyArrayList = (ArrayList<DepartamentoReadonly>) ((LinkedTreeMap) objO).get("departamentos");
 
-                    _pref.limparObjeto(_usuario.o);
-                    _pref.salvarObjeto(_usuario.o);*/
+                    // Converter UsuárioEntity em UsuarioReadonly
+                    UsuarioReadonly _usuarioReadonly = new UsuarioReadonly(
+                            (String) ((LinkedTreeMap) objO).get("nome"),
+                            (String) ((LinkedTreeMap) objO).get("login"),
+                            ((Double) ((LinkedTreeMap) objO).get("usuarioativo")).intValue(),
+                            (String) ((LinkedTreeMap) objO).get("email"),
+                            departamentoReadonlyArrayList
+                    );
+
+                    // Salvar as preferences do usuário
+                    StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+                    _pref.limparObjeto(_usuarioReadonly);
+                    _pref.salvarObjeto(_usuarioReadonly);
 
                     listener.onSuccess(responseString);
 

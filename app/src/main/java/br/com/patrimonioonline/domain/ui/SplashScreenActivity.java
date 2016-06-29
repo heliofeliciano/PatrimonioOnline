@@ -1,21 +1,37 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
-public class SplashScreenActivity extends AppCompatActivity {
+import br.com.patrimonioonline.domain.splashscreen.ISplashScreenView;
+
+public class SplashScreenActivity extends BaseActivity implements ISplashScreenView {
+
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("LOG", "Open SplashScreen");
+        if (verificarSeUsuarioLogado()) {
+            this.verificacaoInicialSucesso();
+        } else {
+            this.verificacaoInicialFalhou();
+        }
+    }
 
-        //Intent intent = new Intent(this, BemCadastrarActivity.class);
-        Intent intent = new Intent(this, LoginActivity.class);
-        //Intent intent = new Intent(this, SincronizacaoActivity.class);
+
+    @Override
+    public void verificacaoInicialSucesso() {
+        intent = new Intent(this, BensListaActivity.class);
+        //intent = new Intent(this, SincronizacaoActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void verificacaoInicialFalhou() {
+        intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

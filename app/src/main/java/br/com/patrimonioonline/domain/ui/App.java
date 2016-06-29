@@ -2,7 +2,6 @@ package br.com.patrimonioonline.domain.ui;
 
 import android.app.Application;
 import android.os.SystemClock;
-import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +23,5 @@ public class App extends Application {
 
         SystemClock.sleep(TimeUnit.SECONDS.toMillis(3));
 
-        Log.d("LOG", "Open App");
     }
 }

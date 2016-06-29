@@ -28,9 +28,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @BindView(R.id.et_login_senha)
     EditText _etSenha;
 
-    /*@BindView(R.id.sp_login_departamentos)
-    MaterialSpinner _sp_login_departamentos;*/
-
     LoginPresenter presenter;
     ProgressDialog progressDialog;
 
@@ -60,24 +57,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     }
 
-    /*@Override
-    public void habilitarEscolhaDoDepartamento(List<DepartamentoEntity> departamentoEntities) {
-        progressDialog.dismiss();
-
-        _sp_login_departamentos.setVisibility(View.VISIBLE);
-        _sp_login_departamentos.setItems(departamentoEntities);
-
-        //startActivity(new Intent(this, SincronizacaoActivity.class));
-        //Toast.makeText(this, "Ok, proxima activity.", Toast.LENGTH_SHORT).show();
-    }*/
-
     @Override
     public void loginSucesso() {
         progressDialog.dismiss();
         Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
 
         this.navegarParaProximaTela();
-        //presenter.buscarDepartamentosPorUsuario();
     }
 
     @Override
@@ -88,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void navegarParaProximaTela() {
-        startActivity(new Intent(this, BensListaActivity.class));
+        finish();
+        startActivity(new Intent(this, SincronizacaoActivity.class));
     }
 }
