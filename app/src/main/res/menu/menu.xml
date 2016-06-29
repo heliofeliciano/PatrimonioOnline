@@ -6,7 +6,7 @@
         android:id="@+id/action_adicionar_bem"
         android:icon="@mipmap/ic_add_circle_black_48dp"
         android:title="@string/action_adicionar_bem"
-        app:showAsAction="always"/>
+        app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->
     <item android:id="@+id/action_configuracoes"

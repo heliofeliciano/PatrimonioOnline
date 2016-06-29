@@ -5,6 +5,7 @@ import android.content.Context;
 import java.util.List;
 
 import br.com.patrimonioonline.domain.consts.DepartamentoPreferenceConst;
+import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.DepartamentoReadonly;
@@ -44,6 +45,14 @@ public class BemListaInteractor implements IBemListaInteractor {
             listener.setorNaoEscolhido();
         }
 
+    }
+
+    @Override
+    public void buscarBemTipo(Context context, IBemListaPresenter listener) {
+        Repository<BemTipoEntity> bemTipoEntityRepository = new Repository<>(BemTipoEntity.class);
+        List<BemTipoEntity> bemTipoEntities = bemTipoEntityRepository.all();
+
+        listener.onBuscarBemTipo(bemTipoEntities);
     }
 
     @Override

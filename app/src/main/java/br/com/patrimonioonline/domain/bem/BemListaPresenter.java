@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
+import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 
 /**
@@ -50,5 +51,15 @@ public class BemListaPresenter implements IBemListaPresenter {
     @Override
     public void salvarEscolhaDepartamento(Context context, DepartamentoEntity departamentoEntity) {
         interactor.salvarPreferenceDepartamento(context, departamentoEntity);
+    }
+
+    @Override
+    public void buscarBemTipos() {
+        interactor.buscarBemTipo(context, this);
+    }
+
+    @Override
+    public void onBuscarBemTipo(List<BemTipoEntity> bemTipoEntities) {
+        view.onExibirTiposBens(bemTipoEntities);
     }
 }

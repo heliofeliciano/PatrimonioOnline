@@ -3,6 +3,8 @@ package br.com.patrimonioonline.domain.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
@@ -10,11 +12,14 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.bem.BemListaPresenter;
 import br.com.patrimonioonline.domain.bem.IBemListaView;
+import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +33,9 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
     @BindView(R.id.lvListaBens)
     ListView lvLista;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     BemListaPresenter presenter;
 
     @Override
@@ -36,6 +44,11 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
         setContentView(R.layout.activity_lista_bens);
 
         ButterKnife.bind(this);
+
+        if (toolbar != null)
+        {
+            setSupportActionBar(toolbar);
+        }
 
         presenter = new BemListaPresenter(getApplicationContext(), this);
 
@@ -71,11 +84,7 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice(){
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        /*Toast.makeText(BensListaActivity.this,
-                                departamentoEntities.get(dialog.getSelectedIndex()).descricao,
-                                Toast.LENGTH_SHORT).show();*/
                         presenter.salvarEscolhaDepartamento(BensListaActivity.this, departamentoEntities.get(dialog.getSelectedIndex()));
-
                         return true;
                     }
                 })
@@ -84,16 +93,51 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
     }
 
     @Override
+    public void onExibirTiposBens(final List<BemTipoEntity> bemTipoEntities) {
+        new MaterialDialog.Builder(this)
+                .title(R.string.str_escolher_bem_tipo)
+                .items(bemTipoEntities)
+                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice(){
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
+                        irParaActivityAdicionarBem(bemTipoEntities.get(dialog.getSelectedIndex()));
+                        return true;
+                    }
+                })
+                .positiveText(R.string.str_escolher)
+                .show();
+    }
+
+    @Override
+    public void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity) {
+
+        Intent _intent = new Intent(this, BemCadastrarActivity.class);
+        Bundle _bundle = new Bundle();
+        _bundle.putParcelable("BemTipoEntity", Parcels.wrap(bemTipoEntity));
+
+
+        startActivity(_intent);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
             case R.id.action_adicionar_bem:
-                startActivity(new Intent(this, BemCadastrarActivity.class));
+                //startActivity(new Intent(this, BemCadastrarActivity.class));
+                presenter.buscarBemTipos();
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
-        return super.onOptionsItemSelected(item);
-        
     }
 
 }

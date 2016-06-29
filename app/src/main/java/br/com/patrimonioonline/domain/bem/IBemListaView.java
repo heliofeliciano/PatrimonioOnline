@@ -2,6 +2,7 @@ package br.com.patrimonioonline.domain.bem;
 
 import java.util.List;
 
+import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 
 /**
@@ -15,6 +16,8 @@ public interface IBemListaView {
     void setorEscolhido();
     void setorNaoEscolhido();
     void onExibirListaDepartamentos(List<DepartamentoEntity> departamentoEntities);
+    void onExibirTiposBens(List<BemTipoEntity> bemTipoEntities);
+    void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity);
 
     // Interactor
     void verificarSeSetorJaFoiEscolhido();

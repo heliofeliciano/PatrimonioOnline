@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import org.parceler.Parcels;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -66,20 +68,6 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     ConvenioEntity convenioEntity;
     SituacaoEntity situacaoEntity;
 
-    /*
-        bemEntity._id = 1;
-        bemEntity.descricao = descricao;
-        bemEntity.classificacaoEntity = classificacaoEntity;
-        bemEntity.aquisicaoEntity = aquisicaoEntity;
-        bemEntity.departamentoEntity = departamentoEntity;
-        bemEntity.convenioEntity = convenioEntity;
-        bemEntity.situacaoEntity = situacaoEntity;
-        bemEntity.numeroPlaca = numeroPlaca;
-        bemEntity.valorAquisicao = valorAquisicao;
-        bemEntity.valorResidual = valorResidual;
-        bemEntity.dataAquisicao = dataAquisicao;
-     */
-
     private int dia, mes, ano;
 
     @Override
@@ -98,6 +86,10 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
         interactor.PopularListaBemtipos(getApplicationContext(), this);
         interactor.PopularListaBemTipoDepreciacao(getApplicationContext(), this);
         interactor.PopularListaSituacao(getApplicationContext(), this);
+
+        // Buscar objetos passados como parametro para a Activity
+        BemTipoEntity bemTipoEntity = Parcels.unwrap(getIntent().getParcelableExtra("BemTipoEntity"));
+        Toast.makeText(this, bemTipoEntity.toString(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
@@ -152,11 +144,6 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
 
         Toast.makeText(this, strSalvar, Toast.LENGTH_LONG).show();
     }
-
-   /* @OnItemSelected(R.id.sp_aquisicao_bem)
-    public void aquisicaoSelecionado() {
-        Toast.makeText(this, "Item selecionado: ", Toast.LENGTH_SHORT).show();
-    }*/
 
     @Override
     @OnClick(R.id.btn_bem_cancelar)

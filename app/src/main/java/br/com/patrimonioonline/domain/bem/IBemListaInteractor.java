@@ -14,5 +14,6 @@ public interface IBemListaInteractor {
     void buscarDepartamentosPorUsuario(IBemListaPresenter listener);
     void verificarSeSetorJaEscolhido(Context context, IBemListaPresenter listener);
     void salvarPreferenceDepartamento(Context context, DepartamentoEntity departamentoEntity);
+    void buscarBemTipo(Context context, IBemListaPresenter listener);
 
 }
