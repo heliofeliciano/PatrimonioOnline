@@ -10,8 +10,6 @@ import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
-import org.parceler.Parcels;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,6 +23,8 @@ import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
+import br.com.patrimonioonline.domain.models.readonly.BemTipoReadonly;
+import br.com.patrimonioonline.lib.GsonLib;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -88,8 +88,9 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
         interactor.PopularListaSituacao(getApplicationContext(), this);
 
         // Buscar objetos passados como parametro para a Activity
-        BemTipoEntity bemTipoEntity = Parcels.unwrap(getIntent().getParcelableExtra("BemTipoEntity"));
-        Toast.makeText(this, bemTipoEntity.toString(), Toast.LENGTH_LONG).show();
+        String strBemTipo = getIntent().getExtras().getString("BemTipoReadonly");
+        BemTipoReadonly _bemTipoReadonly = (BemTipoReadonly) GsonLib.fromJsonObject(strBemTipo, new BemTipoReadonly());
+        Toast.makeText(this, _bemTipoReadonly.toString(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)

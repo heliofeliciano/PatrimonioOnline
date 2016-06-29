@@ -6,7 +6,7 @@ package br.com.patrimonioonline.domain.models.readonly;
 
 public class BemTipoReadonly {
 
-    private int id;
-    private String descricao;
+    public int id;
+    public String descricao;
 
 }

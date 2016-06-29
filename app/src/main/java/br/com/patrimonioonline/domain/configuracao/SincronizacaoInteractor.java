@@ -78,13 +78,13 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                             (BemTipoDepreciacaoEntity.class);
 
                     // Exclui todos os cadastros
-                    repositoryAquisicao.deleteAll();
+                   /* repositoryAquisicao.deleteAll();
                     repositoryClassificacao.deleteAll();
                     repositoryConvenio.deleteAll();
                     repositorySituacao.deleteAll();
                     repositoryDepartamento.deleteAll();
                     repositoryBemtipo.deleteAll();
-                    repositoryBemTiposDepreciacao.deleteAll();
+                    repositoryBemTiposDepreciacao.deleteAll();*/
 
                     // Inclui todos os cadastros
                     repositoryAquisicao.createAllFromJson(jsonAquisicao);

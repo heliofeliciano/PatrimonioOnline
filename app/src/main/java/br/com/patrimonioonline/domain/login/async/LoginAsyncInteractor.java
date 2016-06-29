@@ -70,7 +70,6 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
                     Object objO = _usuario.o;
                     LinkedTreeMap objLinked = (LinkedTreeMap) objO;
-                    //objLinked.get("aquisicao")
                     ArrayList<DepartamentoReadonly> departamentoReadonlyArrayList = (ArrayList<DepartamentoReadonly>) ((LinkedTreeMap) objO).get("departamentos");
 
                     // Converter UsuárioEntity em UsuarioReadonly

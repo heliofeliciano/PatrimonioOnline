@@ -34,7 +34,7 @@ public class SincronizacaoActivity extends ActivityBase implements ISincronizaca
     public void sincronizacaoOk() {
         progressDialog.dismiss();
         this.showToast("Configuração finalizada com sucesso.");
-        startActivity(new Intent(this, BemCadastrarActivity.class));
+        startActivity(new Intent(this, BemListaActivity.class));
     }
 
     @Override

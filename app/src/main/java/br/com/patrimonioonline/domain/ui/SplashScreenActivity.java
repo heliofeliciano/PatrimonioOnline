@@ -23,7 +23,7 @@ public class SplashScreenActivity extends BaseActivity implements ISplashScreenV
 
     @Override
     public void verificacaoInicialSucesso() {
-        intent = new Intent(this, BensListaActivity.class);
+        intent = new Intent(this, BemListaActivity.class);
         //intent = new Intent(this, SincronizacaoActivity.class);
         startActivity(intent);
         finish();

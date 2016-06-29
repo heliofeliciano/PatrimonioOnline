@@ -12,8 +12,6 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.parceler.Parcels;
-
 import java.util.List;
 
 import br.com.patrimonioonline.R;
@@ -21,14 +19,17 @@ import br.com.patrimonioonline.domain.bem.BemListaPresenter;
 import br.com.patrimonioonline.domain.bem.IBemListaView;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.readonly.BemTipoReadonly;
+import br.com.patrimonioonline.lib.GsonLib;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.BemTipoEntityRealmProxy;
 
 /**
  * Created by helio on 18/06/16.
  */
 
-public class BensListaActivity extends AppCompatActivity implements IBemListaView {
+public class BemListaActivity extends AppCompatActivity implements IBemListaView {
 
     @BindView(R.id.lvListaBens)
     ListView lvLista;
@@ -84,7 +85,7 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
                 .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice(){
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        presenter.salvarEscolhaDepartamento(BensListaActivity.this, departamentoEntities.get(dialog.getSelectedIndex()));
+                        presenter.salvarEscolhaDepartamento(BemListaActivity.this, departamentoEntities.get(dialog.getSelectedIndex()));
                         return true;
                     }
                 })
@@ -112,12 +113,15 @@ public class BensListaActivity extends AppCompatActivity implements IBemListaVie
     public void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity) {
 
         Intent _intent = new Intent(this, BemCadastrarActivity.class);
-        Bundle _bundle = new Bundle();
-        _bundle.putParcelable("BemTipoEntity", Parcels.wrap(bemTipoEntity));
+        //Bundle _bundle = new Bundle();
 
+        BemTipoReadonly _bemTipo = new BemTipoReadonly();
+        _bemTipo.id = ((BemTipoEntityRealmProxy) bemTipoEntity).realmGet$id();
+        _bemTipo.descricao = ((BemTipoEntityRealmProxy) bemTipoEntity).realmGet$descricao();
+
+        _intent.putExtra("BemTipoReadonly", GsonLib.converterObjetoParaJson(_bemTipo));
 
         startActivity(_intent);
-
     }
 
     @Override
