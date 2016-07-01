@@ -61,8 +61,13 @@ public class BemListaPresenter implements IBemListaPresenter {
     }
 
     @Override
-    public void buscarBens() {
+    public void buscarListaBens() {
         interactor.buscarBensPorDepartamento(this);
+    }
+
+    @Override
+    public void atualizarListaBens() {
+        interactor.atualizarListaBens(this);
     }
 
     @Override
@@ -78,5 +83,10 @@ public class BemListaPresenter implements IBemListaPresenter {
     @Override
     public void onListaBensPorDepartamento(RealmResults<BemEntity> lista) {
         view.onListaBensPorDepartamento(lista);
+    }
+
+    @Override
+    public void onAtualizarListaBens(RealmResults<BemEntity> lista) {
+        view.onAtualizarListaBens(lista);
     }
 }

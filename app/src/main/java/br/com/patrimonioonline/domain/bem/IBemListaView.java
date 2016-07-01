@@ -16,14 +16,16 @@ public interface IBemListaView {
     // View
     void onBuscaDepartamentoSucesso(List<DepartamentoEntity> departamentoEntities);
     void onListaBensPorDepartamento(RealmResults<BemEntity> lista);
+    void onAtualizarListaBens(RealmResults<BemEntity> lista);
     void onListaBensVazia();
     void setorEscolhido();
     void setorNaoEscolhido();
     void onExibirListaDepartamentos(List<DepartamentoEntity> departamentoEntities);
+
     void onExibirTiposBens(List<BemTipoEntity> bemTipoEntities);
 
-    void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity);
 
+    void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity);
 
     // Interactor
     void verificarSeSetorJaFoiEscolhido();

@@ -14,7 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
-import br.com.patrimonioonline.domain.adapter.RecyclerViewBemListaAdapter;
+import br.com.patrimonioonline.domain.adapter.RealmRecyclerViewBemListaAdapter;
 import br.com.patrimonioonline.domain.bem.BemListaPresenter;
 import br.com.patrimonioonline.domain.bem.IBemListaView;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
@@ -40,7 +40,7 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
     @BindView(R.id.rvRealmBemLista)
     RealmRecyclerView rvRealmBemLista;
 
-    RecyclerViewBemListaAdapter adapter;
+    RealmRecyclerViewBemListaAdapter adapter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -65,8 +65,22 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
     @Override
     public void onListaBensPorDepartamento(RealmResults<BemEntity> lista) {
 
-        adapter = new RecyclerViewBemListaAdapter(this, lista, true, true);
+        adapter = new RealmRecyclerViewBemListaAdapter(this, lista, true, true);
         rvRealmBemLista.setAdapter(adapter);
+
+        // Atualizar lista
+        rvRealmBemLista.setOnRefreshListener(new RealmRecyclerView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                presenter.atualizarListaBens();
+            }
+        });
+    }
+
+    @Override
+    public void onAtualizarListaBens(RealmResults<BemEntity> lista) {
+
+        rvRealmBemLista.setRefreshing(false);
 
     }
 
@@ -80,7 +94,7 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
     private void init() {
         presenter = new BemListaPresenter(getApplicationContext(), this);
         verificarSeSetorJaFoiEscolhido();
-        presenter.buscarBens();
+        presenter.buscarListaBens();
     }
 
     @Override

@@ -22,11 +22,13 @@ public interface IBemListaPresenter {
     void setorNaoEscolhido();
     void onListaBensVazia();
     void onListaBensPorDepartamento(RealmResults<BemEntity> lista);
+    void onAtualizarListaBens(RealmResults<BemEntity> lista);
 
     // Interactor
     void verificarSeSetorJaEscolhido();
     void buscarDepartamentosPorUsuario();
     void salvarEscolhaDepartamento(Context context, DepartamentoEntity departamentoEntity);
     void buscarBemTipos();
-    void buscarBens();
+    void buscarListaBens();
+    void atualizarListaBens();
 }

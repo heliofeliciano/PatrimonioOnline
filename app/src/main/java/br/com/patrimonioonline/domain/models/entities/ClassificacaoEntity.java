@@ -15,4 +15,9 @@ public class ClassificacaoEntity extends RealmObject {
         this._id = _id;
         this.descricao = descricao;
     }*/
+
+    @Override
+    public String toString() {
+        return descricao;
+    }
 }

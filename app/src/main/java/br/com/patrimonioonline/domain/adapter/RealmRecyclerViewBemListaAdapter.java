@@ -16,9 +16,9 @@ import io.realm.RealmViewHolder;
  * Created by helio on 30/06/16.
  */
 
-public class RecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdapter<BemEntity, RecyclerViewBemListaAdapter.ViewHolder> {
+public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdapter<BemEntity, RealmRecyclerViewBemListaAdapter.ViewHolder> {
 
-    public RecyclerViewBemListaAdapter(
+    public RealmRecyclerViewBemListaAdapter(
             Context context,
             RealmResults<BemEntity> realmResults,
             boolean automaticUpdate,
@@ -38,47 +38,30 @@ public class RecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdapter<B
     public void onBindRealmViewHolder(ViewHolder viewHolder, int position) {
         BemEntity _bemEntity = realmResults.get(position);
         viewHolder.descricao.setText(_bemEntity.descricao);
+        viewHolder.situacao.setText(_bemEntity.situacaoEntity.descricao);
+        viewHolder.setor.setText(_bemEntity.departamentoEntity.descricao);
+
+        if (_bemEntity.classificacaoEntity != null) {
+            viewHolder.classificacao.setText(_bemEntity.classificacaoEntity.descricao);
+        }
     }
 
     public class ViewHolder extends RealmViewHolder {
 
         public FrameLayout container;
         public TextView descricao;
+        public TextView situacao;
+        public TextView classificacao;
+        public TextView setor;
 
         public ViewHolder(FrameLayout container) {
             super(container);
             this.container = container;
             this.descricao = (TextView) container.findViewById(R.id.tvListaBemItemDescricao);
+            this.situacao = (TextView) container.findViewById(R.id.tvListaBemItemSituacao);
+            this.classificacao = (TextView) container.findViewById(R.id.tvListaBemItemClassificacao);
+            this.setor = (TextView) container.findViewById(R.id.tvListaBemItemSetor);
         }
     }
-
-    /*@Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.activity_bem_lista_item, parent, false);
-
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView tvListaBemItemDescricao;
-
-        public ViewHolder(View v) {
-            super(v);
-
-        }
-    }*/
 
 }

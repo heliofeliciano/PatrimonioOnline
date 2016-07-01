@@ -23,6 +23,7 @@
             />
 
         <TextView
+            android:id="@+id/tvListaBemItemSituacao"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="14sp"
@@ -53,7 +54,7 @@
                 />
 
             <TextView
-                android:id="@+id/tv_lista_bem_item_classificacao"
+                android:id="@+id/tvListaBemItemClassificacao"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:layout_below="@+id/tvListaBemItemDescricao"
@@ -71,8 +72,8 @@
             android:orientation="horizontal"
             android:paddingBottom="5dp">
 
-            <TextView
-                android:id="@+id/tv_lista_bem_item_unidade"
+            <!--<TextView
+                android:id="@+id/tvListaBemItemUnidade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -84,10 +85,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
-                android:text="/"/>
+                android:text="/"/>-->
 
             <TextView
-                android:id="@+id/tv_lista_bem_item_setor"
+                android:id="@+id/tvListaBemItemSetor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"

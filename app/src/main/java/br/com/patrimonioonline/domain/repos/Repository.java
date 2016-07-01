@@ -43,7 +43,7 @@ public class Repository<T extends RealmObject> {
             return 1;
         }
 
-        return realm.where(clazz).max("_id").intValue();
+        return realm.where(clazz).max("_id").intValue() + 1;
     }
 
     public RealmResults<T> allResults() {

@@ -33,6 +33,16 @@ public class BemListaInteractor implements IBemListaInteractor {
     }
 
     @Override
+    public void atualizarListaBens(IBemListaPresenter listener) {
+
+        Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);
+        RealmResults<BemEntity> lista = bemEntityRepository.allResults();
+
+
+        listener.onAtualizarListaBens(lista);
+    }
+
+    @Override
     public void buscarDepartamentosPorUsuario(IBemListaPresenter listener) {
 
         Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
