@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import io.realm.RealmObject;
+
 /**
  * Created by helio on 14/06/16.
  */
@@ -28,6 +30,21 @@ public class StoredPreference {
             Gson _gson = new Gson();
             String _json = _gson.toJson(obj);
             editor.putString(obj.getClass().getSimpleName(), _json);
+            editor.commit();
+
+            Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+    public static void salvarObjetoRealm(RealmObject obj, String json){
+        try {
+
+            editor.putString(obj.getClass().getSimpleName(), json);
             editor.commit();
 
             Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
