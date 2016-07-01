@@ -6,8 +6,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.RealmBasedRecyclerViewAdapter;
 import io.realm.RealmResults;
 import io.realm.RealmViewHolder;
@@ -18,6 +21,8 @@ import io.realm.RealmViewHolder;
 
 public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdapter<BemEntity, RealmRecyclerViewBemListaAdapter.ViewHolder> {
 
+    Context context;
+
     public RealmRecyclerViewBemListaAdapter(
             Context context,
             RealmResults<BemEntity> realmResults,
@@ -25,6 +30,7 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
             boolean animateIdType) {
 
         super(context, realmResults, automaticUpdate, animateIdType);
+        this.context = context;
     }
 
     @Override
@@ -41,6 +47,15 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
         viewHolder.situacao.setText(_bemEntity.situacaoEntity.descricao);
         viewHolder.setor.setText(_bemEntity.departamentoEntity.descricao);
 
+        // Setar imagem do bem
+        Glide
+                .with(context)
+                .load("http://goo.gl/gEgYUd")
+                .centerCrop()
+                .crossFade()
+                .error(R.drawable.image_error)
+                .into(viewHolder.imagem);
+
         if (_bemEntity.classificacaoEntity != null) {
             viewHolder.classificacao.setText(_bemEntity.classificacaoEntity.descricao);
         }
@@ -53,6 +68,7 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
         public TextView situacao;
         public TextView classificacao;
         public TextView setor;
+        public CircleImageView imagem;
 
         public ViewHolder(FrameLayout container) {
             super(container);
@@ -61,6 +77,7 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
             this.situacao = (TextView) container.findViewById(R.id.tvListaBemItemSituacao);
             this.classificacao = (TextView) container.findViewById(R.id.tvListaBemItemClassificacao);
             this.setor = (TextView) container.findViewById(R.id.tvListaBemItemSetor);
+            this.imagem = (CircleImageView) container.findViewById(R.id.cvListaBemImagem);
         }
     }
 

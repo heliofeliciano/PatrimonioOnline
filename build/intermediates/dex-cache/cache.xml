@@ -12,6 +12,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/glide-3.7.0_0590db218fc95da8df5db9c9853ab2eeac318b00/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.0.1/345b89f45d02d8b09400b472fab7b7e38f4ede1f/butterknife-annotations-8.0.1.jar"
         jumboMode="true"
         optimize="false"
@@ -52,7 +61,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
-        sha1="df3a954389258e59610392a14130be21046188a3">
+        sha1="c6d3be8189a7d39ed2c1cd79991f50ffb3a3d41c">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_05e6c4eab53cae95f389f03c5c8b447bee4d7774/classes.dex" />
     </item>
     <item
@@ -111,6 +120,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="4b868b833b0887aa48c4e581558eef4f1196f6a2">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/de.hdodenhof-circleimageview-1.2.1_9fab5dab4b9c4b9610849b7a72108e47df89787c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/helio/.gradle/caches/modules-2/files-2.1/cz.msebera.android/httpclient/4.3.6/526a9f794eab830eae4f23a62c572878b3f491ab/httpclient-4.3.6.jar"
         jumboMode="true"
         optimize="false"
@@ -133,7 +151,7 @@
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
-        sha1="bd6b531c582f348847ac5fb09b977e4bae107d3e">
+        sha1="d7287f41e3b8502f196273e85a96dabbd363d417">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1acef8c89a950e60fecfe4862b83b718f7d16820/classes.dex" />
     </item>
     <item
@@ -156,21 +174,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.github.thorbenprimke/realm-recyclerview/0.9.20/jars/libs/diffutils-1.2.1.jar"
-        jumboMode="true"
-        optimize="false"
-        revision="23.0.3"
-        sha1="b7ef6f0beada3a075b7c652d65edbddb0b539de8">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/diffutils-1.2.1_928fad5586511ec63be2f0022438b42bd85a3a82/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/helio/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
         jumboMode="true"
         optimize="false"
         revision="23.0.3"
         sha1="f1bc476cc167b18e66c297df599b2377131a8947">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.2_bc3e6412d565e5455be7c73b14fdd096c5af4ddd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.github.thorbenprimke/realm-recyclerview/0.9.20/jars/libs/diffutils-1.2.1.jar"
+        jumboMode="true"
+        optimize="false"
+        revision="23.0.3"
+        sha1="b7ef6f0beada3a075b7c652d65edbddb0b539de8">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/transforms/dex/debug/folders/1000/10/diffutils-1.2.1_928fad5586511ec63be2f0022438b42bd85a3a82/classes.dex" />
     </item>
     <item
         is-multidex="true"

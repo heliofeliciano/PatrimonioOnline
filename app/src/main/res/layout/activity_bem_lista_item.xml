@@ -15,12 +15,20 @@
         android:orientation="vertical"
         >
 
-        <View
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvListaBemImagem"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/logo_ecidade"
+            />
+
+        <!--<View
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:background="@drawable/circle_view"
-            />
+            />-->
 
         <TextView
             android:id="@+id/tvListaBemItemSituacao"
