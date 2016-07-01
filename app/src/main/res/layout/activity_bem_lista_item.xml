@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="88dp"
@@ -44,7 +44,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_lista_bem_item_descricao"
+                android:id="@+id/tvListaBemItemDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
                 android:gravity="center_vertical"
@@ -56,7 +56,7 @@
                 android:id="@+id/tv_lista_bem_item_classificacao"
                 android:layout_width="match_parent"
                 android:layout_height="24dp"
-                android:layout_below="@+id/tv_lista_bem_item_descricao"
+                android:layout_below="@+id/tvListaBemItemDescricao"
                 android:textSize="12sp"
                 android:text="@string/criacao_layout_bem_classificacao"
                 />
@@ -97,4 +97,4 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+</FrameLayout>

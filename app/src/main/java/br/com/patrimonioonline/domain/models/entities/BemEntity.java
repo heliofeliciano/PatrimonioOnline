@@ -1,8 +1,7 @@
 package br.com.patrimonioonline.domain.models.entities;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by helio on 15/06/16.
@@ -10,6 +9,7 @@ import io.realm.RealmObject;
 
 public class BemEntity extends RealmObject {
 
+    @PrimaryKey
     public int _id;
     public String descricao;
     public BemTipoEntity bemTipoEntity;
@@ -22,7 +22,7 @@ public class BemEntity extends RealmObject {
     public String numeroPlaca;
     public Double valorAquisicao;
     public Double valorResidual;
-    public Date dataAquisicao;
+    public String dataAquisicao;
 
 
 }

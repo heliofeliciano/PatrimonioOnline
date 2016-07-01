@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,15 +14,19 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.adapter.RecyclerViewBemListaAdapter;
 import br.com.patrimonioonline.domain.bem.BemListaPresenter;
 import br.com.patrimonioonline.domain.bem.IBemListaView;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.readonly.BemTipoReadonly;
 import br.com.patrimonioonline.lib.GsonLib;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
 import io.realm.BemTipoEntityRealmProxy;
+import io.realm.RealmResults;
 
 /**
  * Created by helio on 18/06/16.
@@ -31,8 +34,13 @@ import io.realm.BemTipoEntityRealmProxy;
 
 public class BemListaActivity extends AppCompatActivity implements IBemListaView {
 
-    @BindView(R.id.lvListaBens)
-    ListView lvLista;
+    /*@BindView(R.id.lvListaBens)
+    ListView lvLista;*/
+
+    @BindView(R.id.rvRealmBemLista)
+    RealmRecyclerView rvRealmBemLista;
+
+    RecyclerViewBemListaAdapter adapter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -42,7 +50,7 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_bens);
+        setContentView(R.layout.activity_bem_lista_recycler);
 
         ButterKnife.bind(this);
 
@@ -51,9 +59,28 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
             setSupportActionBar(toolbar);
         }
 
-        presenter = new BemListaPresenter(getApplicationContext(), this);
+        init();
+    }
 
+    @Override
+    public void onListaBensPorDepartamento(RealmResults<BemEntity> lista) {
+
+        adapter = new RecyclerViewBemListaAdapter(this, lista, true, true);
+        rvRealmBemLista.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onListaBensVazia() {
+
+        Toast.makeText(this, "Não há bens cadastrados. Clique no + para adicionar um bem", Toast.LENGTH_SHORT).show();
+
+    }
+
+    private void init() {
+        presenter = new BemListaPresenter(getApplicationContext(), this);
         verificarSeSetorJaFoiEscolhido();
+        presenter.buscarBens();
     }
 
     @Override

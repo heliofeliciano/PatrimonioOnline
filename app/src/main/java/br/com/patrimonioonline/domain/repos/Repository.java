@@ -37,6 +37,19 @@ public class Repository<T extends RealmObject> {
         realm.commitTransaction();
     }
 
+    public int getProximoId() {
+
+        if (allResults().size() == 0) {
+            return 1;
+        }
+
+        return realm.where(clazz).max("_id").intValue();
+    }
+
+    public RealmResults<T> allResults() {
+        return realm.where(clazz).findAll();
+    }
+
     public List<T> all(){
         return realm.where(clazz).findAll();
     }

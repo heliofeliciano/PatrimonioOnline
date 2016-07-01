@@ -17,11 +17,48 @@
             android:id="@+id/etDescricaoBem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
             android:maxLines="1"
             android:hint="@string/str_descricao_bem_hint"/>
 
     </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/str_cadastrarbem_tombo"
+                android:textColor="#99000000"/>
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/sp_temnumerotombo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_numerotombo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:layout_gravity="bottom"
+            android:visibility="invisible"
+            android:hint="@string/str_numerotombo_hint"/>
+
+    </LinearLayout>
 
 
     <LinearLayout
@@ -43,19 +80,10 @@
                 android:text="Aquisição"
                 android:textColor="#99000000"/>
 
-            <!--<View style="@style/Divider_8dp"/>-->
-
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/sp_aquisicao_bem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-            <!--<Spinner
-                android:id="@+id/sp_aquisicao_bem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@style/Base.Widget.AppCompat.Spinner.Underlined"
-                />-->
 
         </LinearLayout>
 

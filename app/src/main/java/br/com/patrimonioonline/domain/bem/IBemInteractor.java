@@ -17,4 +17,5 @@ public interface IBemInteractor {
     void PopularListaAquisicao(Context context, IBemPresenter listener);
     void PopularListaConvenio(Context context, IBemPresenter listener);
     void PopularListaClassificacao(Context context, IBemPresenter listener);
+    void PopularListaTemNumeroTombo(Context context, IBemPresenter listener);
 }

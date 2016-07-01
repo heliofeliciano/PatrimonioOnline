@@ -5,12 +5,13 @@ import android.content.Context;
 import java.util.List;
 
 import br.com.patrimonioonline.domain.consts.DepartamentoPreferenceConst;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
-import br.com.patrimonioonline.domain.models.readonly.DepartamentoReadonly;
 import br.com.patrimonioonline.domain.repos.Repository;
 import br.com.patrimonioonline.lib.StoredPreference;
+import io.realm.RealmResults;
 
 /**
  * Created by helio on 27/06/16.
@@ -19,7 +20,15 @@ import br.com.patrimonioonline.lib.StoredPreference;
 public class BemListaInteractor implements IBemListaInteractor {
 
     @Override
-    public void buscarBensPorDepartamento() {
+    public void buscarBensPorDepartamento(IBemListaPresenter listener) {
+        Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);
+        RealmResults<BemEntity> lista = bemEntityRepository.allResults();
+
+        if (lista.size() == 0) {
+            listener.onListaBensVazia();
+        } else {
+            listener.onListaBensPorDepartamento(lista);
+        }
 
     }
 
@@ -36,10 +45,10 @@ public class BemListaInteractor implements IBemListaInteractor {
     public void verificarSeSetorJaEscolhido(Context context, IBemListaPresenter listener) {
 
         StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
-        _pref.limparObjeto(new DepartamentoReadonly());
-        DepartamentoReadonly departamentoReadonly = (DepartamentoReadonly) _pref.buscarObjeto(new DepartamentoReadonly());
+        //_pref.limparObjeto(new DepartamentoReadonly());
+        DepartamentoEntity departamentoEntity = (DepartamentoEntity) _pref.buscarObjeto(new DepartamentoEntity());
 
-        if (departamentoReadonly != null) {
+        if (departamentoEntity != null) {
             listener.setorEscolhido();
         } else {
             listener.setorNaoEscolhido();
@@ -59,24 +68,8 @@ public class BemListaInteractor implements IBemListaInteractor {
     public void salvarPreferenceDepartamento(Context context, DepartamentoEntity departamentoEntity) {
 
         StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
-        _pref.salvarObjeto(new DepartamentoReadonly(departamentoEntity.id, departamentoEntity.descricao));
+        _pref.salvarObjetoRealm(new DepartamentoEntity(), departamentoEntity.converterParaJson());
+        //_pref.salvarObjeto(departamentoEntity.converterParaJson());
 
-
-        /*StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
-        //_pref.limparObjeto(departamentoEntity);
-
-        DepartamentoReadonly departamentoReadonly = new DepartamentoReadonly();
-        departamentoReadonly.id = departamentoEntity.id;
-        departamentoReadonly.descricao = departamentoEntity.descricao;
-        departamentoReadonly.nomeresponsavel = departamentoEntity.nomeresponsavel;
-        departamentoReadonly.emailresponsavel = departamentoEntity.emailresponsavel;
-        departamentoReadonly.limite = departamentoEntity.limite;
-        departamentoReadonly.telefone = departamentoEntity.telefone;
-        departamentoReadonly.email = departamentoEntity.email;
-        departamentoReadonly.fax = departamentoEntity.fax;
-        departamentoReadonly.ramal = departamentoEntity.ramal;
-        departamentoReadonly.instituicao = departamentoEntity.instituicao;
-
-        _pref.salvarObjeto(departamentoReadonly);*/
     }
 }

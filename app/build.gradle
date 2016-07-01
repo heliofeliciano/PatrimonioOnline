@@ -52,4 +52,10 @@ dependencies {
     /*compile 'org.parceler:parceler-api:1.1.5'
     apt 'org.parceler:parceler:1.1.5'*/
 
+    // RECYCLERVIEW - REALM
+    compile 'com.github.thorbenprimke:realm-recyclerview:0.9.20'
+
+    // LOAD IMAGES
+    //compile 'com.github.bumptech.glide:glide:3.6.1'
+
 }

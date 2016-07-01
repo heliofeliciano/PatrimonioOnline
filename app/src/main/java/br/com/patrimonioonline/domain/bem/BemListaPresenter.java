@@ -4,8 +4,10 @@ import android.content.Context;
 
 import java.util.List;
 
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import io.realm.RealmResults;
 
 /**
  * Created by helio on 27/06/16.
@@ -59,7 +61,22 @@ public class BemListaPresenter implements IBemListaPresenter {
     }
 
     @Override
+    public void buscarBens() {
+        interactor.buscarBensPorDepartamento(this);
+    }
+
+    @Override
+    public void onListaBensVazia() {
+        view.onListaBensVazia();
+    }
+
+    @Override
     public void onBuscarBemTipo(List<BemTipoEntity> bemTipoEntities) {
         view.onExibirTiposBens(bemTipoEntities);
+    }
+
+    @Override
+    public void onListaBensPorDepartamento(RealmResults<BemEntity> lista) {
+        view.onListaBensPorDepartamento(lista);
     }
 }

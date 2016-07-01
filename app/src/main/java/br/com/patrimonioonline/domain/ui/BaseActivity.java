@@ -2,6 +2,7 @@ package br.com.patrimonioonline.domain.ui;
 
 import android.support.v7.app.AppCompatActivity;
 
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.padrao.BasePresenter;
 import br.com.patrimonioonline.domain.padrao.IBaseView;
 
@@ -25,5 +26,10 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     @Override
     public Boolean verificarSincronizacao() {
         return presenter.verificarSincronizacao();
+    }
+
+    @Override
+    public DepartamentoEntity getDepartamentoLogado() {
+        return presenter.buscarDepartamentoLogado();
     }
 }

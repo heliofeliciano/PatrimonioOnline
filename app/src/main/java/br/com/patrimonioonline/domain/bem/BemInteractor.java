@@ -2,6 +2,8 @@ package br.com.patrimonioonline.domain.bem;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
@@ -19,6 +21,7 @@ public class BemInteractor implements IBemInteractor {
     public void Salvar(Context context, IBemPresenter listener, BemEntity bemEntity) {
 
         Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
+        bemEntity._id = bemEntityRepository.getProximoId();
         bemEntityRepository.create(bemEntity);
         listener.SalvoComSucesso();
     }
@@ -53,5 +56,14 @@ public class BemInteractor implements IBemInteractor {
 
     @Override
     public void PopularListaClassificacao(Context context, IBemPresenter listener) {
+    }
+
+    @Override
+    public void PopularListaTemNumeroTombo(Context context, IBemPresenter listener) {
+        ArrayList<String> lista = new ArrayList<>();
+        lista.add("Não");
+        lista.add("Sim");
+
+        listener.PopularListaTemNumeroTombo(lista);
     }
 }

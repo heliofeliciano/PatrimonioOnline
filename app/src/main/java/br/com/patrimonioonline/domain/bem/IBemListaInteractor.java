@@ -10,7 +10,7 @@ import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 
 public interface IBemListaInteractor {
 
-    void buscarBensPorDepartamento();
+    void buscarBensPorDepartamento(IBemListaPresenter listener);
     void buscarDepartamentosPorUsuario(IBemListaPresenter listener);
     void verificarSeSetorJaEscolhido(Context context, IBemListaPresenter listener);
     void salvarPreferenceDepartamento(Context context, DepartamentoEntity departamentoEntity);

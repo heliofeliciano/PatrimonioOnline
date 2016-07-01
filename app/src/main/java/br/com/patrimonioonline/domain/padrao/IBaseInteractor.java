@@ -1,6 +1,6 @@
 package br.com.patrimonioonline.domain.padrao;
 
-import android.content.Context;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 
 /**
  * Created by helio on 28/06/16.
@@ -8,5 +8,5 @@ import android.content.Context;
 public interface IBaseInteractor {
 
     Boolean verificarSeUsuarioLogado();
-
+    DepartamentoEntity buscarDepartamentoLogado();
 }

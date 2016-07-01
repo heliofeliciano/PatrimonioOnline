@@ -3,13 +3,14 @@ package br.com.patrimonioonline.domain.ui;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.bem.BemInteractor;
 import br.com.patrimonioonline.domain.bem.IBemPresenter;
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
@@ -33,7 +35,7 @@ import butterknife.OnClick;
  * Created by helio on 20/06/16.
  */
 
-public class BemCadastrarActivity extends AppCompatActivity implements IBemPresenter {
+public class BemCadastrarActivity extends BaseActivity implements IBemPresenter {
 
     private BemInteractor interactor;
 
@@ -41,11 +43,23 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @BindView(R.id.etDescricaoBem)
     EditText etDescricaoBem;
 
+    @BindView(R.id.et_numerotombo)
+    EditText etNumeroTombo;
+
+    @BindView(R.id.et_valoraquisicao_bem)
+    EditText etValorAquisicao;
+
+    @BindView(R.id.et_valorresidual_bem)
+    EditText etValorResidual;
+
+    @BindView(R.id.sp_temnumerotombo)
+    MaterialSpinner spTemNumeroTombo;
+
     @BindView(R.id.et_dataaquisicao_bem)
     EditText et_dataaquisicao;
 
     @BindView(R.id.sp_aquisicao_bem)
-    MaterialSpinner sp_aquisicao;
+    MaterialSpinner spAquisicao;
 
     @BindView(R.id.sp_bem_tipo)
     MaterialSpinner sp_bemtipo;
@@ -67,13 +81,14 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     DepartamentoEntity departamentoEntity;
     ConvenioEntity convenioEntity;
     SituacaoEntity situacaoEntity;
+    String temNumeroTombo;
 
     private int dia, mes, ano;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_bens);
+        setContentView(R.layout.activity_bem_cadastrar);
         interactor = new BemInteractor();
 
         ButterKnife.bind(this);
@@ -86,6 +101,7 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
         interactor.PopularListaBemtipos(getApplicationContext(), this);
         interactor.PopularListaBemTipoDepreciacao(getApplicationContext(), this);
         interactor.PopularListaSituacao(getApplicationContext(), this);
+        interactor.PopularListaTemNumeroTombo(getApplicationContext(), this);
 
         // Buscar objetos passados como parametro para a Activity
         String strBemTipo = getIntent().getExtras().getString("BemTipoReadonly");
@@ -118,29 +134,26 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @OnClick(R.id.btn_bem_salvar)
     public void Salvar() {
 
-        /*
+        BemEntity _bemEntity = new BemEntity();
 
-        bemEntity._id = 1;
-        bemEntity.descricao = descricao;
-        bemEntity.classificacaoEntity = classificacaoEntity;
-        bemEntity.aquisicaoEntity = aquisicaoEntity;
-        bemEntity.departamentoEntity = departamentoEntity;
-        bemEntity.convenioEntity = convenioEntity;
-        bemEntity.situacaoEntity = situacaoEntity;
-        bemEntity.numeroPlaca = numeroPlaca;
-        bemEntity.valorAquisicao = valorAquisicao;
-        bemEntity.valorResidual = valorResidual;
-        bemEntity.dataAquisicao = dataAquisicao;
+        _bemEntity.descricao = etDescricaoBem.getText().toString();
+        _bemEntity.classificacaoEntity = classificacaoEntity;
+        _bemEntity.aquisicaoEntity = aquisicaoEntity;
+        _bemEntity.departamentoEntity = this.getDepartamentoLogado();
+        _bemEntity.convenioEntity = convenioEntity;
+        _bemEntity.situacaoEntity = situacaoEntity;
+        _bemEntity.numeroPlaca = etNumeroTombo.toString();
+        _bemEntity.valorAquisicao = Double.parseDouble(etValorAquisicao.getText().toString());
+        _bemEntity.valorResidual = Double.parseDouble(etValorResidual.getText().toString());
+        _bemEntity.dataAquisicao = et_dataaquisicao.getText().toString();
 
-        interactor.Salvar(
-                getApplicationContext(),
-                this,
-        );*/
+        interactor.Salvar(getApplicationContext(), this, _bemEntity);
 
         String strSalvar = situacaoEntity.toString()
                  + "\n" + aquisicaoEntity.toString()
                  + "\n" + bemTipoEntity.toString()
                  + "\n" + bemTipoDepreciacaoEntity.toString()
+                 + "\n" + temNumeroTombo
                 ;
 
         Toast.makeText(this, strSalvar, Toast.LENGTH_LONG).show();
@@ -169,11 +182,11 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @Override
     public void PopularListaAquisicao(List<AquisicaoEntity> lista) {
 
-        sp_aquisicao.setItems(lista);
+        spAquisicao.setItems(lista);
 
-        aquisicaoEntity = lista.get(sp_aquisicao.getSelectedIndex());
+        aquisicaoEntity = lista.get(spAquisicao.getSelectedIndex());
 
-        sp_aquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<AquisicaoEntity>() {
+        spAquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<AquisicaoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, AquisicaoEntity item) {
                 aquisicaoEntity = item;
@@ -219,6 +232,21 @@ public class BemCadastrarActivity extends AppCompatActivity implements IBemPrese
     @Override
     public void PopularListaClassificacao(List<ClassificacaoEntity> lista) {
         classificacaoEntity = null;
+    }
+
+    @Override
+    public void PopularListaTemNumeroTombo(ArrayList<String> lista) {
+        spTemNumeroTombo.setItems(lista);
+
+        temNumeroTombo = lista.get(spTemNumeroTombo.getSelectedIndex());
+
+        spTemNumeroTombo.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                temNumeroTombo = item;
+                etNumeroTombo.setVisibility(temNumeroTombo.equals("Sim") ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
     }
 
     @Override
