@@ -31,4 +31,5 @@ public class BasePresenter implements IBasePresenter {
     public Boolean verificarSincronizacao() {
         return true;
     }
+
 }

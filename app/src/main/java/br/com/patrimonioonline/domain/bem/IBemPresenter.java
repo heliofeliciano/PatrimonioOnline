@@ -20,6 +20,7 @@ public interface IBemPresenter {
     void Salvar();
     void onSalvoNovo();
     void onSalvoEdicao();
+    void onDeletarBem();
     void Cancelar();
     void PopularListaSituacao(List<SituacaoEntity> lista);
     void PopularListaAquisicao(List<AquisicaoEntity> lista);

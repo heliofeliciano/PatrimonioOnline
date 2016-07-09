@@ -89,6 +89,16 @@ public class BemInteractor implements IBemInteractor {
     }
 
     @Override
+    public void deletarBem(int idBem, IBemPresenter listener) {
+
+        Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);
+        bemEntityRepository.deleteRealmObject(bemEntityRepository.getById(idBem));
+
+        listener.onDeletarBem();
+
+    }
+
+    @Override
     public void buscarBemEntity(int idBem, IBemPresenter listener) {
 
         Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);

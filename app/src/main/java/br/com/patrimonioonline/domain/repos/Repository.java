@@ -70,6 +70,12 @@ public class Repository<T extends RealmObject> {
         return realm.where(clazz).equalTo("id", id).findFirst();
     }
 
+    public void deleteRealmObject(RealmObject realmObject){
+        realm.beginTransaction();
+        realmObject.deleteFromRealm();
+        realm.commitTransaction();
+    }
+
     public void deleteAll(){
 
         final RealmResults results = realm.where(clazz).findAll();

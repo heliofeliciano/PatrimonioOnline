@@ -28,6 +28,11 @@
     <string name="str_cadastrarbem_tombo">Tombo</string>
     <string name="str_numerotombo_hint">Número do Tombo</string>
     <string name="str_listabem_longclick_escolher">Escolha uma ação</string>
+    <string name="action_excluir_bem">Excluir Bem</string>
+    <string name="pergunta_excluir_bem">Confirmar</string>
+    <string name="pergunta_excluir_bem_msg">Deseja realmente excluir este bem?</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 
 
 </resources>

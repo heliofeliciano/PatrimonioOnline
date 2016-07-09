@@ -1,14 +1,18 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.AlertDialogWrapper;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jaredrummler.materialspinner.MaterialSpinnerAdapter;
 
@@ -380,4 +384,45 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_bem_cadastrar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_excluir_bem:
+                new AlertDialogWrapper.Builder(this)
+                        .setTitle(R.string.pergunta_excluir_bem)
+                        .setMessage(R.string.pergunta_excluir_bem_msg)
+                        .setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                interactor.deletarBem(idBem, BemCadastrarActivity.this);
+                            }
+                        })
+                        .show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    @Override
+    public void onDeletarBem() {
+        Toast.makeText(this, "Bem excluído com sucesso", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, BemListaActivity.class));
+        finish();
+    }
 }

@@ -8,9 +8,4 @@
         android:title="@string/action_adicionar_bem"
         app:showAsAction="ifRoom"/>
 
-    <!-- Settings, should always be in the overflow -->
-    <item android:id="@+id/action_configuracoes"
-          android:title="@string/action_configuracoes"
-          app:showAsAction="never"/>
-
 </menu>

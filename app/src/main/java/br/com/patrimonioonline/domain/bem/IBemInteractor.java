@@ -44,4 +44,5 @@ public interface IBemInteractor {
     void PopularListaTemNumeroTombo(Context context, IBemPresenter listener);
 
     void buscarBemEntity(int idBem, IBemPresenter listener);
+    void deletarBem(int idBem, IBemPresenter listener) ;
 }
