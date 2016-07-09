@@ -8,6 +8,9 @@ import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
+import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
+import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
+import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 import br.com.patrimonioonline.domain.repos.Repository;
 
@@ -17,13 +20,81 @@ import br.com.patrimonioonline.domain.repos.Repository;
 
 public class BemInteractor implements IBemInteractor {
 
-    @Override
+    /*@Override
     public void Salvar(Context context, IBemPresenter listener, BemEntity bemEntity) {
 
         Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
-        bemEntity._id = bemEntityRepository.getProximoId();
+        bemEntity.setId(bemEntityRepository.getProximoId());
         bemEntityRepository.create(bemEntity);
-        listener.SalvoComSucesso();
+        listener.irParaActivityUploadImagens();
+    }*/
+
+    @Override
+    public void Salvar(Context context,
+                       IBemPresenter listener,
+                       int id,
+                       String descricao,
+                       BemTipoEntity bemTipoEntity,
+                       BemTipoDepreciacaoEntity bemTipoDepreciacaoEntity,
+                       ClassificacaoEntity classificacaoEntity,
+                       AquisicaoEntity aquisicaoEntity,
+                       DepartamentoEntity departamentoEntity,
+                       ConvenioEntity convenioEntity,
+                       SituacaoEntity situacaoEntity,
+                       String numeroPlaca,
+                       Double valorAquisicao,
+                       Double valorResidual,
+                       String dataAquisicao) {
+
+        BemEntity _bemEntity = new BemEntity();
+        _bemEntity.setId(id);
+        _bemEntity.setDescricao(descricao);
+        _bemEntity.setBemTipoEntity(bemTipoEntity);
+        _bemEntity.setBemTipoDepreciacaoEntity(bemTipoDepreciacaoEntity);
+        _bemEntity.setClassificacaoEntity(classificacaoEntity);
+        _bemEntity.setAquisicaoEntity(aquisicaoEntity);
+        _bemEntity.setDepartamentoEntity(departamentoEntity);
+        _bemEntity.setConvenioEntity(convenioEntity);
+        _bemEntity.setSituacaoEntity(situacaoEntity);
+        _bemEntity.setNumeroPlaca(numeroPlaca);
+        _bemEntity.setValorAquisicao(valorAquisicao);
+        _bemEntity.setValorResidual(valorResidual);
+        _bemEntity.setDataAquisicao(dataAquisicao);
+
+        if (id != 0) {
+            SalvarEdicao(context, listener, _bemEntity);
+        } else {
+            SalvarNovo(context, listener, _bemEntity);
+        }
+
+    }
+
+    @Override
+    public void SalvarNovo(Context context, IBemPresenter listener, BemEntity bemEntity) {
+
+        Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
+        bemEntity.setId(bemEntityRepository.getProximoId());
+        bemEntityRepository.createOrUpdate(bemEntity);
+
+        listener.onSalvoNovo();
+    }
+
+    @Override
+    public void SalvarEdicao(Context context, IBemPresenter listener, BemEntity bemEntity) {
+
+        Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
+        bemEntityRepository.createOrUpdate(bemEntity);
+
+        listener.onSalvoEdicao();
+    }
+
+    @Override
+    public void buscarBemEntity(int idBem, IBemPresenter listener) {
+
+        Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);
+        BemEntity bemEntity = bemEntityRepository.getById(idBem);
+        listener.EditarBemEntity(bemEntity);
+
     }
 
     @Override

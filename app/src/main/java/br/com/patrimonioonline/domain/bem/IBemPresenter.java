@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.patrimonioonline.domain.models.entities.AquisicaoEntity;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoDepreciacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
@@ -17,6 +18,8 @@ import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 public interface IBemPresenter {
 
     void Salvar();
+    void onSalvoNovo();
+    void onSalvoEdicao();
     void Cancelar();
     void PopularListaSituacao(List<SituacaoEntity> lista);
     void PopularListaAquisicao(List<AquisicaoEntity> lista);
@@ -25,8 +28,10 @@ public interface IBemPresenter {
     void PopularListaConvenio(List<ConvenioEntity> lista);
     void PopularListaClassificacao(List<ClassificacaoEntity> lista);
     void PopularListaTemNumeroTombo(ArrayList<String> lista);
+    void EditarBemEntity(BemEntity bemEntity);
+    void CheckInformacoesParaSalvar();
 
-    void SalvoComSucesso();
+    void irParaActivityUploadImagens();
     void ErroAoSalvar();
 
 }

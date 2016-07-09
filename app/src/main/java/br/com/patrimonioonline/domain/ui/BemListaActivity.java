@@ -2,7 +2,6 @@ package br.com.patrimonioonline.domain.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,19 +19,16 @@ import br.com.patrimonioonline.domain.bem.IBemListaView;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
-import br.com.patrimonioonline.domain.models.readonly.BemTipoReadonly;
-import br.com.patrimonioonline.lib.GsonLib;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
-import io.realm.BemTipoEntityRealmProxy;
 import io.realm.RealmResults;
 
 /**
  * Created by helio on 18/06/16.
  */
 
-public class BemListaActivity extends AppCompatActivity implements IBemListaView {
+public class BemListaActivity extends BaseActivity implements IBemListaView {
 
     /*@BindView(R.id.lvListaBens)
     ListView lvLista;*/
@@ -58,6 +54,13 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
         {
             setSupportActionBar(toolbar);
         }
+
+        //init();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         init();
     }
@@ -154,13 +157,7 @@ public class BemListaActivity extends AppCompatActivity implements IBemListaView
     public void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity) {
 
         Intent _intent = new Intent(this, BemCadastrarActivity.class);
-        //Bundle _bundle = new Bundle();
-
-        BemTipoReadonly _bemTipo = new BemTipoReadonly();
-        _bemTipo.id = ((BemTipoEntityRealmProxy) bemTipoEntity).realmGet$id();
-        _bemTipo.descricao = ((BemTipoEntityRealmProxy) bemTipoEntity).realmGet$descricao();
-
-        _intent.putExtra("BemTipoReadonly", GsonLib.converterObjetoParaJson(_bemTipo));
+        _intent.putExtra("BemTipo", bemTipoEntity.converterParaJson());
 
         startActivity(_intent);
     }

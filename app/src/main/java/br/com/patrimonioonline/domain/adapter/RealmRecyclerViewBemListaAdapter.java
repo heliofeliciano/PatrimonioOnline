@@ -1,6 +1,7 @@
 package br.com.patrimonioonline.domain.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -10,6 +11,7 @@ import com.bumptech.glide.Glide;
 
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
+import br.com.patrimonioonline.domain.ui.BemCadastrarActivity;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.RealmBasedRecyclerViewAdapter;
 import io.realm.RealmResults;
@@ -42,10 +44,10 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
 
     @Override
     public void onBindRealmViewHolder(ViewHolder viewHolder, int position) {
-        BemEntity _bemEntity = realmResults.get(position);
-        viewHolder.descricao.setText(_bemEntity.descricao);
-        viewHolder.situacao.setText(_bemEntity.situacaoEntity.descricao);
-        viewHolder.setor.setText(_bemEntity.departamentoEntity.descricao);
+        final BemEntity _bemEntity = realmResults.get(position);
+        viewHolder.descricao.setText(_bemEntity.getDescricao());
+        viewHolder.situacao.setText(_bemEntity.getSituacaoEntity().getDescricao());
+        viewHolder.setor.setText(_bemEntity.getDepartamentoEntity().descricao);
 
         // Setar imagem do bem
         Glide
@@ -56,9 +58,18 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
                 .error(R.drawable.image_error)
                 .into(viewHolder.imagem);
 
-        if (_bemEntity.classificacaoEntity != null) {
-            viewHolder.classificacao.setText(_bemEntity.classificacaoEntity.descricao);
+        if (_bemEntity.getClassificacaoEntity() != null) {
+            viewHolder.classificacao.setText(_bemEntity.getClassificacaoEntity().descricao);
         }
+
+        viewHolder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent _intent = new Intent(context, BemCadastrarActivity.class);
+                _intent.putExtra("IdBem", String.valueOf(_bemEntity.getId()));
+                context.startActivity(_intent);
+            }
+        });
     }
 
     public class ViewHolder extends RealmViewHolder {

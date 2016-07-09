@@ -3,6 +3,7 @@
           package="br.com.patrimonioonline">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +16,7 @@
         <activity android:name=".domain.ui.LoginActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.SincronizacaoActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.BemCadastrarActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".domain.ui.BemCadastrarImagensActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.BemListaActivity" android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".domain.ui.SplashScreenActivity" android:theme="@style/SplashTheme">

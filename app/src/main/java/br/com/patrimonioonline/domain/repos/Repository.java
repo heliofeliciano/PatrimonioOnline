@@ -19,9 +19,9 @@ public class Repository<T extends RealmObject> {
         this.clazz = clazz;
     }
 
-    public void create(RealmObject realmObject){
+    public void createOrUpdate(RealmObject realmObject){
         realm.beginTransaction();
-        RealmObject object = realm.copyToRealm(realmObject);
+        RealmObject object = realm.copyToRealmOrUpdate(realmObject);
         realm.commitTransaction();
     }
 
@@ -37,13 +37,21 @@ public class Repository<T extends RealmObject> {
         realm.commitTransaction();
     }
 
+    /*public void updateObject(RealmObject realmObject){
+
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(realmObject);
+        realm.commitTransaction();
+
+    }*/
+
     public int getProximoId() {
 
         if (allResults().size() == 0) {
             return 1;
         }
 
-        return realm.where(clazz).max("_id").intValue() + 1;
+        return realm.where(clazz).max("id").intValue() + 1;
     }
 
     public RealmResults<T> allResults() {
@@ -56,6 +64,10 @@ public class Repository<T extends RealmObject> {
 
     public T getByLogin(String login){
         return realm.where(clazz).equalTo("login", login).findFirst();
+    }
+
+    public T getById(int id){
+        return realm.where(clazz).equalTo("id", id).findFirst();
     }
 
     public void deleteAll(){

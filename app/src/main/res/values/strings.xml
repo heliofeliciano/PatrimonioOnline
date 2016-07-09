@@ -27,6 +27,7 @@
     <string name="str_escolher_bem_tipo">Tipo do Bem</string>
     <string name="str_cadastrarbem_tombo">Tombo</string>
     <string name="str_numerotombo_hint">Número do Tombo</string>
+    <string name="str_listabem_longclick_escolher">Escolha uma ação</string>
 
 
 </resources>

@@ -1,14 +1,16 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.jaredrummler.materialspinner.MaterialSpinnerAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +27,6 @@ import br.com.patrimonioonline.domain.models.entities.ClassificacaoEntity;
 import br.com.patrimonioonline.domain.models.entities.ConvenioEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
-import br.com.patrimonioonline.domain.models.readonly.BemTipoReadonly;
 import br.com.patrimonioonline.lib.GsonLib;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,11 +53,11 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     @BindView(R.id.et_valorresidual_bem)
     EditText etValorResidual;
 
-    @BindView(R.id.sp_temnumerotombo)
-    MaterialSpinner spTemNumeroTombo;
+    /*@BindView(R.id.sp_temnumerotombo)
+    MaterialSpinner spTemNumeroTombo;*/
 
     @BindView(R.id.et_dataaquisicao_bem)
-    EditText et_dataaquisicao;
+    EditText etDataAquisicao;
 
     @BindView(R.id.sp_aquisicao_bem)
     MaterialSpinner spAquisicao;
@@ -70,10 +71,14 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     @BindView(R.id.sp_tipodepreciacao)
     MaterialSpinner sp_tipodepreciacao;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     // Adapaters
     // private AquisicaoAdapter adapterAquisicao;
 
     // Objetos
+    BemEntity _bemEntity;
     BemTipoEntity bemTipoEntity;
     BemTipoDepreciacaoEntity bemTipoDepreciacaoEntity;
     ClassificacaoEntity classificacaoEntity;
@@ -83,7 +88,15 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     SituacaoEntity situacaoEntity;
     String temNumeroTombo;
 
+    MaterialSpinnerAdapter<SituacaoEntity> adapterSituacao;
+    List<BemTipoDepreciacaoEntity> listaBemTipoDepreciacao;
+    List<SituacaoEntity> listaSituacao;
+    List<AquisicaoEntity> listaAquisicao;
+    List<BemTipoEntity> listaBemTipo;
+
     private int dia, mes, ano;
+
+    private int idBem = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,20 +106,51 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
         ButterKnife.bind(this);
 
+        if (toolbar != null)
+        {
+            setSupportActionBar(toolbar);
+        }
+
         init();
+        checarVariaveisExtras();
+
     }
 
-    private void init() {
+    private void checarVariaveisExtras() {
+
+        String strIdBem = getIntent().getExtras().getString("IdBem");
+
+        if (strIdBem == null) {
+            initInsert();
+        } else {
+            idBem = Integer.valueOf(strIdBem);
+            initEdit();
+        }
+
+    }
+
+    private void init(){
+
+        _bemEntity = new BemEntity();
+
         interactor.PopularListaAquisicao(getApplicationContext(), this);
         interactor.PopularListaBemtipos(getApplicationContext(), this);
         interactor.PopularListaBemTipoDepreciacao(getApplicationContext(), this);
         interactor.PopularListaSituacao(getApplicationContext(), this);
-        interactor.PopularListaTemNumeroTombo(getApplicationContext(), this);
+        //interactor.PopularListaTemNumeroTombo(getApplicationContext(), this);
+    }
+
+    private void initEdit() {
+
+        interactor.buscarBemEntity(idBem, this);
+
+    }
+
+    private void initInsert() {
 
         // Buscar objetos passados como parametro para a Activity
-        String strBemTipo = getIntent().getExtras().getString("BemTipoReadonly");
-        BemTipoReadonly _bemTipoReadonly = (BemTipoReadonly) GsonLib.fromJsonObject(strBemTipo, new BemTipoReadonly());
-        Toast.makeText(this, _bemTipoReadonly.toString(), Toast.LENGTH_LONG).show();
+        String strBemTipo = getIntent().getExtras().getString("BemTipo");
+        BemTipoEntity _bemTipoEntity = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
@@ -119,7 +163,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                et_dataaquisicao.setText(new StringBuilder().append(dayOfMonth).append(" - ").append(monthOfYear-1).append(" - ").append(year).toString());
+                etDataAquisicao.setText(new StringBuilder().append(dayOfMonth).append(" - ").append(monthOfYear-1).append(" - ").append(year).toString());
 
                 ano = year;
                 mes = (monthOfYear - 1);
@@ -130,33 +174,45 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
         datePickerDialog.show();
     }
 
-    @Override
+
     @OnClick(R.id.btn_bem_salvar)
+    public void CheckInformacoesParaSalvar(){
+
+        // checar informacoes para salvar
+
+        Salvar();
+
+    }
+
+    @Override
+    public void onSalvoNovo() {
+        Toast.makeText(this, "Salvar", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSalvoEdicao() {
+        Toast.makeText(this, "Edicao", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public void Salvar() {
 
-        BemEntity _bemEntity = new BemEntity();
+        interactor.Salvar(getApplicationContext(),
+                this,
+                idBem,
+                etDescricaoBem.getText().toString(),
+                bemTipoEntity,
+                bemTipoDepreciacaoEntity,
+                classificacaoEntity,
+                aquisicaoEntity,
+                getDepartamentoLogado(),
+                convenioEntity,
+                situacaoEntity,
+                etNumeroTombo.getText().toString(),
+                Double.valueOf(etValorAquisicao.getText().toString()),
+                Double.valueOf(etValorResidual.getText().toString()),
+                etDataAquisicao.getText().toString());
 
-        _bemEntity.descricao = etDescricaoBem.getText().toString();
-        _bemEntity.classificacaoEntity = classificacaoEntity;
-        _bemEntity.aquisicaoEntity = aquisicaoEntity;
-        _bemEntity.departamentoEntity = this.getDepartamentoLogado();
-        _bemEntity.convenioEntity = convenioEntity;
-        _bemEntity.situacaoEntity = situacaoEntity;
-        _bemEntity.numeroPlaca = etNumeroTombo.toString();
-        _bemEntity.valorAquisicao = Double.parseDouble(etValorAquisicao.getText().toString());
-        _bemEntity.valorResidual = Double.parseDouble(etValorResidual.getText().toString());
-        _bemEntity.dataAquisicao = et_dataaquisicao.getText().toString();
-
-        interactor.Salvar(getApplicationContext(), this, _bemEntity);
-
-        String strSalvar = situacaoEntity.toString()
-                 + "\n" + aquisicaoEntity.toString()
-                 + "\n" + bemTipoEntity.toString()
-                 + "\n" + bemTipoDepreciacaoEntity.toString()
-                 + "\n" + temNumeroTombo
-                ;
-
-        Toast.makeText(this, strSalvar, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -166,45 +222,99 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     }
 
     @Override
+    public void EditarBemEntity(BemEntity bemEntity) {
+
+        _bemEntity = bemEntity;
+
+        // Inserir dados na view
+        etDescricaoBem.setText(_bemEntity.getDescricao());
+        etNumeroTombo.setText(_bemEntity.getNumeroPlaca());
+        etDataAquisicao.setText(_bemEntity.getDataAquisicao());
+        etValorAquisicao.setText(String.valueOf(_bemEntity.getValorAquisicao()));
+        etValorResidual.setText(String.valueOf(_bemEntity.getValorResidual()));
+
+        for (int i = 0; i <  listaBemTipoDepreciacao.size(); i++) {
+            BemTipoDepreciacaoEntity _bemTipoDepreciacao = listaBemTipoDepreciacao.get(i);
+            if (_bemTipoDepreciacao.getId() == _bemEntity.getBemTipoDepreciacaoEntity().getId()) {
+                sp_tipodepreciacao.setSelectedIndex(i);
+            }
+        }
+
+        for (int i = 0; i <  listaBemTipo.size(); i++) {
+            BemTipoEntity _bemTipo = listaBemTipo.get(i);
+            if (_bemTipo.getId() == _bemEntity.getBemTipoEntity().getId()) {
+                sp_bemtipo.setSelectedIndex(i);
+            }
+        }
+
+        for (int i = 0; i <  listaAquisicao.size(); i++) {
+            AquisicaoEntity _aquisicao = listaAquisicao.get(i);
+            if (_aquisicao.getId() == _bemEntity.getAquisicaoEntity().getId()) {
+                spAquisicao.setSelectedIndex(i);
+            }
+        }
+
+        for (int i = 0; i <  listaSituacao.size(); i++) {
+            SituacaoEntity _situacao = listaSituacao.get(i);
+            if (_situacao.getId() == _bemEntity.getSituacaoEntity().getId()) {
+                sp_situacao.setSelectedIndex(i);
+            }
+        }
+
+    }
+
+    @Override
     public void PopularListaSituacao(List<SituacaoEntity> lista) {
+        listaSituacao = new ArrayList<SituacaoEntity>();
+        listaSituacao = lista;
+
         sp_situacao.setItems(lista);
 
-        situacaoEntity = lista.get(sp_situacao.getSelectedIndex());
+        situacaoEntity = (lista.get(sp_situacao.getSelectedIndex()));
 
         sp_situacao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<SituacaoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, SituacaoEntity item) {
-                situacaoEntity = item;
+                _bemEntity.setSituacaoEntity(item);
+                //situacaoEntity = item;
             }
+
+
         });
     }
 
     @Override
     public void PopularListaAquisicao(List<AquisicaoEntity> lista) {
+        listaAquisicao = new ArrayList<AquisicaoEntity>();
+        listaAquisicao = lista;
 
         spAquisicao.setItems(lista);
 
-        aquisicaoEntity = lista.get(spAquisicao.getSelectedIndex());
+        aquisicaoEntity = (lista.get(spAquisicao.getSelectedIndex()));
 
         spAquisicao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<AquisicaoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, AquisicaoEntity item) {
-                aquisicaoEntity = item;
+                _bemEntity.setAquisicaoEntity(item);
+                //aquisicaoEntity = item;
             }
         });
     }
 
     @Override
     public void PopularListaBemtipos(List<BemTipoEntity> lista) {
+        listaBemTipo = new ArrayList<BemTipoEntity>();
+        listaBemTipo = lista;
 
         sp_bemtipo.setItems(lista);
 
-        bemTipoEntity = lista.get(sp_bemtipo.getSelectedIndex());
+        bemTipoEntity = (lista.get(sp_bemtipo.getSelectedIndex()));
 
         sp_bemtipo.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoEntity item) {
-                bemTipoEntity = item;
+                _bemEntity.setBemTipoEntity(item);
+                //bemTipoEntity = item;
                 Snackbar.make(view, item.toString() + " foi selecionado.", Snackbar.LENGTH_LONG).show();
             }
         });
@@ -212,31 +322,38 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
     @Override
     public void PopularListaBemTipoDepreciacao(List<BemTipoDepreciacaoEntity> lista) {
+
+        listaBemTipoDepreciacao = new ArrayList<BemTipoDepreciacaoEntity>();
+        listaBemTipoDepreciacao = lista;
+
         sp_tipodepreciacao.setItems(lista);
 
-        bemTipoDepreciacaoEntity = lista.get(sp_tipodepreciacao.getSelectedIndex());
+        bemTipoDepreciacaoEntity = (lista.get(sp_tipodepreciacao.getSelectedIndex()));
 
         sp_tipodepreciacao.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<BemTipoDepreciacaoEntity>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, BemTipoDepreciacaoEntity item) {
-                bemTipoDepreciacaoEntity = item;
+                _bemEntity.setBemTipoDepreciacaoEntity(item);
+                //bemTipoDepreciacaoEntity = item;
             }
         });
     }
 
     @Override
     public void PopularListaConvenio(List<ConvenioEntity> lista) {
-        convenioEntity = null;
+        _bemEntity.setConvenioEntity(null);
+        //convenioEntity = null;
     }
 
     @Override
     public void PopularListaClassificacao(List<ClassificacaoEntity> lista) {
-        classificacaoEntity = null;
+        _bemEntity.setClassificacaoEntity(null);
+        //classificacaoEntity = null;
     }
 
     @Override
     public void PopularListaTemNumeroTombo(ArrayList<String> lista) {
-        spTemNumeroTombo.setItems(lista);
+        /*spTemNumeroTombo.setItems(lista);
 
         temNumeroTombo = lista.get(spTemNumeroTombo.getSelectedIndex());
 
@@ -246,12 +363,16 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                 temNumeroTombo = item;
                 etNumeroTombo.setVisibility(temNumeroTombo.equals("Sim") ? View.VISIBLE : View.INVISIBLE);
             }
-        });
+        });*/
     }
 
     @Override
-    public void SalvoComSucesso() {
+    public void irParaActivityUploadImagens() {
 
+        Intent _intent = new Intent(this, BemCadastrarImagensActivity.class);
+        _intent.putExtra("IdBem", _bemEntity.getId());
+
+        startActivity(_intent);
     }
 
     @Override

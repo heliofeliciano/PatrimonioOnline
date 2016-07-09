@@ -38,7 +38,6 @@ public class BemListaInteractor implements IBemListaInteractor {
         Repository<BemEntity> bemEntityRepository = new Repository<>(BemEntity.class);
         RealmResults<BemEntity> lista = bemEntityRepository.allResults();
 
-
         listener.onAtualizarListaBens(lista);
     }
 
