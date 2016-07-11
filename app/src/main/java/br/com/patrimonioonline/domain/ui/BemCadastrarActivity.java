@@ -189,8 +189,9 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     }
 
     @Override
-    public void onSalvoNovo() {
-        Toast.makeText(this, "Salvar", Toast.LENGTH_LONG).show();
+    public void onSalvoNovo(BemEntity _entity) {
+        Toast.makeText(this, "Bem salvo com sucesso", Toast.LENGTH_LONG).show();
+        irParaActivityUploadImagens(_entity);
     }
 
     @Override
@@ -371,10 +372,10 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     }
 
     @Override
-    public void irParaActivityUploadImagens() {
+    public void irParaActivityUploadImagens(BemEntity _entity) {
 
         Intent _intent = new Intent(this, BemCadastrarImagensActivity.class);
-        _intent.putExtra("IdBem", _bemEntity.getId());
+        _intent.putExtra("IdBem", String.valueOf(_entity.getId()));
 
         startActivity(_intent);
     }

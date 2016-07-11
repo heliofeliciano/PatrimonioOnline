@@ -18,7 +18,7 @@ import br.com.patrimonioonline.domain.models.entities.SituacaoEntity;
 public interface IBemPresenter {
 
     void Salvar();
-    void onSalvoNovo();
+    void onSalvoNovo(BemEntity _entity);
     void onSalvoEdicao();
     void onDeletarBem();
     void Cancelar();
@@ -32,7 +32,7 @@ public interface IBemPresenter {
     void EditarBemEntity(BemEntity bemEntity);
     void CheckInformacoesParaSalvar();
 
-    void irParaActivityUploadImagens();
+    void irParaActivityUploadImagens(BemEntity _entity);
     void ErroAoSalvar();
 
 }

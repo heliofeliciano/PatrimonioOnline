@@ -19,6 +19,10 @@ public class Repository<T extends RealmObject> {
         this.clazz = clazz;
     }
 
+    public Realm getInstancia() {
+        return realm;
+    }
+
     public void createOrUpdate(RealmObject realmObject){
         realm.beginTransaction();
         RealmObject object = realm.copyToRealmOrUpdate(realmObject);
@@ -37,11 +41,11 @@ public class Repository<T extends RealmObject> {
         realm.commitTransaction();
     }
 
-    /*public void updateObject(RealmObject realmObject){
+    /*public void updateObject(BemEntity bemEntity){
 
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(realmObject);
-        realm.commitTransaction();
+        BemImagensEntity _imgEntity = realm.copyToRealm(new BemImagensEntity());
+        bemEntity.setListaBemImageEntities(_imgEntity);
 
     }*/
 
@@ -67,6 +71,7 @@ public class Repository<T extends RealmObject> {
     }
 
     public T getById(int id){
+
         return realm.where(clazz).equalTo("id", id).findFirst();
     }
 

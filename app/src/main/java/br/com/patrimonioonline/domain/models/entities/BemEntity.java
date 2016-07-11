@@ -1,5 +1,6 @@
 package br.com.patrimonioonline.domain.models.entities;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -23,7 +24,7 @@ public class BemEntity extends RealmObject {
     private Double valorAquisicao;
     private Double valorResidual;
     private String dataAquisicao;
-    private BemImagensEntity bemImagensEntity;
+    private RealmList<BemImagensEntity> listaBemImageEntities;
 
     public int getId() {
         return id;
@@ -129,12 +130,12 @@ public class BemEntity extends RealmObject {
         this.dataAquisicao = dataAquisicao;
     }
 
-    public BemImagensEntity getBemImagensEntity() {
-        return bemImagensEntity;
+    public RealmList<BemImagensEntity> getListaBemImageEntities() {
+        return listaBemImageEntities;
     }
 
-    public void setBemImagensEntity(BemImagensEntity bemImagensEntity) {
-        this.bemImagensEntity = bemImagensEntity;
+    public void setListaBemImageEntities(RealmList<BemImagensEntity> listaBemImageEntities) {
+        this.listaBemImageEntities = listaBemImageEntities;
     }
 
     /*public String converterParaJson(){

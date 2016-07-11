@@ -76,7 +76,7 @@ public class BemInteractor implements IBemInteractor {
         bemEntity.setId(bemEntityRepository.getProximoId());
         bemEntityRepository.createOrUpdate(bemEntity);
 
-        listener.onSalvoNovo();
+        listener.onSalvoNovo(bemEntity);
     }
 
     @Override
