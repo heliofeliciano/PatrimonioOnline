@@ -414,6 +414,10 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                         .show();
 
                 return true;
+            case R.id.action_add_imagem_bem:
+                Intent it = new Intent(this, BemCadastrarImagensActivity.class);
+                it.putExtra("IdBem", String.valueOf(idBem));
+                startActivity(it);
             default:
                 return super.onOptionsItemSelected(item);
         }

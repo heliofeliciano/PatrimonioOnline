@@ -33,6 +33,7 @@
     <string name="pergunta_excluir_bem_msg">Deseja realmente excluir este bem?</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="action_add_imagem_bem">AdicionarImagem</string>
 
 
 </resources>

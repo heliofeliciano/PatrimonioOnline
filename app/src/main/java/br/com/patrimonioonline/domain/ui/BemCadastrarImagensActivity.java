@@ -19,6 +19,7 @@ import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.adapter.RealmRecyclerViewBemListaImagensAdapter;
 import br.com.patrimonioonline.domain.bem.BemImagemInteractor;
 import br.com.patrimonioonline.domain.bem.IBemImagemPresenter;
+import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -66,7 +67,7 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
         String strIdBem = getIntent().getExtras().getString("IdBem");
         idBem = Integer.valueOf(strIdBem);
         interactor = new BemImagemInteractor();
-
+        interactor.buscarImagens(this, idBem);
         /*BemImagensEntity _imagemEntity = new BemImagensEntity();
         _imagemEntity.id = 1;
         _imagemEntity.descricao = "bla bla";
@@ -145,6 +146,19 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     public void onSalvarImagem() {
 
         Log.d("Imagem", "Imagem salva com sucesso");
+
+    }
+
+    @Override
+    public void onBuscarImagem(BemEntity bemEntity) {
+
+        Glide
+                .with(this)
+                .load(bemEntity.getListaBemImageEntities().get(0).getCaminho())
+                .centerCrop()
+                .crossFade()
+                .error(R.drawable.image_error)
+                .into(imageView);
 
     }
 

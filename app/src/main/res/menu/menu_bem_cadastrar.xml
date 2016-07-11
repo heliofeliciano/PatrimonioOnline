@@ -8,4 +8,10 @@
         android:title="@string/action_excluir_bem"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_add_imagem_bem"
+        android:icon="@mipmap/ic_add_a_photo_black_48dp"
+        android:title="@string/action_add_imagem_bem"
+        app:showAsAction="ifRoom"/>
+
 </menu>

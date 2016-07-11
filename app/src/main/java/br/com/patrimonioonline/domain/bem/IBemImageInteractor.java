@@ -5,4 +5,5 @@ package br.com.patrimonioonline.domain.bem;
  */
 public interface IBemImageInteractor {
     void salvarImagem(IBemImagemPresenter listener, int idBem, String descricao, String caminho);
+    void buscarImagens(IBemImagemPresenter listener, int idBem);
 }

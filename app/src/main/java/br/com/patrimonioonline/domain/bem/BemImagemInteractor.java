@@ -35,4 +35,13 @@ public class BemImagemInteractor implements IBemImageInteractor {
 
         listener.onSalvarImagem();
     }
+
+    @Override
+    public void buscarImagens(IBemImagemPresenter listener, int idBem) {
+
+        Repository<BemEntity> _repository = new Repository<>(BemEntity.class);
+        BemEntity _entity = _repository.getById(idBem);
+
+        listener.onBuscarImagem(_entity);
+    }
 }
