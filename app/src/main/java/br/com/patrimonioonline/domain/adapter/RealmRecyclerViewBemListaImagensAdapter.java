@@ -3,9 +3,8 @@ package br.com.patrimonioonline.domain.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
@@ -38,7 +37,7 @@ public class RealmRecyclerViewBemListaImagensAdapter extends RealmBasedRecyclerV
     public ViewHolder onCreateRealmViewHolder(ViewGroup viewGroup, int i) {
 
         View v = inflater.inflate(R.layout.activity_bem_lista_imagens_item, viewGroup, false);
-        return new ViewHolder((FrameLayout) v);
+        return new ViewHolder((LinearLayout) v);
     }
 
     @Override
@@ -46,37 +45,26 @@ public class RealmRecyclerViewBemListaImagensAdapter extends RealmBasedRecyclerV
         final BemImagensEntity _imagemEntity = realmResults.get(position);
 
         // Setar imagem do bem
-        Glide
-                .with(context)
-                .load("http://goo.gl/gEgYUd")
-                .centerCrop()
-                .crossFade()
-                .error(R.drawable.image_error)
-                .into(viewHolder.imageView);
-
-        /*viewHolder.container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent _intent = new Intent(context, BemCadastrarActivity.class);
-                _intent.putExtra("IdBem", String.valueOf(_bemEntity.getId()));
-                context.startActivity(_intent);
-            }
-        });*/
+        if (_imagemEntity != null) {
+            Glide
+                    .with(context)
+                    .load(_imagemEntity.getCaminho())
+                    .centerCrop()
+                    .crossFade()
+                    .error(R.drawable.image_error)
+                    .into(viewHolder.imageView);
+        }
     }
 
     public class ViewHolder extends RealmViewHolder {
 
-        public FrameLayout container;
+        public LinearLayout container;
         public ImageView imageView;
-        public Button buttonCamera;
-        public Button buttonGaleria;
 
-        public ViewHolder(FrameLayout container) {
+        public ViewHolder(LinearLayout container) {
             super(container);
             this.container = container;
             this.imageView = (ImageView) container.findViewById(R.id.ivBemCadastrarImagem1);
-            this.buttonCamera = (Button) container.findViewById(R.id.btnBemImageCamera);
-            this.buttonGaleria = (Button) container.findViewById(R.id.btnBemImagemGaleria);
         }
     }
 

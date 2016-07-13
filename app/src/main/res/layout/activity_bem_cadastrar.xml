@@ -144,6 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp"
                 android:paddingTop="16dp"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <TextView
@@ -183,6 +184,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 android:layout_marginBottom="8dp">
 
                 <EditText
@@ -200,6 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 android:layout_marginBottom="8dp">
 
                 <EditText

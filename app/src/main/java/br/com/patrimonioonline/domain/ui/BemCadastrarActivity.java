@@ -151,10 +151,10 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     }
 
     private void initInsert() {
-
         // Buscar objetos passados como parametro para a Activity
         String strBemTipo = getIntent().getExtras().getString("BemTipo");
-        BemTipoEntity _bemTipoEntity = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
+        bemTipoEntity = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
+        /*getSupportActionBar().setTitle("Cadastro de " + bemTipoEntity.getDescricao());*/
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
@@ -183,7 +183,6 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     public void CheckInformacoesParaSalvar(){
 
         // checar informacoes para salvar
-
         Salvar();
 
     }
@@ -191,7 +190,12 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     @Override
     public void onSalvoNovo(BemEntity _entity) {
         Toast.makeText(this, "Bem salvo com sucesso", Toast.LENGTH_LONG).show();
-        irParaActivityUploadImagens(_entity);
+
+        //if (bemTipoEntity.getDescricao().equals("MOVEIS")) {
+            irParaActivityMapa(_entity);
+        //} else {
+        //    irParaActivityUploadImagens(_entity);
+        //}
     }
 
     @Override
@@ -201,6 +205,22 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
     @Override
     public void Salvar() {
+
+        /*interactor.Salvar(getApplicationContext(),
+                this,
+                idBem,
+                etDescricaoBem.getText().toString(),
+                bemTipoEntity,
+                bemTipoDepreciacaoEntity,
+                classificacaoEntity,
+                aquisicaoEntity,
+                getDepartamentoLogado(),
+                convenioEntity,
+                situacaoEntity,
+                etNumeroTombo.getText().toString(),
+                Double.valueOf(etValorAquisicao.getText().toString()),
+                Double.valueOf(etValorResidual.getText().toString()),
+                etDataAquisicao.getText().toString());*/
 
         interactor.Salvar(getApplicationContext(),
                 this,
@@ -215,7 +235,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                 situacaoEntity,
                 etNumeroTombo.getText().toString(),
                 Double.valueOf(etValorAquisicao.getText().toString()),
-                Double.valueOf(etValorResidual.getText().toString()),
+                Double.valueOf(0),
                 etDataAquisicao.getText().toString());
 
     }
@@ -236,14 +256,15 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
         etNumeroTombo.setText(_bemEntity.getNumeroPlaca());
         etDataAquisicao.setText(_bemEntity.getDataAquisicao());
         etValorAquisicao.setText(String.valueOf(_bemEntity.getValorAquisicao()));
-        etValorResidual.setText(String.valueOf(_bemEntity.getValorResidual()));
+        //etValorResidual.setText(String.valueOf(_bemEntity.getValorResidual()));
+        etValorResidual.setText(String.valueOf(0));
 
-        for (int i = 0; i <  listaBemTipoDepreciacao.size(); i++) {
+        /*for (int i = 0; i <  listaBemTipoDepreciacao.size(); i++) {
             BemTipoDepreciacaoEntity _bemTipoDepreciacao = listaBemTipoDepreciacao.get(i);
             if (_bemTipoDepreciacao.getId() == _bemEntity.getBemTipoDepreciacaoEntity().getId()) {
                 sp_tipodepreciacao.setSelectedIndex(i);
             }
-        }
+        }*/
 
         for (int i = 0; i <  listaBemTipo.size(); i++) {
             BemTipoEntity _bemTipo = listaBemTipo.get(i);
@@ -328,7 +349,9 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     @Override
     public void PopularListaBemTipoDepreciacao(List<BemTipoDepreciacaoEntity> lista) {
 
-        listaBemTipoDepreciacao = new ArrayList<BemTipoDepreciacaoEntity>();
+        _bemEntity.setBemTipoDepreciacaoEntity(null);
+
+        /*listaBemTipoDepreciacao = new ArrayList<BemTipoDepreciacaoEntity>();
         listaBemTipoDepreciacao = lista;
 
         sp_tipodepreciacao.setItems(lista);
@@ -341,7 +364,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                 _bemEntity.setBemTipoDepreciacaoEntity(item);
                 //bemTipoDepreciacaoEntity = item;
             }
-        });
+        });*/
     }
 
     @Override
@@ -378,6 +401,14 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
         _intent.putExtra("IdBem", String.valueOf(_entity.getId()));
 
         startActivity(_intent);
+    }
+
+    @Override
+    public void irParaActivityMapa(BemEntity _entity) {
+
+        Intent _intent = new Intent(this, MapsActivity.class);
+        startActivity(_intent);
+
     }
 
     @Override

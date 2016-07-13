@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "154414422765",
+    "project_id": "patrimonioonline-1370"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154414422765:android:3d149c8f19cf99d6",
+        "android_client_info": {
+          "package_name": "br.com.patrimonioonline"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZNVhfYbsg1SG1DHGYFOPoX-V8mr47hMo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

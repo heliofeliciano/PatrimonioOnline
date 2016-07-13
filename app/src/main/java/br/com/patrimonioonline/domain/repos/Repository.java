@@ -12,8 +12,8 @@ import io.realm.RealmResults;
 
 public class Repository<T extends RealmObject> {
 
-    private Realm realm = Realm.getDefaultInstance();
-    private Class<T> clazz;
+    public Realm realm = Realm.getDefaultInstance();
+    public Class<T> clazz;
 
     public Repository(Class<T> clazz) {
         this.clazz = clazz;

@@ -33,6 +33,7 @@ public interface IBemPresenter {
     void CheckInformacoesParaSalvar();
 
     void irParaActivityUploadImagens(BemEntity _entity);
+    void irParaActivityMapa(BemEntity _entity);
     void ErroAoSalvar();
 
 }

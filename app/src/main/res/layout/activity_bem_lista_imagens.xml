@@ -14,9 +14,56 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <ListView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <View style="@style/Divider_8dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@drawable/rect_view">
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_width="200dp"
+                android:layout_height="100dp">
+
+                <Button
+                    android:id="@+id/btnBemImageCamera"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="@mipmap/ic_photo_camera_black_24dp"
+                    />
+
+                <Button
+                    android:id="@+id/btnBemImagemGaleria"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/ic_photo_library_black_24dp"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView
         android:id="@+id/lvListaBemImagens"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        app:rrvIsRefreshable="true"
+        app:rrvLayoutType="LinearLayout"
+        />
+
 
 </LinearLayout>

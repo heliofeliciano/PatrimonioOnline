@@ -49,7 +49,7 @@ public class RealmRecyclerViewBemListaAdapter extends RealmBasedRecyclerViewAdap
         viewHolder.situacao.setText(_bemEntity.getSituacaoEntity().getDescricao());
         viewHolder.setor.setText(_bemEntity.getDepartamentoEntity().descricao);
 
-        if (_bemEntity.getListaBemImageEntities() != null) {
+        if (_bemEntity.getListaBemImageEntities() != null && _bemEntity.getListaBemImageEntities().size() != 0) {
 
             String caminho = _bemEntity.getListaBemImageEntities().get(0).getCaminho();
 

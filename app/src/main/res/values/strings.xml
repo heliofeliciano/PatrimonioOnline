@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PatrimonioOnline</string>
+    <!--<string name="google_api_key">AIzaSyBWrmMd7NSysn23uc7qTbN3us7Q6JXcCKQ</string>-->
 
     <string name="str_entrar">Entrar</string>
     <string name="str_solicitaracesso">Solicitar Acesso</string>
@@ -34,6 +35,8 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="action_add_imagem_bem">AdicionarImagem</string>
+    <string name="str_bem_localizacao">Localização</string>
+    <string name="ok">OK</string>
 
 
 </resources>

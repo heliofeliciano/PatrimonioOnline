@@ -8,10 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import java.io.File;
 
@@ -19,16 +16,16 @@ import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.adapter.RealmRecyclerViewBemListaImagensAdapter;
 import br.com.patrimonioonline.domain.bem.BemImagemInteractor;
 import br.com.patrimonioonline.domain.bem.IBemImagemPresenter;
-import br.com.patrimonioonline.domain.models.entities.BemEntity;
+import br.com.patrimonioonline.domain.models.entities.BemImagensEntity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
+import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
-
-import static br.com.patrimonioonline.R.id.ivBemCadastrarImagem1;
 
 /**
  * Created by helio on 02/07/16.
@@ -36,8 +33,8 @@ import static br.com.patrimonioonline.R.id.ivBemCadastrarImagem1;
 
 public class BemCadastrarImagensActivity extends BaseActivity implements IBemImagemPresenter {
 
-    @BindView(ivBemCadastrarImagem1)
-    ImageView imageView;
+    @BindView(R.id.lvListaBemImagens)
+    RealmRecyclerView lvListaBemImagens;
 
     RealmRecyclerViewBemListaImagensAdapter adapter;
 
@@ -50,7 +47,7 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bem_lista_imagens_item);
+        setContentView(R.layout.activity_bem_lista_imagens);
 
         ButterKnife.bind(this);
 
@@ -64,10 +61,12 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     }
 
     private void init() {
+
         String strIdBem = getIntent().getExtras().getString("IdBem");
         idBem = Integer.valueOf(strIdBem);
         interactor = new BemImagemInteractor();
         interactor.buscarImagens(this, idBem);
+
         /*BemImagensEntity _imagemEntity = new BemImagensEntity();
         _imagemEntity.id = 1;
         _imagemEntity.descricao = "bla bla";
@@ -150,15 +149,21 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     }
 
     @Override
-    public void onBuscarImagem(BemEntity bemEntity) {
+    public void onBuscarImagem(RealmResults<BemImagensEntity> imagensEntities) {
 
-        Glide
-                .with(this)
-                .load(bemEntity.getListaBemImageEntities().get(0).getCaminho())
-                .centerCrop()
-                .crossFade()
-                .error(R.drawable.image_error)
-                .into(imageView);
+        adapter = new RealmRecyclerViewBemListaImagensAdapter(this, imagensEntities, true, true);
+        lvListaBemImagens.setAdapter(adapter);
+
+        /*if (bemEntity.getListaBemImageEntities() != null &&
+                bemEntity.getListaBemImageEntities().size() != 0) {
+            Glide
+                    .with(this)
+                    .load(bemEntity.getListaBemImageEntities().get(0).getCaminho())
+                    .centerCrop()
+                    .crossFade()
+                    .error(R.drawable.image_error)
+                    .into(imageView);
+        }*/
 
     }
 
@@ -166,13 +171,14 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
 
         interactor.salvarImagem(this, idBem, "teste imagem nome", imageFile.getAbsolutePath());
 
-        Glide
+
+        /*Glide
                 .with(this)
                 .load(imageFile)
                 .centerCrop()
                 .crossFade()
                 .error(R.drawable.image_error)
-                .into(imageView);
+                .into(imageView);*/
 
     }
 }
