@@ -84,6 +84,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     // Objetos
     BemEntity _bemEntity;
     BemTipoEntity bemTipoEntity;
+    BemTipoEntity _bemTipoEntityAux;
     BemTipoDepreciacaoEntity bemTipoDepreciacaoEntity;
     ClassificacaoEntity classificacaoEntity;
     AquisicaoEntity aquisicaoEntity;
@@ -153,8 +154,8 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     private void initInsert() {
         // Buscar objetos passados como parametro para a Activity
         String strBemTipo = getIntent().getExtras().getString("BemTipo");
-        bemTipoEntity = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
-        /*getSupportActionBar().setTitle("Cadastro de " + bemTipoEntity.getDescricao());*/
+        _bemTipoEntityAux = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
+        getSupportActionBar().setTitle("Cadastro de " + _bemTipoEntityAux.getDescricao());
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
