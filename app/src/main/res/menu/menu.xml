@@ -8,4 +8,9 @@
         android:title="@string/action_adicionar_bem"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/action_alterar_departamento"
+        android:title="@string/action_alterar_departamento"
+        app:showAsAction="never"/>
+
 </menu>

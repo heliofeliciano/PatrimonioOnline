@@ -37,6 +37,7 @@
     <string name="action_add_imagem_bem">AdicionarImagem</string>
     <string name="str_bem_localizacao">Localização</string>
     <string name="ok">OK</string>
+    <string name="action_alterar_departamento">Alterar Departamento</string>
 
 
 </resources>

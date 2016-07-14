@@ -176,6 +176,8 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 //startActivity(new Intent(this, BemCadastrarActivity.class));
                 presenter.buscarBemTipos();
                 return true;
+            case R.id.action_alterar_departamento:
+                startActivity(new Intent(this, AlterarDepartamentoActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
