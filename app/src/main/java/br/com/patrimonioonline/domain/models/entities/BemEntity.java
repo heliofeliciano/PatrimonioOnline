@@ -24,6 +24,8 @@ public class BemEntity extends RealmObject {
     private Double valorAquisicao;
     private Double valorResidual;
     private String dataAquisicao;
+    private String latitude;
+    private String longitude;
     private RealmList<BemImagensEntity> listaBemImageEntities;
 
     public int getId() {
@@ -128,6 +130,22 @@ public class BemEntity extends RealmObject {
 
     public void setDataAquisicao(String dataAquisicao) {
         this.dataAquisicao = dataAquisicao;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public RealmList<BemImagensEntity> getListaBemImageEntities() {

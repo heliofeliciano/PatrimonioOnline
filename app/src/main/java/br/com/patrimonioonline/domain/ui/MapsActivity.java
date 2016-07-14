@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.Button;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,6 +25,11 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.bem.IMapsPresenter;
+import br.com.patrimonioonline.domain.bem.MapsInteractor;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pl.tajchert.nammu.Nammu;
 import pl.tajchert.nammu.PermissionCallback;
 
@@ -31,7 +37,14 @@ import pl.tajchert.nammu.PermissionCallback;
  * Created by helio on 11/07/16.
  */
 public class MapsActivity extends BaseActivity
-        implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener,
+        IMapsPresenter {
+
+    @BindView(R.id.btnLocalizacaoCancelar)
+    Button btnLocalizacaoCancelar;
+
+    private MapsInteractor _interactor;
+    private int _idBem;
 
     private LocationRequest _locationRequest;
     private GoogleMap _map;
@@ -45,8 +58,20 @@ public class MapsActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bem_mapa);
 
+        _interactor = new MapsInteractor();
+        ButterKnife.bind(this);
+
+        init();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void init() {
+
+        String strIdBem = getIntent().getExtras().getString("IdBem");
+        _idBem = Integer.valueOf(strIdBem);
+
     }
 
     @Override
@@ -85,13 +110,9 @@ public class MapsActivity extends BaseActivity
                 }
             });
         } else {
-            buildGoogleApiClient();
-            _map.setMyLocationEnabled(true);
+            configurarMapa();
         }
 
-        /*LatLng sydney = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
 
     private void configurarMapa() {
@@ -103,6 +124,25 @@ public class MapsActivity extends BaseActivity
                 buildGoogleApiClient();
             }
             _map.setMyLocationEnabled(true);
+
+            _map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(LatLng latLng) {
+
+                    if (_currentLocationMarker != null) {
+                        _currentLocationMarker.remove();
+                    }
+
+                    MarkerOptions _markerOptions = new MarkerOptions();
+                    _markerOptions.position(latLng);
+                    _markerOptions.title("Posição Atual");
+                    _markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    _currentLocationMarker = _map.addMarker(_markerOptions);
+
+                    _map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                }
+            });
         }
 
     }
@@ -163,4 +203,16 @@ public class MapsActivity extends BaseActivity
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {}
+
+    @Override
+    @OnClick(R.id.btnLocalizacaoSalvar)
+    public void salvar() {
+        _interactor.Salvar(_idBem, String.valueOf(_currentLocationMarker.getPosition().latitude),
+                String.valueOf(_currentLocationMarker.getPosition().longitude),this);
+    }
+
+    @Override
+    public void salvarResult() {
+
+    }
 }

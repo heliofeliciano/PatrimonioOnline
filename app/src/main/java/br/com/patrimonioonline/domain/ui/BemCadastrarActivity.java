@@ -193,9 +193,9 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
         Toast.makeText(this, "Bem salvo com sucesso", Toast.LENGTH_LONG).show();
 
         //if (bemTipoEntity.getDescricao().equals("MOVEIS")) {
-            irParaActivityMapa(_entity);
+        irParaActivityMapa(_entity);
         //} else {
-        //    irParaActivityUploadImagens(_entity);
+        //irParaActivityUploadImagens(_entity);
         //}
     }
 
@@ -408,6 +408,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     public void irParaActivityMapa(BemEntity _entity) {
 
         Intent _intent = new Intent(this, MapsActivity.class);
+        _intent.putExtra("IdBem", String.valueOf(_entity.getId()));
         startActivity(_intent);
 
     }
