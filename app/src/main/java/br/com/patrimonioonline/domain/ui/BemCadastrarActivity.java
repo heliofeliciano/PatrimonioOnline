@@ -152,10 +152,18 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     }
 
     private void initInsert() {
-        // Buscar objetos passados como parametro para a Activity
+
         String strBemTipo = getIntent().getExtras().getString("BemTipo");
         _bemTipoEntityAux = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
         getSupportActionBar().setTitle("Cadastro de " + _bemTipoEntityAux.getDescricao());
+
+        for (int i = 0; i <  listaBemTipo.size(); i++) {
+            BemTipoEntity _bemTipo = listaBemTipo.get(i);
+            if (_bemTipo.getId() == _bemTipoEntityAux.getId()) {
+                sp_bemtipo.setSelectedIndex(i);
+            }
+        }
+
     }
 
     @OnClick(R.id.et_dataaquisicao_bem)
@@ -206,22 +214,6 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
     @Override
     public void Salvar() {
-
-        /*interactor.Salvar(getApplicationContext(),
-                this,
-                idBem,
-                etDescricaoBem.getText().toString(),
-                bemTipoEntity,
-                bemTipoDepreciacaoEntity,
-                classificacaoEntity,
-                aquisicaoEntity,
-                getDepartamentoLogado(),
-                convenioEntity,
-                situacaoEntity,
-                etNumeroTombo.getText().toString(),
-                Double.valueOf(etValorAquisicao.getText().toString()),
-                Double.valueOf(etValorResidual.getText().toString()),
-                etDataAquisicao.getText().toString());*/
 
         interactor.Salvar(getApplicationContext(),
                 this,
