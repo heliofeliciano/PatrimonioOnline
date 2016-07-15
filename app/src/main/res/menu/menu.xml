@@ -3,10 +3,16 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_ler_barcode"
+        android:icon="@mipmap/ic_qrcode"
+        android:title="@string/action_ler_barcode"
+        app:showAsAction="always"/>
+
+    <item
         android:id="@+id/action_adicionar_bem"
         android:icon="@mipmap/ic_add_circle_black_48dp"
         android:title="@string/action_adicionar_bem"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/action_alterar_departamento"

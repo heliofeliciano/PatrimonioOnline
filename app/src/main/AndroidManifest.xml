@@ -16,8 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:name=".domain.ui.App"
-        >
+        android:name=".domain.ui.App">
 
         <activity android:name=".domain.ui.LoginActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.SincronizacaoActivity" android:windowSoftInputMode="stateHidden" />
@@ -27,6 +26,8 @@
         <activity android:name=".domain.ui.BemCadastrarLocalizacao" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.MapsActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.AlterarDepartamentoActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".domain.ui.BemBarcodeCaptureActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".domain.ui.BemBarcodeActivity" android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".domain.ui.SplashScreenActivity" android:theme="@style/SplashTheme">
             <intent-filter>

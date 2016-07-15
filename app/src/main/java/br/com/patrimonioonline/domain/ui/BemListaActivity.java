@@ -178,6 +178,8 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 return true;
             case R.id.action_alterar_departamento:
                 startActivity(new Intent(this, AlterarDepartamentoActivity.class));
+            case R.id.action_ler_barcode:
+                startActivity(new Intent(this, BemBarcodeActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

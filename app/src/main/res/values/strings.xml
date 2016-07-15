@@ -38,6 +38,7 @@
     <string name="str_bem_localizacao">Localização</string>
     <string name="ok">OK</string>
     <string name="action_alterar_departamento">Alterar Departamento</string>
+    <string name="action_ler_barcode">QR Code</string>
 
 
 </resources>
