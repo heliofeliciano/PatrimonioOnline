@@ -56,6 +56,16 @@ public class BemListaPresenter implements IBemListaPresenter {
     }
 
     @Override
+    public void buscarDadosLidoPeloQrCode() {
+
+    }
+
+    @Override
+    public void buscarDadosLidoPeloQrCodeResult(BemEntity bemEntity) {
+        view.exibirDadosQrCode(bemEntity);
+    }
+
+    @Override
     public void buscarBemTipos() {
         interactor.buscarBemTipo(context, this);
     }

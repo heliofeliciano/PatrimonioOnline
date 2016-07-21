@@ -23,9 +23,8 @@ public interface IBemListaView {
     void onExibirListaDepartamentos(List<DepartamentoEntity> departamentoEntities);
 
     void onExibirTiposBens(List<BemTipoEntity> bemTipoEntities);
-
-
     void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity);
+    void exibirDadosQrCode(BemEntity bemEntity);
 
     // Interactor
     void verificarSeSetorJaFoiEscolhido();

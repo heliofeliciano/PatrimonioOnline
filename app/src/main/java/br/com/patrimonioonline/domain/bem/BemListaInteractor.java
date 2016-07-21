@@ -81,4 +81,11 @@ public class BemListaInteractor implements IBemListaInteractor {
         //_pref.salvarObjeto(departamentoEntity.converterParaJson());
 
     }
+
+    @Override
+    public void buscarDadosQrCode(IBemListaPresenter listener) {
+
+        listener.buscarDadosLidoPeloQrCodeResult(null);
+
+    }
 }

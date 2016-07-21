@@ -31,4 +31,6 @@ public interface IBemListaPresenter {
     void buscarBemTipos();
     void buscarListaBens();
     void atualizarListaBens();
+    void buscarDadosLidoPeloQrCode();
+    void buscarDadosLidoPeloQrCodeResult(BemEntity bemEntity);
 }

@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         progressDialog.dismiss();
         Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
 
-        this.navegarParaProximaTela();
+        presenter.cadastrarRegIdDispositivo();
     }
 
     @Override
@@ -76,4 +76,5 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         finish();
         startActivity(new Intent(this, SincronizacaoActivity.class));
     }
+
 }

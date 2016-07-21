@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ import io.realm.RealmResults;
 
 public class BemListaActivity extends BaseActivity implements IBemListaView {
 
+    private static final int RC_BARCODE_CAPTURE = 9001;
     /*@BindView(R.id.lvListaBens)
     ListView lvLista;*/
 
@@ -163,6 +166,11 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
     }
 
     @Override
+    public void exibirDadosQrCode(BemEntity bemEntity) {
+        Toast.makeText(this, bemEntity.getDescricao(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -178,12 +186,36 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 return true;
             case R.id.action_alterar_departamento:
                 startActivity(new Intent(this, AlterarDepartamentoActivity.class));
+                return true;
             case R.id.action_ler_barcode:
-                startActivity(new Intent(this, BemBarcodeActivity.class));
+                //startActivity(new Intent(this, BemBarcodeActivity.class));
+                Intent intent = new Intent(this, BemBarcodeCaptureActivity.class);
+                startActivityForResult(intent, RC_BARCODE_CAPTURE);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_BARCODE_CAPTURE) {
+            if (resultCode == CommonStatusCodes.SUCCESS) {
+                if (data != null) {
+                    Barcode barcode = data.getParcelableExtra(BemBarcodeCaptureActivity.BarcodeObject);
+                    Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(this, "Barcode não foi capturado", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, String.format("Erro na leitura",CommonStatusCodes.getStatusCodeString(resultCode)), Toast
+                        .LENGTH_SHORT).show();
+            }
+        }
+        else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package br.com.patrimonioonline.domain.login.async;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -95,6 +96,25 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
             }
 
         });
+
+    }
+
+    @Override
+    public void cadastrarRegIdDispositivo(Context context, ILoginPresenter listener) {
+
+        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+        UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+
+        // Cadastrar o registro do dispositivo
+        final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("login", _usuarioReadonly.login);
+        requestParams.put("regid", "");
+        requestParams.put("modelo", Build.MODEL);
+        requestParams.put("dispositivo", Build.DEVICE);
+
+        listener.cadastrarRegIdDispositivoResult();
 
     }
 

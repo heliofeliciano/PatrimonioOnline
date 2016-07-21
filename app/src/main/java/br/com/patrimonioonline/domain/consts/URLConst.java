@@ -7,6 +7,7 @@ package br.com.patrimonioonline.domain.consts;
 public class URLConst {
 
     public static final String URL_Login = "/api/usuario/login/";
+    public static final String URL_CadastrarDispositivo = "/api/usuario/cadastrardispositivo/";
     public static final String URL_AquisicaoListar = "/api/patrimonio/aquisicao/listar";
     public static final String URL_ObjetosIniciaisListar = "/api/configuracao/listarobjetosiniciais/";
     public static final String URL_DepartamentosUsuarioListar = "/api/configuracao/listarobjetosiniciais/";

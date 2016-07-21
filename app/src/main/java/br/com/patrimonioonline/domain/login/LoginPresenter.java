@@ -24,6 +24,11 @@ public class LoginPresenter implements ILoginPresenter {
         interactor.validarLogin(context, this, usuario, senha);
     }
 
+    @Override
+    public void cadastrarRegIdDispositivo() {
+        interactor.cadastrarRegIdDispositivo(context, this);
+    }
+
     /*@Override
     public void onDepartamentosPorUsuario(List<DepartamentoEntity> lista) {
         view.habilitarEscolhaDoDepartamento(lista);
@@ -42,5 +47,10 @@ public class LoginPresenter implements ILoginPresenter {
     @Override
     public void onFailure(String msg) {
         view.loginFalhou();
+    }
+
+    @Override
+    public void cadastrarRegIdDispositivoResult() {
+        view.navegarParaProximaTela();
     }
 }
