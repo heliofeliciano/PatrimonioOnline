@@ -19,4 +19,9 @@
         android:title="@string/action_alterar_departamento"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_solicitar_placas"
+        android:title="@string/action_solicitar_placas"
+        app:showAsAction="never"/>
+
 </menu>
