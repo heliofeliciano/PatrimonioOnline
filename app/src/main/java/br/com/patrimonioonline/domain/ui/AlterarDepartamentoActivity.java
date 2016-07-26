@@ -58,7 +58,8 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
     private void init() {
 
         departamentoAtualEntity = getDepartamentoLogado();
-        tvDepartamentoAtual.setText(String.valueOf(departamentoAtualEntity.id).concat(" - ").concat(departamentoAtualEntity.descricao));
+        tvDepartamentoAtual.setText(String.valueOf(departamentoAtualEntity.getId()).concat(" - ").concat(departamentoAtualEntity.getDescricao
+                ()));
 
         ListarDepartamentos();
     }

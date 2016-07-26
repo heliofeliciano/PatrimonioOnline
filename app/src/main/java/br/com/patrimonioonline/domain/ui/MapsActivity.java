@@ -95,7 +95,7 @@ public class MapsActivity extends BaseActivity
         _map = map;
         _map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        // Inicializar Google Play Service
+        // Inicializar GoogleConst Play Service
         int verificarPermissao = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (verificarPermissao != PackageManager.PERMISSION_GRANTED) {
             Nammu.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, new PermissionCallback() {

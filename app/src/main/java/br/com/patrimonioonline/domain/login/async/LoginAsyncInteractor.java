@@ -100,7 +100,7 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
     }
 
     @Override
-    public void cadastrarRegIdDispositivo(Context context, ILoginPresenter listener) {
+    public void cadastrarRegIdDispositivo(Context context, final ILoginPresenter listener) {
 
         StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
         UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
@@ -114,7 +114,23 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
         requestParams.put("modelo", Build.MODEL);
         requestParams.put("dispositivo", Build.DEVICE);
 
-        listener.cadastrarRegIdDispositivoResult();
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(_url.toString(), requestParams, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                listener.onFailure("Ocorreu um erro ao cadastrar o dispositivo");
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+                listener.cadastrarRegIdDispositivoResult();
+
+            }
+        });
+
+        //listener.cadastrarRegIdDispositivoResult();
 
     }
 

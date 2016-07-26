@@ -25,7 +25,7 @@ public class SolicitarPlacasInteractor implements ISolicitarPlacasInteractor {
                 .URL_SolicitarPlacas);
 
         RequestParams _requestParams = new RequestParams();
-        _requestParams.put("coddepto", (int)Double.parseDouble(departamentoEntity.id));
+        _requestParams.put("coddepto", departamentoEntity.getId());
         _requestParams.put("idusuariosolicitante", 1);
         _requestParams.put("quantidade", quantidadeSolicitada);
 

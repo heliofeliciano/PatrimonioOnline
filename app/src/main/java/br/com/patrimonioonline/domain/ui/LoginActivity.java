@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import br.com.patrimonioonline.BuildConfig;
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.consts.GoogleConst;
+import br.com.patrimonioonline.domain.gcm_config.ConfigGcmInteractor;
+import br.com.patrimonioonline.domain.gcm_config.IConfigGcm;
 import br.com.patrimonioonline.domain.login.ILoginView;
 import br.com.patrimonioonline.domain.login.LoginPresenter;
 import butterknife.BindView;
@@ -20,7 +23,7 @@ import butterknife.OnClick;
  * Created by helio on 06/06/16.
  */
 
-public class LoginActivity extends AppCompatActivity implements ILoginView {
+public class LoginActivity extends AppCompatActivity implements ILoginView, IConfigGcm {
 
     @BindView(R.id.et_login)
     EditText _etLogin;
@@ -29,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     EditText _etSenha;
 
     LoginPresenter presenter;
+    ConfigGcmInteractor interactorGcm;
     ProgressDialog progressDialog;
 
      @Override
@@ -43,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         }
 
          presenter = new LoginPresenter(getApplicationContext(), this);
+         interactorGcm = new ConfigGcmInteractor();
     }
 
     @OnClick(R.id.btn_login)
@@ -77,4 +82,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         startActivity(new Intent(this, SincronizacaoActivity.class));
     }
 
+    @Override
+    public void cadastrarRegIdNoGoogle() {
+
+        interactorGcm.salvarRegIdNoGoogle(this, getApplicationContext(), GoogleConst.GOOGLE_PROJ_ID);
+
+    }
+
+    @Override
+    public void cadastrarRegIdNoGoogleResult(Boolean result, String msg) {
+
+    }
 }

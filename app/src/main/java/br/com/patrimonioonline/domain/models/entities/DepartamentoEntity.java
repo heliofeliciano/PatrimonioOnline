@@ -19,16 +19,96 @@ import io.realm.RealmObject;
 
 public class DepartamentoEntity extends RealmObject {
 
-    public String id;
-    public String descricao;
-    public String nomeresponsavel;
-    public String emailresponsavel;
-    public String limite;
-    public String telefone;
-    public String email;
-    public String fax;
-    public String ramal;
-    public String instituicao;
+    private int id;
+    private String descricao;
+    private String nomeresponsavel;
+    private String emailresponsavel;
+    private String limite;
+    private String telefone;
+    private String email;
+    private String fax;
+    private String ramal;
+    private String instituicao;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getNomeresponsavel() {
+        return nomeresponsavel;
+    }
+
+    public void setNomeresponsavel(String nomeresponsavel) {
+        this.nomeresponsavel = nomeresponsavel;
+    }
+
+    public String getEmailresponsavel() {
+        return emailresponsavel;
+    }
+
+    public void setEmailresponsavel(String emailresponsavel) {
+        this.emailresponsavel = emailresponsavel;
+    }
+
+    public String getLimite() {
+        return limite;
+    }
+
+    public void setLimite(String limite) {
+        this.limite = limite;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFax() {
+        return fax;
+    }
+
+    public void setFax(String fax) {
+        this.fax = fax;
+    }
+
+    public String getRamal() {
+        return ramal;
+    }
+
+    public void setRamal(String ramal) {
+        this.ramal = ramal;
+    }
+
+    public String getInstituicao() {
+        return instituicao;
+    }
+
+    public void setInstituicao(String instituicao) {
+        this.instituicao = instituicao;
+    }
 
     @Override
     public String toString() {
@@ -64,16 +144,16 @@ public class DepartamentoEntity extends RealmObject {
         @Override
         public JsonElement serialize(DepartamentoEntity src, Type typeOfSrc, JsonSerializationContext context) {
             final JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", src.id);
-            jsonObject.addProperty("descricao", src.descricao);
-            jsonObject.addProperty("nomeresponsavel", src.nomeresponsavel);
-            jsonObject.addProperty("emailresponsavel", src.emailresponsavel);
-            jsonObject.addProperty("limite", src.limite);
-            jsonObject.addProperty("telefone", src.telefone);
-            jsonObject.addProperty("email", src.email);
-            jsonObject.addProperty("fax", src.fax);
-            jsonObject.addProperty("ramal", src.ramal);
-            jsonObject.addProperty("instituicao", src.instituicao);
+            jsonObject.addProperty("id", src.getId());
+            jsonObject.addProperty("descricao", src.getDescricao());
+            jsonObject.addProperty("nomeresponsavel", src.getNomeresponsavel());
+            jsonObject.addProperty("emailresponsavel", src.getEmailresponsavel());
+            jsonObject.addProperty("limite", src.getLimite());
+            jsonObject.addProperty("telefone", src.getTelefone());
+            jsonObject.addProperty("email", src.getEmail());
+            jsonObject.addProperty("fax", src.getFax());
+            jsonObject.addProperty("ramal", src.getRamal());
+            jsonObject.addProperty("instituicao", src.getInstituicao());
 
             return jsonObject;
         }

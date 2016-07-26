@@ -43,7 +43,8 @@ public class SolicitarPlacasAcitivity extends BaseActivity implements ISolicitar
 
         _interactor = new SolicitarPlacasInteractor();
         tvSolicitarPlaca_UsuarioSolicitante.setText(getUsuarioLogado().nome);
-        tvSolicitarPlaca_Departamento.setText(String.valueOf(getDepartamentoLogado().id) + " - " + getDepartamentoLogado().descricao);
+        tvSolicitarPlaca_Departamento.setText(String.valueOf(getDepartamentoLogado().getId()) + " - " + getDepartamentoLogado()
+                .getDescricao());
 
     }
 
