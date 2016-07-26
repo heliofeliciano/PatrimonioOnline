@@ -8,6 +8,7 @@ import java.util.List;
 
 public class UsuarioReadonly {
 
+
     public String nome;
     public String login;
     public int usuarioativo;

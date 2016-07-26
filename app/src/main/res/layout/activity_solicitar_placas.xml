@@ -1,7 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <View style="@style/Divider_8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strUsuarioSolicitante"/>
+
+        <TextView
+            android:id="@+id/tvSolicitarPlaca_UsuarioSolicitante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hélio Feliciano dos Santos Júnior"/>
+
+        <View style="@style/Divider_8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strDepartamento"/>
+
+        <TextView
+            android:id="@+id/tvSolicitarPlacas_Departamento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CPD"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/etSolicitarPlacas_Quantidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="number"
+                android:hint="@string/strQuantidade"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <Button
+                android:id="@+id/btnSolicitarPlacas_Salvar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Salvar"
+                android:layout_alignParentRight="true"/>
+
+            <Button
+                android:id="@+id/btnSolicitarPlacas_Cancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cancelar"
+                android:layout_toLeftOf="@+id/btnSolicitarPlacas_Salvar"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

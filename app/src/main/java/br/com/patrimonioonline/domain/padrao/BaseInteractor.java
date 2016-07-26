@@ -37,4 +37,13 @@ public class BaseInteractor implements IBaseInteractor {
 
         return departamentoEntity;
     }
+
+    @Override
+    public UsuarioReadonly getUsuarioLogado() {
+
+        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+        UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+
+        return usuarioReadonly;
+    }
 }

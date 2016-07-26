@@ -25,6 +25,7 @@
         android:name=".domain.ui.App">
 
         <activity android:name=".domain.ui.LoginActivity" android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".domain.ui.SolicitarPlacasAcitivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.SincronizacaoActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.BemCadastrarActivity" android:windowSoftInputMode="stateHidden" />
         <activity android:name=".domain.ui.BemCadastrarImagensActivity" android:windowSoftInputMode="stateHidden" />

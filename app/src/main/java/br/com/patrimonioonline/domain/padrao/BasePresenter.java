@@ -3,6 +3,7 @@ package br.com.patrimonioonline.domain.padrao;
 import android.content.Context;
 
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 
 /**
  * Created by helio on 28/06/16.
@@ -32,4 +33,8 @@ public class BasePresenter implements IBasePresenter {
         return true;
     }
 
+    @Override
+    public UsuarioReadonly getUsuarioLogado() {
+        return interactor.getUsuarioLogado();
+    }
 }

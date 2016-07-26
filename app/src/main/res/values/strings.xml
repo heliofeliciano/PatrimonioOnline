@@ -40,6 +40,9 @@
     <string name="action_alterar_departamento">Alterar Departamento</string>
     <string name="action_ler_barcode">QR Code</string>
     <string name="action_solicitar_placas">Solicitar Placas</string>
+    <string name="strUsuarioSolicitante">Usuário Solicitante</string>
+    <string name="strDepartamento">Departamento</string>
+    <string name="strQuantidade">Quantidade</string>
 
 
 </resources>

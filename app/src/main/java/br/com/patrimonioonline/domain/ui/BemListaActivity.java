@@ -188,9 +188,12 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 startActivity(new Intent(this, AlterarDepartamentoActivity.class));
                 return true;
             case R.id.action_ler_barcode:
-                //startActivity(new Intent(this, BemBarcodeActivity.class));
                 Intent intent = new Intent(this, BemBarcodeCaptureActivity.class);
                 startActivityForResult(intent, RC_BARCODE_CAPTURE);
+                return true;
+            case R.id.action_solicitar_placas:
+                Intent intentSolicitarPlacas = new Intent(this, SolicitarPlacasAcitivity.class);
+                startActivity(intentSolicitarPlacas);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
