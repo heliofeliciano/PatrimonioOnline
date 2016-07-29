@@ -1,7 +1,11 @@
 package br.com.patrimonioonline.domain.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.vision.barcode.Barcode;
 
@@ -18,6 +24,7 @@ import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.adapter.RealmRecyclerViewBemListaAdapter;
 import br.com.patrimonioonline.domain.bem.BemListaPresenter;
 import br.com.patrimonioonline.domain.bem.IBemListaView;
+import br.com.patrimonioonline.domain.gcm_config.GCMRegistrationIntentService;
 import br.com.patrimonioonline.domain.models.entities.BemEntity;
 import br.com.patrimonioonline.domain.models.entities.BemTipoEntity;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
@@ -31,6 +38,10 @@ import io.realm.RealmResults;
  */
 
 public class BemListaActivity extends BaseActivity implements IBemListaView {
+
+    private BroadcastReceiver _registrationBroadcastReceiver;
+
+    public static final int REQUEST_PLAY_SERVICES = 1;
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     /*@BindView(R.id.lvListaBens)
@@ -58,14 +69,58 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
             setSupportActionBar(toolbar);
         }
 
-        //init();
+        init();
+        inicializarBroadcastReceiver();
+        checarGooglePlayService();
+    }
+
+    private void init() {
+
+        if (getIntent().getExtras() != null) {
+            Toast.makeText(this, getIntent().getExtras().getString("mensagem"), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void inicializarBroadcastReceiver() {
+        _registrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)){
+                    String token = intent.getStringExtra("token");
+                    //Toast.makeText(getApplicationContext(), "Registration token " + token, Toast.LENGTH_SHORT).show();
+                } else if (intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)){
+                    Toast.makeText(getApplicationContext(), "GCM Registration erro", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Ocorreu um erro", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        init();
+        initResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(_registrationBroadcastReceiver);
+    }
+
+    private void initResume() {
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+
+        presenter = new BemListaPresenter(getApplicationContext(), this);
+        verificarSeSetorJaFoiEscolhido();
+        presenter.buscarListaBens();
     }
 
     @Override
@@ -95,12 +150,6 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
         Toast.makeText(this, "Não há bens cadastrados. Clique no + para adicionar um bem", Toast.LENGTH_SHORT).show();
 
-    }
-
-    private void init() {
-        presenter = new BemListaPresenter(getApplicationContext(), this);
-        verificarSeSetorJaFoiEscolhido();
-        presenter.buscarListaBens();
     }
 
     @Override
@@ -215,10 +264,60 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 Toast.makeText(this, String.format("Erro na leitura",CommonStatusCodes.getStatusCodeString(resultCode)), Toast
                         .LENGTH_SHORT).show();
             }
-        }
-        else {
+        } else if (requestCode == REQUEST_PLAY_SERVICES) {
+            checarGooglePlayService();
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
+    private void checarGooglePlayService() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
+        if (resultCode != ConnectionResult.SUCCESS) {
+
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+
+                GooglePlayServicesUtil.showErrorNotification(resultCode, getApplicationContext());
+
+            } else {
+                Toast.makeText(this, R.string.gcm_naosuportado, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+        } else {
+
+            Intent it = new Intent(this, GCMRegistrationIntentService.class);
+            startService(it);
+
+        }
+    }
+
+    /*private void checarGooglePlayService() {
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int resultCode = api.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+
+            if (api.isUserResolvableError(resultCode)) {
+                Dialog dialog = api.getErrorDialog(this, resultCode, REQUEST_PLAY_SERVICES);
+                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        finish();
+                    }
+                });
+                dialog.show();
+            } else {
+                Toast.makeText(this, R.string.gcm_naosuportado, Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+        } else {
+
+            Intent it = new Intent(this, GCMRegistrationIntentService.class);
+            startService(it);
+
+        }
+    }*/
 
 }

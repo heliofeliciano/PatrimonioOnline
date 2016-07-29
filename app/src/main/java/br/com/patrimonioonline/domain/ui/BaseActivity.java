@@ -38,4 +38,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     public UsuarioReadonly getUsuarioLogado() {
         return presenter.getUsuarioLogado();
     }
+
+
 }

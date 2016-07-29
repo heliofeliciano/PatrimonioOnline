@@ -43,6 +43,7 @@
     <string name="strUsuarioSolicitante">Usuário Solicitante</string>
     <string name="strDepartamento">Departamento</string>
     <string name="strQuantidade">Quantidade</string>
+    <string name="gcm_naosuportado">GCM não suportado</string>
 
 
 </resources>
