@@ -10,9 +10,13 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import com.google.gson.internal.LinkedTreeMap;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.models.readonly.GcmPadrao;
+import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
 import br.com.patrimonioonline.domain.ui.BemListaActivity;
+import br.com.patrimonioonline.lib.GsonLib;
 
 /**
  * Created by helio on 20/07/16.
@@ -25,12 +29,17 @@ public class GCMPushReceiverService extends GcmListenerService {
 
         // Sempre que receber uma mensagem, passará por aqui!!!
 
-        String mensagem = data.getString("message");
-        sendNotification(mensagem);
+        String mensagem = data.getString("mensagem");
+
+        Object obj = GsonLib.fromJsonObject(mensagem, new RetornoObjeto<GcmPadrao>());
+        RetornoObjeto gcmPadraoRetornoObjeto = (RetornoObjeto) obj;
+        LinkedTreeMap objLinked = (LinkedTreeMap) gcmPadraoRetornoObjeto.o;
+
+        sendNotification(objLinked.get("titulo").toString(), objLinked.get("mensagem").toString());
 
     }
 
-    private void sendNotification(String mensagem) {
+    private void sendNotification(String titulo, String mensagem) {
 
         Intent intent = new Intent(this, BemListaActivity.class);
         intent.putExtra("mensagem", mensagem);
@@ -41,7 +50,7 @@ public class GCMPushReceiverService extends GcmListenerService {
 
         NotificationCompat.Builder noBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.logo_ecidade)
-                .setContentTitle("Aprovado seu pedido")
+                .setContentTitle(titulo)
                 .setContentText(mensagem)
                 .setAutoCancel(true)
                 .setContentIntent(_pendingIntent);
