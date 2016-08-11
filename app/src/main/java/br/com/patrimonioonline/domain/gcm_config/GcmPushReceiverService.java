@@ -35,7 +35,8 @@ public class GCMPushReceiverService extends GcmListenerService {
         RetornoObjeto gcmPadraoRetornoObjeto = (RetornoObjeto) obj;
         LinkedTreeMap objLinked = (LinkedTreeMap) gcmPadraoRetornoObjeto.o;
 
-        sendNotification(objLinked.get("titulo").toString(), objLinked.get("mensagem").toString());
+        sendNotification(objLinked.get("titulo").toString() + " - " + objLinked.get("execBackground"), objLinked.get("mensagem").toString
+                ());
 
     }
 

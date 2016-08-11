@@ -10,6 +10,7 @@ public class GcmPadrao {
     private String titulo;
     private String mensagem;
     private String modulo;
+    private Boolean execbackground;
 
     public int getId() {
         return id;
@@ -41,5 +42,13 @@ public class GcmPadrao {
 
     public void setModulo(String modulo) {
         this.modulo = modulo;
+    }
+
+    public Boolean getExecbackground() {
+        return execbackground;
+    }
+
+    public void setExecbackground(Boolean execbackground) {
+        this.execbackground = execbackground;
     }
 }

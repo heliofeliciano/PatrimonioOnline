@@ -11,6 +11,7 @@ public class SolicitarPlacasEntity extends RealmObject {
     private int id;
     private DepartamentoEntity departamentoEntity;
     private int quantidadeSolicitada;
+    private Boolean pedidoAtendido;
 
     public int getId() {
         return id;
@@ -34,5 +35,13 @@ public class SolicitarPlacasEntity extends RealmObject {
 
     public void setQuantidadeSolicitada(int quantidadeSolicitada) {
         this.quantidadeSolicitada = quantidadeSolicitada;
+    }
+
+    public Boolean getPedidoAtendido() {
+        return pedidoAtendido;
+    }
+
+    public void setPedidoAtendido(Boolean pedidoAtendido) {
+        this.pedidoAtendido = pedidoAtendido;
     }
 }
