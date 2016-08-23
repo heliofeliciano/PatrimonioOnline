@@ -46,4 +46,17 @@ public class BaseInteractor implements IBaseInteractor {
 
         return usuarioReadonly;
     }
+
+    @Override
+    public Boolean logout() {
+
+        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+        UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+
+        if (usuarioReadonly != null) {
+            _pref.limparObjeto(new UsuarioReadonly());
+        }
+
+        return true;
+    }
 }

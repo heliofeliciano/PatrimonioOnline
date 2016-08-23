@@ -44,6 +44,7 @@
     <string name="strDepartamento">Departamento</string>
     <string name="strQuantidade">Quantidade</string>
     <string name="gcm_naosuportado">GCM não suportado</string>
+    <string name="action_logout">Sair</string>
 
 
 </resources>

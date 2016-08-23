@@ -11,4 +11,5 @@ public interface IBaseInteractor {
     Boolean verificarSeUsuarioLogado();
     DepartamentoEntity buscarDepartamentoLogado();
     UsuarioReadonly getUsuarioLogado();
+    Boolean logout();
 }

@@ -13,5 +13,6 @@ public interface IBasePresenter {
     Boolean verificarSincronizacao();
     DepartamentoEntity buscarDepartamentoLogado();
     UsuarioReadonly getUsuarioLogado();
+    Boolean logout();
 
 }

@@ -244,6 +244,13 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 Intent intentSolicitarPlacas = new Intent(this, SolicitarPlacasAcitivity.class);
                 startActivity(intentSolicitarPlacas);
                 return true;
+            case R.id.action_logout:
+
+                if (this.logout()) {
+                    finish();
+                }
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

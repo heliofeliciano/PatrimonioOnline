@@ -39,5 +39,9 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         return presenter.getUsuarioLogado();
     }
 
+    @Override
+    public Boolean logout() {
+        return presenter.logout();
+    }
 
 }

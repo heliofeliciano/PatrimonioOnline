@@ -13,5 +13,6 @@ public interface IBaseView {
     Boolean verificarSincronizacao();
     DepartamentoEntity getDepartamentoLogado();
     UsuarioReadonly getUsuarioLogado();
+    Boolean logout();
 
 }

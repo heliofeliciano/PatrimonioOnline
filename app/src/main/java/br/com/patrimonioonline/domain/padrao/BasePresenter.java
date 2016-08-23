@@ -37,4 +37,9 @@ public class BasePresenter implements IBasePresenter {
     public UsuarioReadonly getUsuarioLogado() {
         return interactor.getUsuarioLogado();
     }
+
+    @Override
+    public Boolean logout() {
+        return interactor.logout();
+    }
 }
