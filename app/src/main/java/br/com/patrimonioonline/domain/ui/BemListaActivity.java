@@ -42,6 +42,7 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
     private BroadcastReceiver _registrationBroadcastReceiver;
 
     public static final int REQUEST_PLAY_SERVICES = 1;
+    public static String codigoQrCode;
 
     private static final int RC_BARCODE_CAPTURE = 9001;
     /*@BindView(R.id.lvListaBens)
@@ -74,12 +75,31 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
         checarGooglePlayService();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initResume();
+    }
+
     private void init() {
 
         if (getIntent().getExtras() != null) {
             Toast.makeText(this, getIntent().getExtras().getString("mensagem"), Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void initResume() {
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
+                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+
+        presenter = new BemListaPresenter(getApplicationContext(), this);
+        verificarSeSetorJaFoiEscolhido();
+        presenter.buscarListaBens();
     }
 
     private void inicializarBroadcastReceiver() {
@@ -99,28 +119,9 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        initResume();
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(_registrationBroadcastReceiver);
-    }
-
-    private void initResume() {
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
-                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
-        LocalBroadcastManager.getInstance(this).registerReceiver(_registrationBroadcastReceiver,
-                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
-
-        presenter = new BemListaPresenter(getApplicationContext(), this);
-        verificarSeSetorJaFoiEscolhido();
-        presenter.buscarListaBens();
     }
 
     @Override
@@ -169,7 +170,7 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
     @Override
     public void onBuscaDepartamentoSucesso(List<DepartamentoEntity> departamentoEntities) {
-        Toast.makeText(this, "Foi retornado " + departamentoEntities.size() + " departamentos", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Foi retornado " + departamentoEntities.size() + " departamentos", Toast.LENGTH_SHORT).show();
         onExibirListaDepartamentos(departamentoEntities);
     }
 
@@ -210,12 +211,16 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
         Intent _intent = new Intent(this, BemCadastrarActivity.class);
         _intent.putExtra("BemTipo", bemTipoEntity.converterParaJson());
+        if (codigoQrCode != null) {
+            _intent.putExtra("codigoQrCode", codigoQrCode);
+        }
 
         startActivity(_intent);
     }
 
     @Override
     public void exibirDadosQrCode(BemEntity bemEntity) {
+
         Toast.makeText(this, bemEntity.getDescricao(), Toast.LENGTH_LONG).show();
     }
 
@@ -247,6 +252,8 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
             case R.id.action_logout:
 
                 if (this.logout()) {
+                    Intent it = new Intent(this, LoginActivity.class);
+                    startActivity(it);
                     finish();
                 }
 
@@ -263,7 +270,9 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
             if (resultCode == CommonStatusCodes.SUCCESS) {
                 if (data != null) {
                     Barcode barcode = data.getParcelableExtra(BemBarcodeCaptureActivity.BarcodeObject);
-                    Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, barcode.displayValue, Toast.LENGTH_LONG).show();
+                    codigoQrCode = barcode.displayValue;
+                    presenter.buscarBemTipos();
                 } else {
                     Toast.makeText(this, "Barcode não foi capturado", Toast.LENGTH_LONG).show();
                 }

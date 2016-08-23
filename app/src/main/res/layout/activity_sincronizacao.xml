@@ -4,10 +4,10 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <Button
+    <!--<Button
         android:id="@+id/btn_sincronizacao"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Sincronizacao"/>
+        android:text="Sincronizacao"/>-->
 
 </LinearLayout>

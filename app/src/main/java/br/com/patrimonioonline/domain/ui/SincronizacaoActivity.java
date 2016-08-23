@@ -3,13 +3,12 @@ package br.com.patrimonioonline.domain.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.configuracao.ISincronizacaoView;
 import br.com.patrimonioonline.domain.configuracao.SincronizacaoPresenter;
 import br.com.patrimonioonline.lib_ui.ActivityBase;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by helio on 15/06/16.
@@ -17,7 +16,6 @@ import butterknife.OnClick;
 
 public class SincronizacaoActivity extends ActivityBase implements ISincronizacaoView {
 
-    protected final String TAG = getClass().getSimpleName();
     private SincronizacaoPresenter presenter;
     ProgressDialog progressDialog;
 
@@ -25,9 +23,9 @@ public class SincronizacaoActivity extends ActivityBase implements ISincronizaca
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sincronizacao);
-        ButterKnife.bind(this);
 
         presenter = new SincronizacaoPresenter(getApplicationContext(), this);
+        sincronizar();
     }
 
     @Override
@@ -47,9 +45,15 @@ public class SincronizacaoActivity extends ActivityBase implements ISincronizaca
 
     }
 
-    @OnClick(R.id.btn_sincronizacao)
-    public void sincronizarClick(){
+    public void sincronizar(){
         progressDialog = ProgressDialog.show(this, "Sincronizando configurações iniciais ...", null);
-        presenter.realizarSincronizacao();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenter.realizarSincronizacao();
+            }
+        }, 3000);
+
     }
 }

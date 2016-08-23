@@ -154,6 +154,13 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     private void initInsert() {
 
         String strBemTipo = getIntent().getExtras().getString("BemTipo");
+
+        if (getIntent().getExtras().getString("codigoQrCode") != null) {
+            String strCodigoQrCode = getIntent().getExtras().getString("codigoQrCode");
+            etNumeroTombo.setText(strCodigoQrCode);
+            etNumeroTombo.setEnabled(false);
+        }
+
         _bemTipoEntityAux = (BemTipoEntity) GsonLib.fromJsonObject(strBemTipo, new BemTipoEntity());
         getSupportActionBar().setTitle("Cadastro de " + _bemTipoEntityAux.getDescricao());
 
@@ -236,7 +243,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     @Override
     @OnClick(R.id.btn_bem_cancelar)
     public void Cancelar() {
-        Toast.makeText(this, "Cancelar", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
