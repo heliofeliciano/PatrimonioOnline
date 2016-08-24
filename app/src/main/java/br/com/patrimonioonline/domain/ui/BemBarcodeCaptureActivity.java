@@ -82,7 +82,7 @@ public final class BemBarcodeCaptureActivity extends BaseActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(mGraphicOverlay, "Tap to capture. Pinch/Stretch to zoom",
+        Snackbar.make(mGraphicOverlay, "Toque para capturar o barcode",
                 Snackbar.LENGTH_LONG)
                 .show();
     }

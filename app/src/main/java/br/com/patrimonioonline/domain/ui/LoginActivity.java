@@ -3,7 +3,6 @@ package br.com.patrimonioonline.domain.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -23,7 +22,7 @@ import butterknife.OnClick;
  * Created by helio on 06/06/16.
  */
 
-public class LoginActivity extends AppCompatActivity implements ILoginView, IConfigGcm {
+public class LoginActivity extends BaseActivity implements ILoginView, IConfigGcm {
 
     @BindView(R.id.et_login)
     EditText _etLogin;
@@ -79,7 +78,16 @@ public class LoginActivity extends AppCompatActivity implements ILoginView, ICon
     @Override
     public void navegarParaProximaTela() {
         finish();
-        startActivity(new Intent(this, SincronizacaoActivity.class));
+
+        if (this.verificarSincronizacao()) {
+
+            startActivity(new Intent(this, BemListaActivity.class));
+
+        } else {
+
+            startActivity(new Intent(this, SincronizacaoActivity.class));
+        }
+
     }
 
     @Override

@@ -216,7 +216,8 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
 
     @Override
     public void onSalvoEdicao() {
-        Toast.makeText(this, "Edicao", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Alteração efetuada com sucesso", Toast.LENGTH_LONG).show();
+        finish();
     }
 
     @Override
@@ -427,6 +428,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
+
             case R.id.action_excluir_bem:
                 new AlertDialogWrapper.Builder(this)
                         .setTitle(R.string.pergunta_excluir_bem)
@@ -444,12 +446,19 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                             }
                         })
                         .show();
-
                 return true;
+
             case R.id.action_add_imagem_bem:
                 Intent it = new Intent(this, BemCadastrarImagensActivity.class);
                 it.putExtra("IdBem", String.valueOf(idBem));
                 startActivity(it);
+
+                return true;
+
+            case R.id.action_localizacao_bem:
+                irParaActivityMapa(_bemEntity);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

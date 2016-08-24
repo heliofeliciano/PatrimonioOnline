@@ -30,7 +30,7 @@ public class BasePresenter implements IBasePresenter {
 
     @Override
     public Boolean verificarSincronizacao() {
-        return true;
+        return interactor.verificarSincronizacao();
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -213,6 +214,7 @@ public class MapsActivity extends BaseActivity
 
     @Override
     public void salvarResult() {
-
+        Toast.makeText(this, "Localização salva com sucesso", Toast.LENGTH_LONG).show();
+        finish();
     }
 }

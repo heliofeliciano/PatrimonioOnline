@@ -55,9 +55,16 @@ public class BaseInteractor implements IBaseInteractor {
 
         if (usuarioReadonly != null) {
             _pref.limparObjeto(new UsuarioReadonly());
-            _pref.limparObjeto(new DepartamentoEntity());
         }
 
         return true;
+    }
+
+    @Override
+    public Boolean verificarSincronizacao() {
+        StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
+        DepartamentoEntity departamentoEntity = (DepartamentoEntity) _pref.buscarObjeto(new DepartamentoEntity());
+
+        return (departamentoEntity != null);
     }
 }

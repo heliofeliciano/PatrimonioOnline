@@ -27,7 +27,7 @@ public class SolicitarPlacasInteractor implements ISolicitarPlacasInteractor {
         RequestParams _requestParams = new RequestParams();
         _requestParams.put("coddepto", departamentoEntity.getId());
         _requestParams.put("idusuariosolicitante", 1);
-        _requestParams.put("quantidade", quantidadeSolicitada);
+        _requestParams.put("quantidadesolicitada", quantidadeSolicitada);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.post(_url.toString(), _requestParams, new TextHttpResponseHandler() {

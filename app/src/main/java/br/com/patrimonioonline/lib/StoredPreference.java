@@ -2,7 +2,6 @@ package br.com.patrimonioonline.lib;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -32,7 +31,7 @@ public class StoredPreference {
             editor.putString(obj.getClass().getSimpleName(), _json);
             editor.commit();
 
-            Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
 
@@ -47,7 +46,7 @@ public class StoredPreference {
             editor.putString(obj.getClass().getSimpleName(), json);
             editor.commit();
 
-            Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+            //Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
 
         } catch (Exception e) {
 

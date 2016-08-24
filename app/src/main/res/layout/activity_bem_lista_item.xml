@@ -44,25 +44,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvListaBemItemDescricao"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:gravity="center_vertical"
-                android:textSize="16sp"
-                android:text="@string/criacao_layout_bem_descricao"
-                />
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvListaBemItemClassificacao"
-                android:layout_width="match_parent"
-                android:layout_height="24dp"
-                android:layout_below="@+id/tvListaBemItemDescricao"
-                android:textSize="12sp"
-                android:text="@string/criacao_layout_bem_classificacao"
-                />
+                <TextView
+                    android:id="@+id/tvListaBemItemDescricao"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:text="@string/criacao_layout_bem_descricao"
+                    />
+
+                <TextView
+                    android:id="@+id/tvListaBemItemClassificacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_below="@+id/tvListaBemItemDescricao"
+                    android:textSize="12sp"
+                    android:text="@string/criacao_layout_bem_classificacao"
+                    />
+            </LinearLayout>
+
+            <!--<de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/cvLocalizacao"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/ic_map_black_48dp"
+                />-->
         </LinearLayout>
 
 

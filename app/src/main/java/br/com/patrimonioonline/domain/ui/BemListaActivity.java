@@ -155,7 +155,8 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
     @Override
     public void setorEscolhido() {
-        Toast.makeText(this, "O setor já foi escolhido", Toast.LENGTH_LONG).show();
+
+        //Toast.makeText(this, "O setor já foi escolhido", Toast.LENGTH_LONG).show();
     }
 
     @Override
