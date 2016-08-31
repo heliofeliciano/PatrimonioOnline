@@ -66,7 +66,8 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
         progressDialog.dismiss();
         Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
 
-        presenter.cadastrarRegIdDispositivo();
+        //presenter.cadastrarRegIdDispositivo();
+        navegarParaProximaTela();
     }
 
     @Override

@@ -207,11 +207,13 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
     public void onSalvoNovo(BemEntity _entity) {
         Toast.makeText(this, "Bem salvo com sucesso", Toast.LENGTH_LONG).show();
 
-        //if (bemTipoEntity.getDescricao().equals("MOVEIS")) {
-        irParaActivityMapa(_entity);
-        //} else {
-        //irParaActivityUploadImagens(_entity);
-        //}
+        idBem = _entity.getId();
+
+        if (bemTipoEntity.getDescricao().equals("MOVEIS")) {
+            irParaActivityMapa(_entity);
+        } else {
+            irParaActivityUploadImagens(_entity);
+        }
     }
 
     @Override

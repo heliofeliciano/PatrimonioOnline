@@ -11,6 +11,7 @@ import com.google.android.gms.iid.InstanceID;
 import java.io.IOException;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.login.async.LoginAsyncInteractor;
 
 
 /**
@@ -47,6 +48,8 @@ public class GCMRegistrationIntentService extends IntentService {
             registrationComplete.putExtra("token", token);
 
             // TODO: 27/07/16 Neste momento deve salvar no servidor qual o token do usuário atual
+            LoginAsyncInteractor interactor = new LoginAsyncInteractor();
+            interactor.cadastrarRegIdDispositivo(getApplicationContext(), token);
 
 
         } catch (IOException e) {

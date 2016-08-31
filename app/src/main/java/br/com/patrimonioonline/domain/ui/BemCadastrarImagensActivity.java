@@ -1,13 +1,15 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;
@@ -24,8 +26,6 @@ import co.moonmonkeylabs.realmrecyclerview.RealmRecyclerView;
 import io.realm.RealmResults;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
-import pl.tajchert.nammu.Nammu;
-import pl.tajchert.nammu.PermissionCallback;
 
 /**
  * Created by helio on 02/07/16.
@@ -37,6 +37,9 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     RealmRecyclerView lvListaBemImagens;
 
     RealmRecyclerViewBemListaImagensAdapter adapter;
+
+    private static final int RC_HANDLE_WRITEEXTERNAL_PERM = 3;
+    private static final int RC_HANDLE_CAMERA_PERM = 4;
 
     int idBem;
     BemImagemInteractor interactor;
@@ -80,6 +83,16 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
     @OnClick(R.id.btnBemImageCamera)
     public void btnTirarFoto(){
 
+        int verificarPermissao_hd = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int verificarPermissao_cam = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (verificarPermissao_hd == PackageManager.PERMISSION_GRANTED
+                && verificarPermissao_cam == PackageManager.PERMISSION_GRANTED) {
+            EasyImage.openCamera(BemCadastrarImagensActivity.this, 0);
+        } else {
+            requestPermission();
+        }
+
+        /*
         int verificarPermissao = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (verificarPermissao == PackageManager.PERMISSION_GRANTED) {
             EasyImage.openCamera(this, 0);
@@ -96,6 +109,7 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
                 }
             });
         }
+        */
 
         Toast.makeText(this, "Tirar foto", Toast.LENGTH_LONG).show();
 
@@ -106,10 +120,53 @@ public class BemCadastrarImagensActivity extends BaseActivity implements IBemIma
         EasyImage.openGallery(this, 0);
     }
 
+    private void requestPermission() {
+
+        final String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_WRITEEXTERNAL_PERM);
+            return;
+        }
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.CAMERA)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_CAMERA_PERM);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_WRITEEXTERNAL_PERM);
+            }
+        };
+
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        /*super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);*/
+
+        /*if (requestCode != RC_HANDLE_WRITEEXTERNAL_PERM || requestCode != RC_HANDLE_CAMERA_PERM) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }*/
+
+        /*if (requestCode != RC_HANDLE_CAMERA_PERM) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }*/
+
+        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            EasyImage.openCamera(BemCadastrarImagensActivity.this, 0);
+            return;
+        }
     }
 
     @Override

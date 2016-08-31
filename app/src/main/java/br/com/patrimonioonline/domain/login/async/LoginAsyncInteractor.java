@@ -134,6 +134,37 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     }
 
+    public void cadastrarRegIdDispositivo(Context context, String regId) {
+
+        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
+        UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+
+        // Cadastrar o registro do dispositivo
+        final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("login", _usuarioReadonly.login);
+        requestParams.put("regid", regId);
+        requestParams.put("modelo", Build.MODEL);
+        requestParams.put("dispositivo", Build.DEVICE);
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(_url.toString(), requestParams, new TextHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+            }
+        });
+
+        //listener.cadastrarRegIdDispositivoResult();
+
+    }
+
     /*@Override
     public void buscarDepartamentosDoUsuario(Context context, final ILoginPresenter listener) {
 

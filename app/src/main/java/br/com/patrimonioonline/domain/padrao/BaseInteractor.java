@@ -55,6 +55,7 @@ public class BaseInteractor implements IBaseInteractor {
 
         if (usuarioReadonly != null) {
             _pref.limparObjeto(new UsuarioReadonly());
+            _pref.limparObjeto(new DepartamentoEntity());
         }
 
         return true;

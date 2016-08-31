@@ -42,6 +42,12 @@ public class BemImagemInteractor implements IBemImageInteractor {
         Repository<BemEntity> _repository = new Repository<>(BemEntity.class);
         BemEntity _entity = _repository.getById(idBem);
 
-        listener.onBuscarImagem(_entity.getListaBemImageEntities().where().findAll());
+        if (_entity != null) {
+            listener.onBuscarImagem(_entity.getListaBemImageEntities().where().findAll());
+        } else {
+            listener.onBuscarImagem(null);
+        }
+
+
     }
 }

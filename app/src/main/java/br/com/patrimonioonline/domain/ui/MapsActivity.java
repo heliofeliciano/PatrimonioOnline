@@ -1,6 +1,7 @@
 package br.com.patrimonioonline.domain.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -31,8 +33,6 @@ import br.com.patrimonioonline.domain.bem.MapsInteractor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pl.tajchert.nammu.Nammu;
-import pl.tajchert.nammu.PermissionCallback;
 
 /**
  * Created by helio on 11/07/16.
@@ -53,6 +53,8 @@ public class MapsActivity extends BaseActivity
     private GoogleApiClient _googleApiClient;
     Location _lastLocation;
     Marker _currentLocationMarker;
+
+    private int RC_HANDLE_ACCESSFINE_PERM = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +101,8 @@ public class MapsActivity extends BaseActivity
         // Inicializar GoogleConst Play Service
         int verificarPermissao = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (verificarPermissao != PackageManager.PERMISSION_GRANTED) {
-            Nammu.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, new PermissionCallback() {
+            requestPermission();
+            /*Nammu.askForPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, new PermissionCallback() {
                 @Override
                 public void permissionGranted() {
                     configurarMapa();
@@ -109,10 +112,32 @@ public class MapsActivity extends BaseActivity
                 public void permissionRefused() {
 
                 }
-            });
+            });*/
         } else {
             configurarMapa();
         }
+
+    }
+
+    private void requestPermission() {
+
+        final String[] permissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
+
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+            ActivityCompat.requestPermissions(this, permissions, RC_HANDLE_ACCESSFINE_PERM);
+            return;
+        }
+
+        final Activity thisActivity = this;
+
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityCompat.requestPermissions(thisActivity, permissions,
+                        RC_HANDLE_ACCESSFINE_PERM);
+            }
+        };
 
     }
 
@@ -159,8 +184,13 @@ public class MapsActivity extends BaseActivity
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //rsuper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        /*Nammu.onRequestPermissionsResult(requestCode, permissions, grantResults);*/
+
+        if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            configurarMapa();
+            return;
+        }
     }
 
     @Override
