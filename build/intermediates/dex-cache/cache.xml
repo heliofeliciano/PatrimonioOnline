@@ -44,13 +44,6 @@
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/pre-dexed/debug/com.jaredrummler-material-spinner-1.0.9_9954595f7502468a03d7591565f44e84363e2e99.jar" />
     </item>
     <item
-        jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-alpha2/constraint-layout-solver-1.0.0-alpha2.jar"
-        jumboMode="false"
-        revision="24.0.0"
-        sha1="d5b32a2a1529a72472729ee5c94779d0ce9951eb">
-        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.0-alpha2_13379a15b4355af7689b99e030f5271209da85ab.jar" />
-    </item>
-    <item
         jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/9.2.1/jars/classes.jar"
         jumboMode="false"
         revision="24.0.0"
@@ -89,7 +82,7 @@
         jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-alpha2/jars/classes.jar"
         jumboMode="false"
         revision="24.0.0"
-        sha1="757a34f5d84a6b77a2bd0ba1affbcd2145329096">
+        sha1="ef0c8364efe2e1b72b3903d6ba588d6cbde9aa6f">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/pre-dexed/debug/com.android.support.constraint-constraint-layout-1.0.0-alpha2_86d3cbc71c7eef606eded75f2fcb1f1b17f2f838.jar" />
     </item>
     <item
@@ -168,6 +161,13 @@
         revision="24.0.0"
         sha1="a65d98c9409f271d3209f4cc1f7d8e0391665fa5">
         <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-iid-9.2.1_a6a562e8893e35f2456d332caf7bb1427322be9a.jar" />
+    </item>
+    <item
+        jar="/Users/helio/Documents/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-alpha2/constraint-layout-solver-1.0.0-alpha2.jar"
+        jumboMode="false"
+        revision="24.0.0"
+        sha1="aa52b18e81a499129a981d0d8681b8b030130a6d">
+        <dex dex="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/pre-dexed/debug/constraint-layout-solver-1.0.0-alpha2_e30f34aff05457c3bb797603e60bd98507746047.jar" />
     </item>
     <item
         jar="/Users/helio/Dropbox/Android/PatrimonioOnline/app/build/intermediates/exploded-aar/com.github.thorbenprimke/realm-recyclerview/0.9.20/jars/classes.jar"
