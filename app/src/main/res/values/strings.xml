@@ -47,5 +47,8 @@
     <string name="action_logout">Sair</string>
     <string name="action_localizacao_bem">Mapa</string>
 
+    <!--Constantes-->
+    <string name="msgConexaoErro">Ocorreu um erro na conexão. Tentar mais tarde.</string>
+
 
 </resources>

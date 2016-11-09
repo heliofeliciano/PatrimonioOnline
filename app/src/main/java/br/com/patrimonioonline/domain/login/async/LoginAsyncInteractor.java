@@ -12,6 +12,7 @@ import com.loopj.android.http.TextHttpResponseHandler;
 
 import java.util.ArrayList;
 
+import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
@@ -33,7 +34,7 @@ import cz.msebera.android.httpclient.Header;
 public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     @Override
-    public void validarLogin(final Context context, final ILoginPresenter listener, final String usuario, String senha) {
+    public void realizarLogin(final Context context, final ILoginPresenter listener, final String usuario, String senha) {
 
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_Login);
 
@@ -45,7 +46,7 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
         client.post(_url.toString(), requestParams, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                listener.onFailure("Error");
+                listener.falhouRealizarLogin(context.getString(R.string.msgConexaoErro));
             }
 
             @Override
@@ -59,13 +60,15 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
                     Object obj = GsonLib.fromJsonObject(responseString, new RetornoObjeto<UsuarioEntity>());
                     RetornoObjeto<UsuarioEntity> _usuario = (RetornoObjeto<UsuarioEntity>) obj;
 
-                    String jsonUsuario;
+                    String jsonUsuario = GsonLib.converterObjetoParaJson(_usuario.o);
 
-                    jsonUsuario = GsonLib.converterObjetoParaJson(_usuario.o);
+                    if (_usuario.s == 0) {
+                        throw new Exception(_usuario.m);
+                    }
 
                     Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
 
-                    // Provisorio
+                    // TODO: 11/8/16 Provisorio Não deve excluir o usuário
                     usuarioEntityRepository.deleteAll();
                     usuarioEntityRepository.createObjectFromJson(jsonUsuario);
 
@@ -87,10 +90,12 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
                     _pref.limparObjeto(_usuarioReadonly);
                     _pref.salvarObjeto(_usuarioReadonly);
 
-                    listener.onSuccess(responseString);
+                    listener.sucessoRealizarLogin(responseString);
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // e.printStackTrace();
+                    listener.falhouRealizarLogin(e.getMessage());
+
                 }
 
             }
@@ -119,7 +124,7 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                listener.onFailure("Ocorreu um erro ao cadastrar o dispositivo");
+                listener.falhouRealizarLogin("Ocorreu um erro ao cadastrar o dispositivo");
             }
 
             @Override

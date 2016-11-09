@@ -20,37 +20,27 @@ public class LoginPresenter implements ILoginPresenter {
         this.context = context;
     }
 
-    public void tentativaLogin(String usuario, String senha) {
-        interactor.validarLogin(context, this, usuario, senha);
-    }
-
     @Override
     public void cadastrarRegIdDispositivo() {
         interactor.cadastrarRegIdDispositivo(context, this);
     }
 
-    /*@Override
-    public void onDepartamentosPorUsuario(List<DepartamentoEntity> lista) {
-        view.habilitarEscolhaDoDepartamento(lista);
-    }*/
-
-    /*@Override
-    public void buscarDepartamentosPorUsuario() {
-        interactor.buscarDepartamentosDoUsuario(context, this);
-    }*/
-
-    @Override
-    public void onSuccess(String msg) {
-        view.loginSucesso();
-    }
-
-    @Override
-    public void onFailure(String msg) {
-        view.loginFalhou();
-    }
-
     @Override
     public void cadastrarRegIdDispositivoResult() {
         view.navegarParaProximaTela();
+    }
+
+    public void realizarLogin(String usuario, String senha) {
+        interactor.realizarLogin(context, this, usuario, senha);
+    }
+
+    @Override
+    public void sucessoRealizarLogin(String msg) {
+        view.loginSucesso(msg);
+    }
+
+    @Override
+    public void falhouRealizarLogin(String msg) {
+        view.loginFalhou(msg);
     }
 }

@@ -38,6 +38,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         ButterKnife.bind(this);
 
         if (BuildConfig.DEBUG){
@@ -57,37 +58,37 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
         String usuario = _etLogin.getText().toString();
         String senha = _etSenha.getText().toString();
 
-        presenter.tentativaLogin(usuario, senha);
+        presenter.realizarLogin(usuario, senha);
 
     }
 
     @Override
-    public void loginSucesso() {
+    public void loginSucesso(String msg) {
         progressDialog.dismiss();
-        Toast.makeText(this, "Login efetuado com sucesso.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
-        //presenter.cadastrarRegIdDispositivo();
         navegarParaProximaTela();
     }
 
     @Override
-    public void loginFalhou() {
+    public void loginFalhou(String msg) {
         progressDialog.dismiss();
-        Toast.makeText(this, "Login falhou. Tente novamente mais tarde.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void navegarParaProximaTela() {
-        finish();
 
-        if (this.verificarSincronizacao()) {
+        // TODO: 11/9/16 Testes para utilizar o Realm em uma classe separada
+        finish();
+        /*if (this.verificarSincronizacao()) {
 
             startActivity(new Intent(this, BemListaActivity.class));
 
         } else {
 
             startActivity(new Intent(this, SincronizacaoActivity.class));
-        }
+        }*/
 
     }
 

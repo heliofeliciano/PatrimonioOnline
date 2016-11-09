@@ -7,8 +7,8 @@ package br.com.patrimonioonline.domain.login;
 public interface ILoginView {
 
     //void habilitarEscolhaDoDepartamento(List<DepartamentoEntity> departamentoEntities);
-    void loginSucesso();
-    void loginFalhou();
+    void loginSucesso(String msg);
+    void loginFalhou(String msg);
     void navegarParaProximaTela();
 
 }

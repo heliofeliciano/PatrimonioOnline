@@ -5,6 +5,8 @@ package br.com.patrimonioonline.domain.models.readonly;
  */
 
 public class SituacaoReadonly {
+
     public int id;
     public String descricao;
+
 }
