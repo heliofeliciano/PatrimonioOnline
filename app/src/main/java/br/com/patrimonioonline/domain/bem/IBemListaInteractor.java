@@ -17,4 +17,5 @@ public interface IBemListaInteractor {
     void salvarPreferenceDepartamento(Context context, DepartamentoEntity departamentoEntity);
     void buscarBemTipo(Context context, IBemListaPresenter listener);
     void buscarDadosQrCode(IBemListaPresenter listener);
+
 }

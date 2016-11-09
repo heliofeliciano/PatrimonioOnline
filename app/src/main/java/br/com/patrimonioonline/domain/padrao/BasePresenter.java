@@ -2,7 +2,9 @@ package br.com.patrimonioonline.domain.padrao;
 
 import android.content.Context;
 
+import br.com.patrimonioonline.domain.bem.IBemListaView;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 
 /**
@@ -13,9 +15,11 @@ public class BasePresenter implements IBasePresenter {
 
     private BaseInteractor interactor;
     private Context context;
+    private IBaseView view;
 
-    public BasePresenter(Context context) {
+    public BasePresenter(Context context, IBaseView view) {
         interactor = new BaseInteractor(context);
+        this.view = view;
     }
 
     @Override
@@ -34,12 +38,17 @@ public class BasePresenter implements IBasePresenter {
     }
 
     @Override
-    public UsuarioReadonly getUsuarioLogado() {
+    public UsuarioEntity getUsuarioLogado() {
         return interactor.getUsuarioLogado();
     }
 
     @Override
-    public Boolean logout() {
-        return interactor.logout();
+    public void logout() {
+        interactor.logout(this);
+    }
+
+    @Override
+    public void logoutSucesso() {
+        view.logoutSucesso();
     }
 }

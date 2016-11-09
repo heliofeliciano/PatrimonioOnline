@@ -20,6 +20,7 @@ public interface IBemListaView {
     void onListaBensVazia();
     void setorEscolhido();
     void setorNaoEscolhido();
+    void logout();
     void onExibirListaDepartamentos(List<DepartamentoEntity> departamentoEntities);
 
     void onExibirTiposBens(List<BemTipoEntity> bemTipoEntities);

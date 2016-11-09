@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
     public void navegarParaProximaTela() {
 
         // TODO: 11/9/16 Testes para utilizar o Realm em uma classe separada
-        finish();
+        //finish();
         /*if (this.verificarSincronizacao()) {
 
             startActivity(new Intent(this, BemListaActivity.class));

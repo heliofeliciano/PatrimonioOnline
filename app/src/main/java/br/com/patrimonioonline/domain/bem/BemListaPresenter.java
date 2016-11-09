@@ -99,4 +99,5 @@ public class BemListaPresenter implements IBemListaPresenter {
     public void onAtualizarListaBens(RealmResults<BemEntity> lista) {
         view.onAtualizarListaBens(lista);
     }
+
 }

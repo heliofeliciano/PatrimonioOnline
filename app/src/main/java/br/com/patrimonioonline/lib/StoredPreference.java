@@ -23,6 +23,10 @@ public class StoredPreference {
         this.ctx = ctx;
     }
 
+    public static void listarPreferences(){
+        preferencias.getAll();
+    }
+
     public static void salvarObjeto(Object obj){
         try {
 
@@ -31,7 +35,41 @@ public class StoredPreference {
             editor.putString(obj.getClass().getSimpleName(), _json);
             editor.commit();
 
-            //Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * Método utilizado para salvar objetos via Shared Preferences
+     * Ao passar o objeto como parametro, o metodo converterá este objeto em um json.
+     * O objeto será armazenado em formato json na Shared Preferences
+     * @param obj   Objeto que se deseja armazenar
+     * @param nomePreferencia   Nome de referencia para realizar uma futura busca
+     */
+    public static void salvarObjeto(Object obj, String nomePreferencia){
+        try {
+
+            Gson _gson = new Gson();
+            String _json = _gson.toJson(obj);
+            editor.putString(nomePreferencia, _json);
+            editor.commit();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+    public static void salvarJson(String json, String nomeObjeto){
+        try {
+
+            Gson _gson = new Gson();
+            editor.putString(nomeObjeto, json);
+            editor.commit();
 
         } catch (Exception e) {
 
@@ -46,8 +84,6 @@ public class StoredPreference {
             editor.putString(obj.getClass().getSimpleName(), json);
             editor.commit();
 
-            //Toast.makeText(ctx, "Preferencias salva com sucesso", Toast.LENGTH_LONG).show();
-
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -55,16 +91,39 @@ public class StoredPreference {
         }
     }
 
-    public Object buscarObjeto(Object obj){
-        String _json = preferencias.getString(obj.getClass().getSimpleName(), "");
+    public String buscarObjetoJson(String nomePreferencia){
+        String _json = preferencias.getString(nomePreferencia, "");
+
+        return _json;
+    }
+
+    /**
+     * Método responsável por retornar um objeto previamente inserido nas Shared Preferences
+     * @param obj   Objeto que se deseja buscar
+     * @param nomePreferencia   Nome de referencia para buscar o objeto inserido
+     * @return  Objeto
+     */
+    public Object buscarObjeto(Object obj, String nomePreferencia){
+
+        String _json = preferencias.getString(nomePreferencia, "");
 
         return new Gson().fromJson(_json, obj.getClass());
     }
 
     public static void limparObjeto(Object obj){
+
         SharedPreferences.Editor _editor = preferencias.edit();
         _editor.remove(obj.getClass().getSimpleName());
         _editor.commit();
+
+    }
+
+    public static void limparTodos(){
+
+        SharedPreferences.Editor _editor = preferencias.edit();
+        _editor.clear();
+        _editor.commit();
+
     }
 
 }

@@ -79,43 +79,4 @@ public class BemTipoDepreciacaoEntity extends RealmObject {
         return descricao;
     }
 
-    public String converterParaJson(){
-
-        Gson gson = null;
-
-        gson = new GsonBuilder()
-                .setExclusionStrategies(new ExclusionStrategy() {
-                    @Override
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getDeclaringClass().equals(RealmObject.class);
-                    }
-
-                    @Override
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-                })
-                .registerTypeAdapter(this.getClass(), new BemTipoDepreciacaoEntity.BemTipoDepreciacaoSerializer())
-                .create();
-
-        String json = gson.toJson(this);
-
-        return json;
-    }
-
-    static class BemTipoDepreciacaoSerializer implements JsonSerializer<BemTipoDepreciacaoEntity> {
-
-        @Override
-        public JsonElement serialize(BemTipoDepreciacaoEntity src, Type typeOfSrc, JsonSerializationContext context) {
-            final JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", src.id);
-            jsonObject.addProperty("descricao", src.descricao);
-            jsonObject.addProperty("quantidadeano", src.quantidadeano);
-            jsonObject.addProperty("percentualdepreciacaoano", src.percentualdepreciacaoano);
-            jsonObject.addProperty("observacao", src.observacao);
-            jsonObject.addProperty("edepreciavel", src.edepreciavel);
-
-            return jsonObject;
-        }
-    }
 }

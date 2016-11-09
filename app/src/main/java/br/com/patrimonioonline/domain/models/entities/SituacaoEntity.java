@@ -42,39 +42,4 @@ public class SituacaoEntity extends RealmObject {
         return descricao;
     }
 
-    public String converterParaJson(){
-
-        Gson gson = null;
-
-        gson = new GsonBuilder()
-                .setExclusionStrategies(new ExclusionStrategy() {
-                    @Override
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getDeclaringClass().equals(RealmObject.class);
-                    }
-
-                    @Override
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-                })
-                .registerTypeAdapter(this.getClass(), new SituacaoEntity.SituacaoSerializer())
-                .create();
-
-        String json = gson.toJson(this);
-
-        return json;
-    }
-
-    static class SituacaoSerializer implements JsonSerializer<SituacaoEntity> {
-
-        @Override
-        public JsonElement serialize(SituacaoEntity src, Type typeOfSrc, JsonSerializationContext context) {
-            final JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", src.id);
-            jsonObject.addProperty("descricao", src.descricao);
-
-            return jsonObject;
-        }
-    }
 }

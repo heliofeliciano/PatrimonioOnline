@@ -2,9 +2,9 @@ package br.com.patrimonioonline.domain.padrao;
 
 import android.content.Context;
 
-import br.com.patrimonioonline.domain.consts.DepartamentoPreferenceConst;
-import br.com.patrimonioonline.domain.consts.UsuarioPreferenceConst;
+import br.com.patrimonioonline.domain.consts.PreferenceConst;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 import br.com.patrimonioonline.lib.StoredPreference;
 
@@ -23,48 +23,56 @@ public class BaseInteractor implements IBaseInteractor {
     @Override
     public Boolean verificarSeUsuarioLogado() {
 
-        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-        UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        //UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
 
-        return (usuarioReadonly != null);
+        return (_usuarioEntity != null);
     }
 
     @Override
     public DepartamentoEntity buscarDepartamentoLogado() {
 
-        StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
-        DepartamentoEntity departamentoEntity = (DepartamentoEntity) _pref.buscarObjeto(new DepartamentoEntity());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        DepartamentoEntity departamentoEntity = (DepartamentoEntity)
+                _pref.buscarObjeto(new DepartamentoEntity(), PreferenceConst.PrefDepartamento);
+
 
         return departamentoEntity;
     }
 
     @Override
-    public UsuarioReadonly getUsuarioLogado() {
+    public UsuarioEntity getUsuarioLogado() {
 
-        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-        UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        //UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        UsuarioEntity _usuarioEntity = (UsuarioEntity)
+                _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
 
-        return usuarioReadonly;
+        return _usuarioEntity;
     }
 
     @Override
-    public Boolean logout() {
+    public void logout(IBasePresenter listener) {
 
-        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-        UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        _pref.limparTodos();
 
-        if (usuarioReadonly != null) {
+        /*UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
+
+        if (_usuarioEntity != null) {
             _pref.limparObjeto(new UsuarioReadonly());
             _pref.limparObjeto(new DepartamentoEntity());
-        }
+        }*/
 
-        return true;
+        listener.logoutSucesso();
     }
 
     @Override
     public Boolean verificarSincronizacao() {
-        StoredPreference _pref = new StoredPreference(context, DepartamentoPreferenceConst.DEPARTAMENTO_PREF);
-        DepartamentoEntity departamentoEntity = (DepartamentoEntity) _pref.buscarObjeto(new DepartamentoEntity());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        DepartamentoEntity departamentoEntity = (DepartamentoEntity)
+                _pref.buscarObjeto(new DepartamentoEntity(), PreferenceConst.PrefDepartamento);
 
         return (departamentoEntity != null);
     }

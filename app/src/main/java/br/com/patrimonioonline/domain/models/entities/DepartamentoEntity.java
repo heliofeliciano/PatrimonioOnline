@@ -115,48 +115,4 @@ public class DepartamentoEntity extends RealmObject {
         return descricao;
     }
 
-    public String converterParaJson(){
-
-        Gson gson = null;
-
-        gson = new GsonBuilder()
-            .setExclusionStrategies(new ExclusionStrategy() {
-                @Override
-                public boolean shouldSkipField(FieldAttributes f) {
-                    return f.getDeclaringClass().equals(RealmObject.class);
-                }
-
-                @Override
-                public boolean shouldSkipClass(Class<?> clazz) {
-                    return false;
-                }
-            })
-            .registerTypeAdapter(this.getClass(), new DepartamentoSerializer())
-            .create();
-
-        String json = gson.toJson(this);
-
-        return json;
-    }
-
-    static class DepartamentoSerializer implements JsonSerializer<DepartamentoEntity> {
-
-        @Override
-        public JsonElement serialize(DepartamentoEntity src, Type typeOfSrc, JsonSerializationContext context) {
-            final JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", src.getId());
-            jsonObject.addProperty("descricao", src.getDescricao());
-            jsonObject.addProperty("nomeresponsavel", src.getNomeresponsavel());
-            jsonObject.addProperty("emailresponsavel", src.getEmailresponsavel());
-            jsonObject.addProperty("limite", src.getLimite());
-            jsonObject.addProperty("telefone", src.getTelefone());
-            jsonObject.addProperty("email", src.getEmail());
-            jsonObject.addProperty("fax", src.getFax());
-            jsonObject.addProperty("ramal", src.getRamal());
-            jsonObject.addProperty("instituicao", src.getInstituicao());
-
-            return jsonObject;
-        }
-    }
-
 }

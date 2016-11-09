@@ -43,39 +43,4 @@ public class AquisicaoEntity extends RealmObject {
         return descricao;
     }
 
-    public String converterParaJson(){
-
-        Gson gson = null;
-
-        gson = new GsonBuilder()
-                .setExclusionStrategies(new ExclusionStrategy() {
-                    @Override
-                    public boolean shouldSkipField(FieldAttributes f) {
-                        return f.getDeclaringClass().equals(RealmObject.class);
-                    }
-
-                    @Override
-                    public boolean shouldSkipClass(Class<?> clazz) {
-                        return false;
-                    }
-                })
-                .registerTypeAdapter(this.getClass(), new AquisicaoEntity.AquisicaoSerializer())
-                .create();
-
-        String json = gson.toJson(this);
-
-        return json;
-    }
-
-    static class AquisicaoSerializer implements JsonSerializer<AquisicaoEntity> {
-
-        @Override
-        public JsonElement serialize(AquisicaoEntity src, Type typeOfSrc, JsonSerializationContext context) {
-            final JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("id", src.id);
-            jsonObject.addProperty("descricao", src.descricao);
-
-            return jsonObject;
-        }
-    }
 }

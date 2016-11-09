@@ -1,6 +1,7 @@
 package br.com.patrimonioonline.domain.SolicitarPlacas;
 
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 
 /**
@@ -8,7 +9,9 @@ import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
  */
 public interface ISolicitarPlacasInteractor {
 
-    void Salvar(ISolicitarPlacasPresenter listener, DepartamentoEntity departamentoEntity, UsuarioReadonly usuarioReadonly, int
-            quantidadeSolicitada);
+    void Salvar(ISolicitarPlacasPresenter listener,
+                DepartamentoEntity departamentoEntity,
+                UsuarioEntity usuarioEntity,
+                int quantidadeSolicitada);
 
 }

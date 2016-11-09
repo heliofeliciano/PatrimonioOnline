@@ -8,6 +8,7 @@ import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
+import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 import cz.msebera.android.httpclient.Header;
 
@@ -18,8 +19,8 @@ import cz.msebera.android.httpclient.Header;
 public class SolicitarPlacasInteractor implements ISolicitarPlacasInteractor {
 
     @Override
-    public void Salvar(final ISolicitarPlacasPresenter listener, DepartamentoEntity departamentoEntity, UsuarioReadonly usuarioReadonly, int
-            quantidadeSolicitada) {
+    public void Salvar(final ISolicitarPlacasPresenter listener, DepartamentoEntity
+            departamentoEntity, UsuarioEntity usuarioEntity, int quantidadeSolicitada) {
 
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst
                 .URL_SolicitarPlacas);

@@ -5,23 +5,18 @@ import android.os.Build;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.internal.LinkedTreeMap;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import java.util.ArrayList;
-
 import br.com.patrimonioonline.R;
 import br.com.patrimonioonline.domain.consts.DomainConst;
 import br.com.patrimonioonline.domain.consts.HostConst;
+import br.com.patrimonioonline.domain.consts.PreferenceConst;
 import br.com.patrimonioonline.domain.consts.URLConst;
-import br.com.patrimonioonline.domain.consts.UsuarioPreferenceConst;
 import br.com.patrimonioonline.domain.login.ILoginPresenter;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
-import br.com.patrimonioonline.domain.models.readonly.DepartamentoReadonly;
 import br.com.patrimonioonline.domain.models.readonly.RetornoObjeto;
-import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 import br.com.patrimonioonline.domain.repos.Repository;
 import br.com.patrimonioonline.lib.GsonLib;
 import br.com.patrimonioonline.lib.StoredPreference;
@@ -35,6 +30,9 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     @Override
     public void realizarLogin(final Context context, final ILoginPresenter listener, final String usuario, String senha) {
+
+        // TODO: 11/9/16 checar se o usuário já existe no banco de dados local
+
 
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_Login);
 
@@ -72,23 +70,8 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
                     usuarioEntityRepository.deleteAll();
                     usuarioEntityRepository.createObjectFromJson(jsonUsuario);
 
-                    Object objO = _usuario.o;
-                    LinkedTreeMap objLinked = (LinkedTreeMap) objO;
-                    ArrayList<DepartamentoReadonly> departamentoReadonlyArrayList = (ArrayList<DepartamentoReadonly>) ((LinkedTreeMap) objO).get("departamentos");
-
-                    // Converter UsuárioEntity em UsuarioReadonly
-                    UsuarioReadonly _usuarioReadonly = new UsuarioReadonly(
-                            (String) ((LinkedTreeMap) objO).get("nome"),
-                            (String) ((LinkedTreeMap) objO).get("login"),
-                            ((Double) ((LinkedTreeMap) objO).get("usuarioativo")).intValue(),
-                            (String) ((LinkedTreeMap) objO).get("email"),
-                            departamentoReadonlyArrayList
-                    );
-
-                    // Salvar as preferences do usuário
-                    StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-                    _pref.limparObjeto(_usuarioReadonly);
-                    _pref.salvarObjeto(_usuarioReadonly);
+                    StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+                    _pref.salvarObjeto(_usuario.o, PreferenceConst.PrefUsuario);
 
                     listener.sucessoRealizarLogin(responseString);
 
@@ -107,14 +90,15 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
     @Override
     public void cadastrarRegIdDispositivo(Context context, final ILoginPresenter listener) {
 
-        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-        UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        //UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
 
         // Cadastrar o registro do dispositivo
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
 
         RequestParams requestParams = new RequestParams();
-        requestParams.put("login", _usuarioReadonly.login);
+        requestParams.put("login", _usuarioEntity.login);
         requestParams.put("regid", "");
         requestParams.put("modelo", Build.MODEL);
         requestParams.put("dispositivo", Build.DEVICE);
@@ -141,14 +125,15 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
 
     public void cadastrarRegIdDispositivo(Context context, String regId) {
 
-        StoredPreference _pref = new StoredPreference(context, UsuarioPreferenceConst.USUARIO_PREF);
-        UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
+        //UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
+        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
 
         // Cadastrar o registro do dispositivo
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
 
         RequestParams requestParams = new RequestParams();
-        requestParams.put("login", _usuarioReadonly.login);
+        requestParams.put("login", _usuarioEntity.login);
         requestParams.put("regid", regId);
         requestParams.put("modelo", Build.MODEL);
         requestParams.put("dispositivo", Build.DEVICE);

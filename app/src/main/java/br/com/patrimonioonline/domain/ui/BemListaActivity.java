@@ -211,12 +211,13 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
     public void irParaActivityAdicionarBem(BemTipoEntity bemTipoEntity) {
 
         Intent _intent = new Intent(this, BemCadastrarActivity.class);
-        _intent.putExtra("BemTipo", bemTipoEntity.converterParaJson());
+        // TODO: 11/9/16 checar a conversao para json
+        /*_intent.putExtra("BemTipo", bemTipoEntity.converterParaJson());
         if (codigoQrCode != null) {
             _intent.putExtra("codigoQrCode", codigoQrCode);
         }
 
-        startActivity(_intent);
+        startActivity(_intent);*/
     }
 
     @Override
@@ -251,12 +252,13 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 startActivity(intentSolicitarPlacas);
                 return true;
             case R.id.action_logout:
+                this.logout();
+                /*if (this.logout()) {
 
-                if (this.logout()) {
                     Intent it = new Intent(this, LoginActivity.class);
                     startActivity(it);
                     finish();
-                }
+                }*/
 
                 return true;
             default:
@@ -309,32 +311,5 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
         }
     }
-
-    /*private void checarGooglePlayService() {
-        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
-        int resultCode = api.isGooglePlayServicesAvailable(this);
-        if (resultCode != ConnectionResult.SUCCESS) {
-
-            if (api.isUserResolvableError(resultCode)) {
-                Dialog dialog = api.getErrorDialog(this, resultCode, REQUEST_PLAY_SERVICES);
-                dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        finish();
-                    }
-                });
-                dialog.show();
-            } else {
-                Toast.makeText(this, R.string.gcm_naosuportado, Toast.LENGTH_SHORT).show();
-                finish();
-            }
-
-        } else {
-
-            Intent it = new Intent(this, GCMRegistrationIntentService.class);
-            startService(it);
-
-        }
-    }*/
 
 }
