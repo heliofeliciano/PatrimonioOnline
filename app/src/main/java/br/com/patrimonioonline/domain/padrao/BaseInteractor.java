@@ -58,13 +58,6 @@ public class BaseInteractor implements IBaseInteractor {
         StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
         _pref.limparTodos();
 
-        /*UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
-
-        if (_usuarioEntity != null) {
-            _pref.limparObjeto(new UsuarioReadonly());
-            _pref.limparObjeto(new DepartamentoEntity());
-        }*/
-
         listener.logoutSucesso();
     }
 

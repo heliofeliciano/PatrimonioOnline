@@ -76,6 +76,9 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Após o login bem sucesso deve navegar para tela de escolha do departamento
+     */
     @Override
     public void navegarParaProximaTela() {
 
