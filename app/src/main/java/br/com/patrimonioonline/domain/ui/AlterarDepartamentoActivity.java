@@ -3,6 +3,8 @@ package br.com.patrimonioonline.domain.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
+import br.com.patrimonioonline.domain.adapter.DepartamentoAdapter;
 import br.com.patrimonioonline.domain.departamento.DepartamentoInteractor;
 import br.com.patrimonioonline.domain.departamento.IDepartamentoPresenter;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
@@ -30,8 +33,8 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
     private List<DepartamentoEntity> listaDepartamentos;
     private DepartamentoInteractor interactor;
 
-    @BindView(R.id.spDepartamentos)
-    MaterialSpinner spDepartamentos;
+    /*@BindView(R.id.spDepartamentos)
+    MaterialSpinner spDepartamentos;*/
 
     @BindView(R.id.tvDepartamentoAtual)
     TextView tvDepartamentoAtual;
@@ -58,20 +61,28 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
     private void init() {
 
         departamentoAtualEntity = getDepartamentoLogado();
-        tvDepartamentoAtual.setText(String.valueOf(departamentoAtualEntity.getId()).concat(" - ").concat(departamentoAtualEntity.getDescricao
-                ()));
 
-        ListarDepartamentos();
+        if (departamentoAtualEntity != null) {
+            tvDepartamentoAtual.setText(
+                    String.valueOf(departamentoAtualEntity.getId())
+                            .concat(" - ")
+                            .concat(departamentoAtualEntity.getDescricao())
+            );
+
+        }
+
+        listarDepartamentos();
     }
 
     @Override
-    public void ListarDepartamentos() {
-        interactor.ListarDepartamentos(this);
+    public void listarDepartamentos() {
+        interactor.ListarDepartamentos(this, this);
     }
 
     @Override
-    public void ListarDepartamentosResult(List<DepartamentoEntity> lista) {
-        listaDepartamentos = new ArrayList<DepartamentoEntity>();
+    public void listaDepartamentosSucesso(List<DepartamentoEntity> lista) {
+
+        /*listaDepartamentos = new ArrayList<DepartamentoEntity>();
         listaDepartamentos = lista;
 
         spDepartamentos.setItems(lista);
@@ -84,7 +95,13 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
                 departamentoEntity = item;
             }
 
-        });
+        });*/
+
+        // TODO: 11/9/16 Desenvolver um onclick do listview e popular a variavel departamentoEntity
+        ListView lvDepartamentos = (ListView) findViewById(R.id.lvDepartamentos);
+        ArrayAdapter adapter = new DepartamentoAdapter(this, R.layout.activity_alterar_departamento_item, lista);
+        lvDepartamentos.setAdapter(adapter);
+
     }
 
     @OnClick(R.id.btnAlterarDepartamentoSalvar)

@@ -20,39 +20,82 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:orientation="vertical">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Departamento Atual"
-            android:textColor="#99000000"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvDepartamentoAtual"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:text="@string/criacao_layout_departamento_atual"
+                android:textColor="#99000000"/>
+
+            <TextView
+                android:id="@+id/tvDepartamentoAtual"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingLeft="10dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/criacao_layout_departamento"
+                android:textStyle="bold"
+                android:textColor="#99000000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="1 - CPD"
-            android:textStyle="bold"
-            android:textColor="#99000000"/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Departamentos"
-            android:paddingTop="8dp"
-            android:textColor="#99000000"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:text="@string/criacao_layout_departamento_escolhido"
+                android:paddingTop="8dp"
+                android:textColor="#99000000"/>
 
-        <com.jaredrummler.materialspinner.MaterialSpinner
+            <TextView
+                android:id="@+id/tvDepartamentoEscolhido"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:paddingLeft="10dp"
+                android:textSize="12sp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/criacao_layout_departamento"
+                android:textStyle="bold"
+                android:textColor="#99000000"/>
+
+        </LinearLayout>
+
+        <!--<com.jaredrummler.materialspinner.MaterialSpinner
             android:id="@+id/spDepartamentos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"/>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <ListView
+            android:id="@+id/lvDepartamentos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ListView>
 
     </LinearLayout>
 

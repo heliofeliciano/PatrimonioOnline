@@ -82,6 +82,9 @@ public class LoginActivity extends BaseActivity implements ILoginView, IConfigGc
     @Override
     public void navegarParaProximaTela() {
 
+        startActivity(new Intent(this, AlterarDepartamentoActivity.class));
+
+
         // TODO: 11/9/16 Testes para utilizar o Realm em uma classe separada
         //finish();
         /*if (this.verificarSincronizacao()) {

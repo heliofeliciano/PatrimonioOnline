@@ -9,6 +9,6 @@ public class PreferenceConst {
     public static final String PREFERENCES = "PREFERENCES";
 
     public static final String PrefUsuario = "usuario";
-    public static final String PrefDepartamento = "departamento";
+    public static final String PrefDepartamento = "departamentoPadrao";
 
 }

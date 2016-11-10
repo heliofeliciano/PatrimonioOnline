@@ -115,4 +115,8 @@ public class DepartamentoEntity extends RealmObject {
         return descricao;
     }
 
+    public String toStringComCodigo() {
+        return String.valueOf(id).concat(" - ").concat(descricao);
+    }
+
 }

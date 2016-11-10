@@ -27,12 +27,16 @@ public class DepartamentoInteractor implements IDepartamentoInteractor {
     }
 
     @Override
-    public void ListarDepartamentos(IDepartamentoPresenter listener) {
+    public void ListarDepartamentos(Context ctx, IDepartamentoPresenter listener) {
 
         Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
-        List<DepartamentoEntity> departamentoEntities = usuarioEntityRepository.getByLogin("dbseller").departamentos;
+        StoredPreference _pref = new StoredPreference(ctx, PreferenceConst.PREFERENCES);
+        String _login = ((UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario)).login;
 
-        listener.ListarDepartamentosResult(departamentoEntities);
+        List<DepartamentoEntity> departamentoEntities =
+                usuarioEntityRepository.getByLogin(_login).departamentos;
+
+        listener.listaDepartamentosSucesso(departamentoEntities);
 
     }
 }

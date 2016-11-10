@@ -253,7 +253,7 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 return true;
             case R.id.action_logout:
                 this.logout();
-                
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

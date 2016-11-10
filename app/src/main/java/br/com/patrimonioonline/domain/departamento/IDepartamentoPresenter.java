@@ -13,7 +13,7 @@ public interface IDepartamentoPresenter {
     void AlterarDepartamento();
     void AlterarDepartamentoResult();
 
-    void ListarDepartamentos();
-    void ListarDepartamentosResult(List<DepartamentoEntity> lista);
+    void listarDepartamentos();
+    void listaDepartamentosSucesso(List<DepartamentoEntity> lista);
 
 }
