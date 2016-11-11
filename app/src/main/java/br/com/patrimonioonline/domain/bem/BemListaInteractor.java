@@ -41,30 +41,15 @@ public class BemListaInteractor implements IBemListaInteractor {
         listener.onAtualizarListaBens(lista);
     }
 
-    @Override
+    // TODO: 11/10/16 Excluir
+    /*@Override
     public void buscarDepartamentosPorUsuario(IBemListaPresenter listener) {
 
         Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
         List<DepartamentoEntity> departamentoEntities = usuarioEntityRepository.getByLogin("dbseller").departamentos;
 
         listener.onBuscarDepartamentosPorUsuario(departamentoEntities);
-    }
-
-    @Override
-    public void verificarSeSetorJaEscolhido(Context context, IBemListaPresenter listener) {
-
-        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        //_pref.limparObjeto(new DepartamentoReadonly());
-        DepartamentoEntity departamentoEntity = (DepartamentoEntity)
-                _pref.buscarObjeto(new DepartamentoEntity(), PreferenceConst.PrefDepartamento);
-
-        if (departamentoEntity != null) {
-            listener.setorEscolhido();
-        } else {
-            listener.setorNaoEscolhido();
-        }
-
-    }
+    }*/
 
     @Override
     public void buscarBemTipo(Context context, IBemListaPresenter listener) {
@@ -72,15 +57,6 @@ public class BemListaInteractor implements IBemListaInteractor {
         List<BemTipoEntity> bemTipoEntities = bemTipoEntityRepository.all();
 
         listener.onBuscarBemTipo(bemTipoEntities);
-    }
-
-    @Override
-    public void salvarPreferenceDepartamento(Context context, DepartamentoEntity departamentoEntity) {
-
-        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        // TODO: 11/9/16 Checar a conversão para Json
-        //_pref.salvarObjetoRealm(new DepartamentoEntity(), departamentoEntity.converterParaJson());
-
     }
 
     @Override

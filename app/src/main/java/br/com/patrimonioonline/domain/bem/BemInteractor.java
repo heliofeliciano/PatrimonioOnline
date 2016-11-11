@@ -21,7 +21,7 @@ import br.com.patrimonioonline.domain.repos.Repository;
 public class BemInteractor implements IBemInteractor {
 
     /*@Override
-    public void Salvar(Context context, IBemPresenter listener, BemEntity bemEntity) {
+    public void SalvarDepartamentoAtual(Context context, IBemPresenter listener, BemEntity bemEntity) {
 
         Repository<BemEntity> bemEntityRepository = new Repository<BemEntity>(BemEntity.class);
         bemEntity.setId(bemEntityRepository.getProximoId());

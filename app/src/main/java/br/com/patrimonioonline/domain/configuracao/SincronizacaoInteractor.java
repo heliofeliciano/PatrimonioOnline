@@ -67,7 +67,7 @@ public class SincronizacaoInteractor implements ISincronizacaoInteractor {
                     jsonBemtipos = GsonLib.converterObjetoParaJson(objLinked.get("bemtipos"));
                     jsonBemTiposDepreciacao = GsonLib.converterObjetoParaJson(objLinked.get("bemtipodepreciacao"));
 
-                    // Salvar as aquisições no Realm
+                    // SalvarDepartamentoAtual as aquisições no Realm
                     Repository<AquisicaoEntity> repositoryAquisicao = new Repository<>(AquisicaoEntity.class);
                     Repository<ClassificacaoEntity> repositoryClassificacao = new Repository<>(ClassificacaoEntity.class);
                     Repository<ConvenioEntity> repositoryConvenio = new Repository<>(ConvenioEntity.class);

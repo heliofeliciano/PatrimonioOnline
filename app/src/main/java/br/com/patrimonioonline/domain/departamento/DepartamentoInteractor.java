@@ -7,7 +7,9 @@ import java.util.List;
 import br.com.patrimonioonline.domain.consts.PreferenceConst;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
+import br.com.patrimonioonline.domain.repos.RepositorioUsuario;
 import br.com.patrimonioonline.domain.repos.Repository;
+import br.com.patrimonioonline.domain.repos.RepositoryDepartamento;
 import br.com.patrimonioonline.lib.StoredPreference;
 
 /**
@@ -17,11 +19,14 @@ import br.com.patrimonioonline.lib.StoredPreference;
 public class DepartamentoInteractor implements IDepartamentoInteractor {
 
     @Override
-    public void Salvar(Context context, DepartamentoEntity departamentoEntity, IDepartamentoPresenter listener) {
+    public void SalvarDepartamentoAtual(Context context, DepartamentoEntity departamentoEntity, IDepartamentoPresenter listener) {
 
-        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        // TODO: 11/9/16 checar a conversao para json
-        //_pref.salvarObjetoRealm(new DepartamentoEntity(), departamentoEntity.converterParaJson());
+        RepositorioUsuario _repositorio = new RepositorioUsuario();
+        StoredPreference loginPreference = new StoredPreference(context, PreferenceConst.PREFERENCES);
+
+        UsuarioEntity usuarioEntity = _repositorio.getByLogin(loginPreference.buscar(PreferenceConst.PrefUsuarioLogin));
+
+        _repositorio.atualizarDepartamentoAtual(usuarioEntity, departamentoEntity);
 
         listener.AlterarDepartamentoResult();
     }
@@ -30,11 +35,11 @@ public class DepartamentoInteractor implements IDepartamentoInteractor {
     public void ListarDepartamentos(Context ctx, IDepartamentoPresenter listener) {
 
         Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
-        StoredPreference _pref = new StoredPreference(ctx, PreferenceConst.PREFERENCES);
-        String _login = ((UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario)).login;
 
-        List<DepartamentoEntity> departamentoEntities =
-                usuarioEntityRepository.getByLogin(_login).departamentos;
+        StoredPreference _pref = new StoredPreference(ctx, PreferenceConst.PREFERENCES);
+        String _login = _pref.buscar(PreferenceConst.PrefUsuarioLogin);
+
+        List<DepartamentoEntity> departamentoEntities = usuarioEntityRepository.getByLogin(_login).departamentos;
 
         listener.listaDepartamentosSucesso(departamentoEntities);
 

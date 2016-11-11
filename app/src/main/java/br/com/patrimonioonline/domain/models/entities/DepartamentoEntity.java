@@ -12,6 +12,7 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 
 /**
  * Created by helio on 15/06/16.

@@ -15,6 +15,9 @@ public class Repository<T extends RealmObject> {
     public Realm realm = Realm.getDefaultInstance();
     public Class<T> clazz;
 
+    public Repository() {
+    }
+
     public Repository(Class<T> clazz) {
         this.clazz = clazz;
     }
@@ -40,14 +43,6 @@ public class Repository<T extends RealmObject> {
         realm.createObjectFromJson(clazz, json);
         realm.commitTransaction();
     }
-
-    /*public void updateObject(BemEntity bemEntity){
-
-        realm.beginTransaction();
-        BemImagensEntity _imgEntity = realm.copyToRealm(new BemImagensEntity());
-        bemEntity.setListaBemImageEntities(_imgEntity);
-
-    }*/
 
     public int getProximoId() {
 

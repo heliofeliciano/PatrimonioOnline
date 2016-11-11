@@ -49,6 +49,7 @@
 
     <!--Constantes-->
     <string name="msgConexaoErro">Ocorreu um erro na conexão. Tentar mais tarde.</string>
+    <string name="msgDepartamentoAlteradoComSucesso">Departamento alterado com sucesso.</string>
     <string name="criacao_layout_departamento">0000 - Sem departamento</string>
     <string name="criacao_layout_departamento_escolhido">Departamento Escolhido</string>
     <string name="criacao_layout_departamento_atual">Departamento atual</string>

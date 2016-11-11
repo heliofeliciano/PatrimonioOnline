@@ -12,7 +12,7 @@ public interface IBasePresenter {
 
     Boolean verificarSeUsuarioLogado();
     Boolean verificarSincronizacao();
-    DepartamentoEntity buscarDepartamentoLogado();
+    DepartamentoEntity buscarDepartamentoAtual();
     UsuarioEntity getUsuarioLogado();
     void logout();
     void logoutSucesso();

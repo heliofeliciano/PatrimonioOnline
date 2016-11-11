@@ -53,7 +53,7 @@ public class SolicitarPlacasAcitivity extends BaseActivity implements ISolicitar
         getSupportActionBar().setTitle("Solicitar Placas");
         _interactor = new SolicitarPlacasInteractor();
         tvSolicitarPlaca_UsuarioSolicitante.setText(getUsuarioLogado().nome);
-        tvSolicitarPlaca_Departamento.setText(String.valueOf(getDepartamentoLogado().getId()) + " - " + getDepartamentoLogado()
+        tvSolicitarPlaca_Departamento.setText(String.valueOf(getDepartamentoAtual().getId()) + " - " + getDepartamentoAtual()
                 .getDescricao());
 
     }
@@ -65,7 +65,7 @@ public class SolicitarPlacasAcitivity extends BaseActivity implements ISolicitar
         if (validar()) {
 
             _interactor.Salvar(this,
-                    getDepartamentoLogado(),
+                    getDepartamentoAtual(),
                     getUsuarioLogado(),
                     Integer.valueOf(etSolicitarPlacas_Quantidade.getText().toString()));
 

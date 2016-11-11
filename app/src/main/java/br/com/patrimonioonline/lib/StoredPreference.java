@@ -64,11 +64,10 @@ public class StoredPreference {
         }
     }
 
-    public static void salvarJson(String json, String nomeObjeto){
+    public static void salvar(String conteudo, String nomeObjeto){
         try {
 
-            Gson _gson = new Gson();
-            editor.putString(nomeObjeto, json);
+            editor.putString(nomeObjeto, conteudo);
             editor.commit();
 
         } catch (Exception e) {
@@ -91,10 +90,10 @@ public class StoredPreference {
         }
     }
 
-    public String buscarObjetoJson(String nomePreferencia){
-        String _json = preferencias.getString(nomePreferencia, "");
+    public String buscar(String nomePreferencia){
+        String conteudo = preferencias.getString(nomePreferencia, "");
 
-        return _json;
+        return conteudo;
     }
 
     /**

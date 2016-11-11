@@ -2,10 +2,8 @@ package br.com.patrimonioonline.domain.padrao;
 
 import android.content.Context;
 
-import br.com.patrimonioonline.domain.bem.IBemListaView;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
-import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 
 /**
  * Created by helio on 28/06/16.
@@ -28,8 +26,8 @@ public class BasePresenter implements IBasePresenter {
     }
 
     @Override
-    public DepartamentoEntity buscarDepartamentoLogado() {
-        return interactor.buscarDepartamentoLogado();
+    public DepartamentoEntity buscarDepartamentoAtual() {
+        return interactor.buscarDepartamentoAtual();
     }
 
     @Override

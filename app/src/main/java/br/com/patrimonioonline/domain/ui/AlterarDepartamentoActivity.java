@@ -1,16 +1,15 @@
 package br.com.patrimonioonline.domain.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jaredrummler.materialspinner.MaterialSpinner;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.patrimonioonline.R;
@@ -26,7 +25,7 @@ import butterknife.OnClick;
  * Created by helio on 13/07/16.
  */
 
-public class AlterarDepartamentoActivity extends BaseActivity implements IDepartamentoPresenter {
+public class AlterarDepartamentoActivity extends BaseActivity implements IDepartamentoPresenter, AdapterView.OnItemClickListener {
 
     private DepartamentoEntity departamentoEntity;
     private DepartamentoEntity departamentoAtualEntity;
@@ -36,8 +35,11 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
     /*@BindView(R.id.spDepartamentos)
     MaterialSpinner spDepartamentos;*/
 
-    @BindView(R.id.tvDepartamentoAtual)
+    @BindView(R.id.tv_departamento_atual)
     TextView tvDepartamentoAtual;
+
+    @BindView(R.id.tv_departamento_escolhido)
+    TextView tvDepartamentoEscolhido;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -60,7 +62,7 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
 
     private void init() {
 
-        departamentoAtualEntity = getDepartamentoLogado();
+        departamentoAtualEntity = getDepartamentoAtual();
 
         if (departamentoAtualEntity != null) {
             tvDepartamentoAtual.setText(
@@ -82,38 +84,38 @@ public class AlterarDepartamentoActivity extends BaseActivity implements IDepart
     @Override
     public void listaDepartamentosSucesso(List<DepartamentoEntity> lista) {
 
-        /*listaDepartamentos = new ArrayList<DepartamentoEntity>();
-        listaDepartamentos = lista;
-
-        spDepartamentos.setItems(lista);
-
-        departamentoEntity = (lista.get(spDepartamentos.getSelectedIndex()));
-
-        spDepartamentos.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<DepartamentoEntity>() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, DepartamentoEntity item) {
-                departamentoEntity = item;
-            }
-
-        });*/
-
-        // TODO: 11/9/16 Desenvolver um onclick do listview e popular a variavel departamentoEntity
         ListView lvDepartamentos = (ListView) findViewById(R.id.lvDepartamentos);
         ArrayAdapter adapter = new DepartamentoAdapter(this, R.layout.activity_alterar_departamento_item, lista);
         lvDepartamentos.setAdapter(adapter);
+        lvDepartamentos.setOnItemClickListener(this);
 
     }
 
     @OnClick(R.id.btnAlterarDepartamentoSalvar)
     @Override
     public void AlterarDepartamento() {
-        interactor.Salvar(getApplicationContext(), departamentoEntity, this);
+        interactor.SalvarDepartamentoAtual(getApplicationContext(), departamentoEntity, this);
     }
 
     @Override
     public void AlterarDepartamentoResult() {
-        Toast.makeText(this, "Departamento alterado com sucesso", Toast.LENGTH_SHORT).show();
+        showToast(getResources().getString(R.string.msgDepartamentoAlteradoComSucesso));
+        navegarParaProximaActivity(new Intent(this, BemListaActivity.class));
         finish();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+        departamentoEntity = (DepartamentoEntity) parent.getItemAtPosition(position);
+
+        atualizarDepartamentoEscolhido();
+    }
+
+    public void atualizarDepartamentoEscolhido() {
+
+        tvDepartamentoEscolhido.setText(departamentoEntity.toStringComCodigo());
+
     }
 
 }

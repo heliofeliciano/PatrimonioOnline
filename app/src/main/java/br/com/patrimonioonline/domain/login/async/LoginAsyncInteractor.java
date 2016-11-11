@@ -71,7 +71,7 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
                     usuarioEntityRepository.createObjectFromJson(jsonUsuario);
 
                     StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-                    _pref.salvarObjeto(_usuario.o, PreferenceConst.PrefUsuario);
+                    _pref.salvar(usuario, PreferenceConst.PrefUsuarioLogin);
 
                     listener.sucessoRealizarLogin(responseString);
 
@@ -91,14 +91,13 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
     public void cadastrarRegIdDispositivo(Context context, final ILoginPresenter listener) {
 
         StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        //UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
-        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
+        String usuarioLogin = _pref.buscar(PreferenceConst.PrefUsuarioLogin);
 
         // Cadastrar o registro do dispositivo
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
 
         RequestParams requestParams = new RequestParams();
-        requestParams.put("login", _usuarioEntity.login);
+        requestParams.put("login", usuarioLogin);
         requestParams.put("regid", "");
         requestParams.put("modelo", Build.MODEL);
         requestParams.put("dispositivo", Build.DEVICE);
@@ -126,14 +125,13 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
     public void cadastrarRegIdDispositivo(Context context, String regId) {
 
         StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        //UsuarioReadonly _usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
-        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
+        String usuarioLogin = _pref.buscar(PreferenceConst.PrefUsuarioLogin);
 
         // Cadastrar o registro do dispositivo
         final StringBuilder _url = new StringBuilder(HostConst.HOST_http).append(DomainConst.Dominio).append(URLConst.URL_CadastrarDispositivo);
 
         RequestParams requestParams = new RequestParams();
-        requestParams.put("login", _usuarioEntity.login);
+        requestParams.put("login", usuarioLogin);
         requestParams.put("regid", regId);
         requestParams.put("modelo", Build.MODEL);
         requestParams.put("dispositivo", Build.DEVICE);
@@ -154,17 +152,5 @@ public class LoginAsyncInteractor implements ILoginAsyncInteractor {
         //listener.cadastrarRegIdDispositivoResult();
 
     }
-
-    /*@Override
-    public void buscarDepartamentosDoUsuario(Context context, final ILoginPresenter listener) {
-
-        Repository<UsuarioEntity> usuarioEntityRepository = new Repository<>(UsuarioEntity.class);
-        //listener.PopularListaAquisicao(aquisicaoEntityRepository.all());
-
-        List<DepartamentoEntity> departamentoEntities = usuarioEntityRepository.getByLogin("dbseller").departamentos;
-
-        listener.onDepartamentosPorUsuario(departamentoEntities);
-
-    }*/
 
 }

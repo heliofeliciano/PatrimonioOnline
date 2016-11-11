@@ -26,36 +26,6 @@ public class BemListaPresenter implements IBemListaPresenter {
     }
 
     @Override
-    public void onBuscarDepartamentosPorUsuario(List<DepartamentoEntity> departamentoEntities) {
-        view.onBuscaDepartamentoSucesso(departamentoEntities);
-    }
-
-    @Override
-    public void verificarSeSetorJaEscolhido() {
-        interactor.verificarSeSetorJaEscolhido(context, this);
-    }
-
-    @Override
-    public void buscarDepartamentosPorUsuario() {
-        interactor.buscarDepartamentosPorUsuario(this);
-    }
-
-    @Override
-    public void setorEscolhido() {
-        view.setorEscolhido();
-    }
-
-    @Override
-    public void setorNaoEscolhido() {
-        view.setorNaoEscolhido();
-    }
-
-    @Override
-    public void salvarEscolhaDepartamento(Context context, DepartamentoEntity departamentoEntity) {
-        interactor.salvarPreferenceDepartamento(context, departamentoEntity);
-    }
-
-    @Override
     public void buscarDadosLidoPeloQrCode() {
 
     }

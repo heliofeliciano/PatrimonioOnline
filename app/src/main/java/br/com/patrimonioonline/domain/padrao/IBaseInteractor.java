@@ -10,7 +10,7 @@ import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
 public interface IBaseInteractor {
 
     Boolean verificarSeUsuarioLogado();
-    DepartamentoEntity buscarDepartamentoLogado();
+    DepartamentoEntity buscarDepartamentoAtual();
     UsuarioEntity getUsuarioLogado();
     void logout(IBasePresenter listener);
     Boolean verificarSincronizacao();

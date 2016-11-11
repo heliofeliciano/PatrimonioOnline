@@ -6,6 +6,9 @@ import br.com.patrimonioonline.domain.consts.PreferenceConst;
 import br.com.patrimonioonline.domain.models.entities.DepartamentoEntity;
 import br.com.patrimonioonline.domain.models.entities.UsuarioEntity;
 import br.com.patrimonioonline.domain.models.readonly.UsuarioReadonly;
+import br.com.patrimonioonline.domain.repos.RepositorioUsuario;
+import br.com.patrimonioonline.domain.repos.Repository;
+import br.com.patrimonioonline.domain.repos.RepositoryDepartamento;
 import br.com.patrimonioonline.lib.StoredPreference;
 
 /**
@@ -24,30 +27,31 @@ public class BaseInteractor implements IBaseInteractor {
     public Boolean verificarSeUsuarioLogado() {
 
         StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        //UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
-        UsuarioEntity _usuarioEntity = (UsuarioEntity) _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
+        String _usuarioLogin = _pref.buscar(PreferenceConst.PrefUsuarioLogin);
 
-        return (_usuarioEntity != null);
+        return (_usuarioLogin != null);
     }
 
     @Override
-    public DepartamentoEntity buscarDepartamentoLogado() {
+    public DepartamentoEntity buscarDepartamentoAtual() {
 
-        StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        DepartamentoEntity departamentoEntity = (DepartamentoEntity)
-                _pref.buscarObjeto(new DepartamentoEntity(), PreferenceConst.PrefDepartamento);
+        RepositorioUsuario repositorioUsuario = new RepositorioUsuario();
+        DepartamentoEntity _departamentoAtual = null;
 
+        UsuarioEntity _usuarioEntity = repositorioUsuario.getByLogin(getUsuarioLogado().login);
+        if (_usuarioEntity != null) {
+            _departamentoAtual = repositorioUsuario.getByLogin(getUsuarioLogado().login).departamentoAtual;
+        }
 
-        return departamentoEntity;
+        return _departamentoAtual;
     }
 
     @Override
     public UsuarioEntity getUsuarioLogado() {
 
         StoredPreference _pref = new StoredPreference(context, PreferenceConst.PREFERENCES);
-        //UsuarioReadonly usuarioReadonly = (UsuarioReadonly) _pref.buscarObjeto(new UsuarioReadonly());
-        UsuarioEntity _usuarioEntity = (UsuarioEntity)
-                _pref.buscarObjeto(new UsuarioEntity(), PreferenceConst.PrefUsuario);
+        Repository<UsuarioEntity> repositorio = new Repository<>(UsuarioEntity.class);
+        UsuarioEntity _usuarioEntity = repositorio.getByLogin(_pref.buscar(PreferenceConst.PrefUsuarioLogin));
 
         return _usuarioEntity;
     }

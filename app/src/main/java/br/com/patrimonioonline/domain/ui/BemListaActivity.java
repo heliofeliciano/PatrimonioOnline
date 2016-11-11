@@ -84,6 +84,7 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
     private void init() {
 
+
         if (getIntent().getExtras() != null) {
             Toast.makeText(this, getIntent().getExtras().getString("mensagem"), Toast.LENGTH_SHORT).show();
         }
@@ -98,7 +99,6 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
                 new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
 
         presenter = new BemListaPresenter(getApplicationContext(), this);
-        verificarSeSetorJaFoiEscolhido();
         presenter.buscarListaBens();
     }
 
@@ -151,44 +151,6 @@ public class BemListaActivity extends BaseActivity implements IBemListaView {
 
         Toast.makeText(this, "Não há bens cadastrados. Clique no + para adicionar um bem", Toast.LENGTH_SHORT).show();
 
-    }
-
-    @Override
-    public void setorEscolhido() {
-
-        //Toast.makeText(this, "O setor já foi escolhido", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void setorNaoEscolhido() {
-        presenter.buscarDepartamentosPorUsuario();
-    }
-
-    @Override
-    public void verificarSeSetorJaFoiEscolhido() {
-        presenter.verificarSeSetorJaEscolhido();
-    }
-
-    @Override
-    public void onBuscaDepartamentoSucesso(List<DepartamentoEntity> departamentoEntities) {
-        //Toast.makeText(this, "Foi retornado " + departamentoEntities.size() + " departamentos", Toast.LENGTH_SHORT).show();
-        onExibirListaDepartamentos(departamentoEntities);
-    }
-
-    @Override
-    public void onExibirListaDepartamentos(final List<DepartamentoEntity> departamentoEntities) {
-        new MaterialDialog.Builder(this)
-                .title(R.string.str_escolher_departamento)
-                .items(departamentoEntities)
-                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice(){
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View itemView, int which, CharSequence text) {
-                        presenter.salvarEscolhaDepartamento(BemListaActivity.this, departamentoEntities.get(dialog.getSelectedIndex()));
-                        return true;
-                    }
-                })
-                .positiveText(R.string.str_escolher)
-                .show();
     }
 
     @Override

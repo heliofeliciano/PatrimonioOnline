@@ -16,18 +16,12 @@ import io.realm.RealmResults;
 public interface IBemListaPresenter {
 
     // View
-    void onBuscarDepartamentosPorUsuario(List<DepartamentoEntity> departamentoEntities);
     void onBuscarBemTipo(List<BemTipoEntity> bemTipoEntities);
-    void setorEscolhido();
-    void setorNaoEscolhido();
     void onListaBensVazia();
     void onListaBensPorDepartamento(RealmResults<BemEntity> lista);
     void onAtualizarListaBens(RealmResults<BemEntity> lista);
 
     // Interactor
-    void verificarSeSetorJaEscolhido();
-    void buscarDepartamentosPorUsuario();
-    void salvarEscolhaDepartamento(Context context, DepartamentoEntity departamentoEntity);
     void buscarBemTipos();
     void buscarListaBens();
     void atualizarListaBens();

@@ -14,5 +14,6 @@ public class UsuarioEntity extends RealmObject {
     public int usuarioativo;
     public String email;
     public RealmList<DepartamentoEntity> departamentos;
+    public DepartamentoEntity departamentoAtual;
 
 }

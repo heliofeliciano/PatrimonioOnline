@@ -233,7 +233,7 @@ public class BemCadastrarActivity extends BaseActivity implements IBemPresenter 
                 bemTipoDepreciacaoEntity,
                 classificacaoEntity,
                 aquisicaoEntity,
-                getDepartamentoLogado(),
+                getDepartamentoAtual(),
                 convenioEntity,
                 situacaoEntity,
                 etNumeroTombo.getText().toString(),
